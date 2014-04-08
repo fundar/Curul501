@@ -41,7 +41,6 @@
 $route['default_controller'] = "examples";
 $route['404_override'] = '';
 
-hoadsasd
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
