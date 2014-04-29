@@ -12,20 +12,23 @@ class Examples extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 	}
 
-	public function _example_output($output = null)
-	{
+	public function _example_output($output = null) {
 		$this->load->view('example.php',$output);
 	}
 
-	public function offices()
-	{
+	public function users() {
+		$output = $this->grocery_crud->render();
+
+		$this->_example_output($output);
+	}
+	
+	public function initiatives() {
 		$output = $this->grocery_crud->render();
 
 		$this->_example_output($output);
 	}
 
-	public function index()
-	{
+	public function index() {
 		$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 	}
 
