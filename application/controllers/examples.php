@@ -23,9 +23,58 @@ class Examples extends CI_Controller {
 	}
 	
 	public function initiatives() {
-		$output = $this->grocery_crud->render();
+		try {
+			$crud = new grocery_CRUD();
+			
+			/*Set table and title*/
+			$crud->set_theme('datatables');
+			$crud->set_table('initiatives');
+			$crud->set_subject('Iniciativas');
+			
+			/*Set requiered fields, columns and fields*/
+			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
+			$crud->columns('id_initiative', 'id_legislature', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
+			$crud->fields('id_initiative', 'id_legislature', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
+			
+			/*Votos posibles 0-501*/
+			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
+			
+			/*Invisible fields*/
+			$crud->field_type('id_initiative', 'invisible');
+			$crud->field_type('official_vote_up', 'dropdown', $cvotes);
+			$crud->field_type('official_vote_down', 'dropdown', $cvotes);
+			$crud->field_type('official_vote_abstentions', 'dropdown', $cvotes);
+			
+			/*Set displays*/
+			$this->display_as_initiatives($crud);
+			
+			/*Set relations*/
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
+		
+			$crud->order_by('id_initiative','desc');
+			$output = $crud->render();
 
-		$this->_example_output($output);
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	public function display_as_initiatives($crud) {
+		$crud->display_as('id_initiative', 'ID Iniciativa');
+		$crud->display_as('title', 'Título');
+		$crud->display_as('short_title', 'Título Corto');
+		$crud->display_as('description', 'Descripción');
+		$crud->display_as('presented_by', 'Presentada por');
+		$crud->display_as('additional_resources', 'Recursos adicionales');
+		$crud->display_as('additional_resources_url', 'Url de recursos adicionales');
+		$crud->display_as('official_vote_up', 'Votos a favor');
+		$crud->display_as('official_vote_down', 'Votos en contrar');
+		$crud->display_as('official_vote_abstentions', 'Abstenciones');
+		$crud->display_as('voted_at', 'Fecha votada');
+		
+		return true;
 	}
 
 	public function index() {

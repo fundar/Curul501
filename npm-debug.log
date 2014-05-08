@@ -1,0 +1,24 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'config',
+1 verbose cli   'set',
+1 verbose cli   'python',
+1 verbose cli   '/usr/bin/python2',
+1 verbose cli   '-g' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.11
+4 info config set "python" "/usr/bin/python2"
+5 error Error: EACCES, mkdir '/usr/etc'
+5 error  { [Error: EACCES, mkdir '/usr/etc'] errno: 3, code: 'EACCES', path: '/usr/etc' }
+6 error Please try running this command again as root/Administrator.
+7 error System Linux 3.2.0-61-generic-pae
+8 error command "nodejs" "/usr/bin/npm" "config" "set" "python" "/usr/bin/python2" "-g"
+9 error cwd /var/www/curul501
+10 error node -v v0.8.11
+11 error npm -v 1.1.62
+12 error path /usr/etc
+13 error code EACCES
+14 error errno 3
+15 error stack Error: EACCES, mkdir '/usr/etc'
+16 verbose exit [ 3, true ]
