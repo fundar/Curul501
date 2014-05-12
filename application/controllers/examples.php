@@ -13,13 +13,40 @@ class Examples extends CI_Controller {
 	}
 
 	public function _example_output($output = null) {
-		$this->load->view('example.php',$output);
+		$this->load->view('example.php', $output);
 	}
+	
+	function multigrids2() {
+		$this->config->load('grocery_crud');
+		$this->config->set_item('grocery_crud_dialog_forms',true);
+		$this->config->set_item('grocery_crud_default_per_page',10);
+		
+		$output1 = $this->users();
+		$output2 = $this->initiatives();
 
+		$js_files  = $output1->js_files + $output2->js_files;
+		$css_files = $output1->css_files + $output2->css_files;
+		$output    = "<h1>List 1</h1>".$output1->output."<h1>List 2</h1>".$output2->output;
+		
+		$this->_example_output((object)array (
+			'js_files' => $js_files,
+			'css_files' => $css_files,
+			'output'	=> $output
+		));
+	}
+	
 	public function users() {
-		$output = $this->grocery_crud->render();
-
-		$this->_example_output($output);
+		$crud = new grocery_CRUD();
+		$crud->set_theme('datatables');	
+		$crud->set_table('users');
+		
+		$output = $crud->render();
+		
+		if($crud->getState() == 'list') {
+			$this->_example_output($output);
+		} else {
+			return $output;
+		}
 	}
 	
 	public function initiatives() {
@@ -55,7 +82,11 @@ class Examples extends CI_Controller {
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			if($crud->getState() == 'list') {
+				$this->_example_output($output);
+			} else {
+				return $output;
+			}
 		} catch(Exception $e) {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
