@@ -208,11 +208,8 @@ class Examples extends CI_Controller {
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
 
-			if($crud->getState() == 'list') {
+			
 				$this->_example_output($output);
-			} else {
-				return $output;
-			}
 		} catch(Exception $e) {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
