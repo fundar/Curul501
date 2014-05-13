@@ -229,7 +229,7 @@ class Admin extends CI_Controller {
 
 	
 	public function index() {
-		header('Location: /examples/political_parties');
+		header('Location: /admin/political_parties');
 		
 		return false;
 	}
