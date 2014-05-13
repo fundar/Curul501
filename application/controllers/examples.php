@@ -16,7 +16,107 @@ class Examples extends CI_Controller {
 		$this->load->view('example.php', $output);
 	}
 	
-	function multigrids2() {
+	/* TO-DO
+	Falta agregar slugs en base de datos, partidos politicos,
+	legislaturas, agregar un función para agregar slugs y  fechas de creación con
+	callback_before_insert
+	*/
+	
+	/*Partidos politicos*/
+	public function political_parties() {
+		$crud = new grocery_CRUD();
+		
+		/*Tabla y título*/
+		$crud->set_theme('datatables');
+		$crud->set_table('political_parties');
+		$crud->set_subject('Partidos políticos');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('name', 'short_name', 'short_title', 'url_logo');
+		$crud->columns('id_political_party', 'name', 'short_name', 'url_logo');
+		$crud->fields('name', 'short_name', 'url_logo');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('id_political_party', 'ID');
+		$crud->display_as('name', 'Nombre');
+		$crud->display_as('short_name', 'Nombre corto');
+		
+		/*Set upload file Logo*/
+		$crud->display_as('url_logo', 'Logo');
+		$crud->set_field_upload('url_logo', 'assets/uploads/files');
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
+	/*Legislaturas*/
+	public function legislatures() {
+		$crud = new grocery_CRUD();
+		
+		/*Tabla y título*/
+		$crud->set_theme('datatables');
+		$crud->set_table('legislatures');
+		$crud->set_subject('Legislaturas');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('name');
+		$crud->columns('id_legislature', 'name');
+		$crud->fields('name');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('id_legislature', 'ID');
+		$crud->display_as('name', 'Nombre');
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+
+	
+	/*Representantes*/
+	public function representatives() {
+		$crud = new grocery_CRUD();
+		
+		/*Tabla y título*/
+		$crud->set_theme('datatables');
+		$crud->set_table('representatives');
+		$crud->set_subject('Representantes');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('id_political_party', 'id_legislature', 'name');
+		$crud->columns('id_representative', 'id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email');
+		$crud->fields('id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'eleccion_type', 'circumscription', 'latitude', 'longitude');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('id_representative', 'ID');
+		$crud->display_as('name', 'Nombre');
+		$crud->display_as('biography', 'Biografia');
+		$crud->display_as('district', 'Distrito');
+		$crud->display_as('substitute', 'Sustituto');
+		$crud->display_as('eleccion_type', 'Tipo de elección');
+		$crud->display_as('circumscription', 'Cirscuncipcion');
+		
+		$crud->display_as('id_political_party', 'Partido Político');
+		$crud->set_relation('id_political_party', 'political_parties', 'name');
+		
+		$crud->display_as('id_legislature', 'Legislatura');
+		$crud->set_relation('id_legislature', 'legislatures', 'name');
+		
+		$crud->display_as('birthday', 'Cumpleaños');
+		$crud->field_type('birthday', 'date');
+		
+		/*Set upload file Avatar & Slug*/
+		$crud->set_field_upload('avatar', 'assets/uploads/files');
+		$crud->field_type('slug', 'invisible');
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
+	
+	public function multigrids2() {
 		$this->config->load('grocery_crud');
 		$this->config->set_item('grocery_crud_dialog_forms',true);
 		$this->config->set_item('grocery_crud_default_per_page',10);
@@ -53,7 +153,7 @@ class Examples extends CI_Controller {
 		try {
 			$crud = new grocery_CRUD();
 			
-			/*Set table and title*/
+			/*Tabla y título*/
 			$crud->set_theme('datatables');
 			$crud->set_table('initiatives');
 			$crud->set_subject('Iniciativas');
