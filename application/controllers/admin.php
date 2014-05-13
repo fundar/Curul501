@@ -35,7 +35,7 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name', 'short_name', 'short_title', 'url_logo');
 		$crud->columns('id_political_party', 'name', 'short_name', 'url_logo');
-		$crud->fields('name', 'short_name', 'url_logo', 'slug');
+		$crud->fields('id_political_party', 'name', 'short_name', 'url_logo', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_political_party', 'ID');
@@ -46,6 +46,7 @@ class Admin extends CI_Controller {
 		$crud->display_as('url_logo', 'Logo');
 		$crud->set_field_upload('url_logo', 'assets/uploads/files');
 		$crud->field_type('slug', 'invisible');
+		$crud->field_type('id_political_party', 'invisible');
 		
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
@@ -67,12 +68,13 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_legislature', 'name');
-		$crud->fields('name', 'slug');
+		$crud->fields('id_legislature', 'name', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_legislature', 'ID');
 		$crud->display_as('name', 'Nombre');
 		$crud->field_type('slug', 'invisible');
+		$crud->field_type('id_legislature', 'invisible');
 		
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
@@ -85,52 +87,73 @@ class Admin extends CI_Controller {
 	
 	/*Representantes*/
 	public function representatives() {
-		$crud = new grocery_CRUD();
-		
-		/*Tabla y título*/
-		$crud->set_theme('datatables');
-		$crud->set_table('representatives');
-		$crud->set_subject('Representantes');
-		
-		/*Set requiered fields, columns and fields*/
-		$crud->required_fields('id_political_party', 'id_legislature', 'name');
-		$crud->columns('id_representative', 'id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email');
-		$crud->fields('id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'eleccion_type', 'circumscription', 'latitude', 'longitude', 'map');
-		
-		/*Nombres de campos*/	
-		$crud->display_as('id_representative', 'ID');
-		$crud->display_as('name', 'Nombre');
-		$crud->display_as('biography', 'Biografia');
-		$crud->display_as('district', 'Distrito');
-		$crud->display_as('substitute', 'Sustituto');
-		$crud->display_as('eleccion_type', 'Tipo de elección');
-		$crud->display_as('circumscription', 'Cirscuncipcion');
-		
-		$crud->display_as('id_political_party', 'Partido Político');
-		$crud->set_relation('id_political_party', 'political_parties', 'name');
-		
-		$crud->display_as('id_legislature', 'Legislatura');
-		$crud->set_relation('id_legislature', 'legislatures', 'name');
-		
-		$crud->display_as('birthday', 'Cumpleaños');
-		$crud->field_type('birthday', 'date');
-		$crud->display_as('map', 'Ubicación');
-		
-		/*Set upload file Avatar, slug, latitude & longitude*/
-		$crud->set_field_upload('avatar', 'assets/uploads/files');
-		$crud->field_type('slug', 'invisible');
-		$crud->field_type('latitude', 'invisible');
-		$crud->field_type('longitude', 'invisible');
-		
-		/*Callback Slug & Map*/
-		$crud->callback_add_field('map', array($this,'getMap'));
-		$crud->callback_before_insert(array($this, 'getSlug'));
-		
-		$output = $crud->render();
-		
-		$this->_example_output($output);
+		try {
+			$crud  = new grocery_CRUD();
+			$state = $crud->getState();
+			
+			/*Tabla y título*/
+			$crud->set_theme('datatables');
+			$crud->set_table('representatives');
+			$crud->set_subject('Representantes');
+			
+			/*Set requiered fields, columns and fields*/
+			$crud->required_fields('id_political_party', 'id_legislature', 'name');
+			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'map');
+			
+			if($state != "read") {
+				$crud->fields('id_representative', 'name','id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'election_type', 'circumscription', 'latitude', 'longitude', 'map');
+			} else {
+				$crud->fields('id_representative', 'name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'election_type', 'circumscription', 'latitude', 'longitude');
+			}
+			
+			/*Nombres de campos*/	
+			$crud->display_as('id_representative', 'ID');
+			$crud->display_as('name', 'Nombre');
+			$crud->display_as('biography', 'Biografia');
+			$crud->display_as('district', 'Distrito');
+			$crud->display_as('substitute', 'Sustituto');
+			$crud->display_as('election_type', 'Tipo de elección');
+			$crud->display_as('circumscription', 'Cirscuncipcion');
+			
+			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->set_relation('id_political_party', 'political_parties', 'name');
+			
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			$crud->display_as('birthday', 'Cumpleaños');
+			$crud->field_type('birthday', 'date');
+			
+			/*Set upload file Avatar, slug, latitude & longitude*/
+			$crud->set_field_upload('avatar', 'assets/uploads/files');
+			$crud->field_type('slug', 'invisible');
+			$crud->field_type('id_representative', 'invisible');
+			$crud->field_type('longitude', 'hidden');
+			
+			/*Callback Para el Mapa*/
+			if($state != "read") {
+				$crud->field_type('latitude', 'hidden');
+				$crud->display_as('map', 'Ubicación');
+				$crud->callback_add_field('map', array($this,'getMap'));
+				$crud->callback_edit_field('map', array($this,'getMap'));
+			} else {
+				$crud->display_as('latitude', 'Ubicación');
+				$crud->callback_field('latitude', array($this, 'getMap2'));
+			}
+			
+			/*Callbacks para obtener urls y slug*/
+			$crud->callback_column($this->unique_field_name('id_political_party'), array($this, 'urlPoliticalParty'));
+			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
+			$crud->callback_before_insert(array($this, 'getSlug'));
+			
+			$output = $crud->render();
+			
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
 	}
-	
+    
 	/*Crud de iniciativas*/
 	public function initiatives() {
 		try {
@@ -182,16 +205,36 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
-	/*Genera slug y fecha*/
+	/*obtener url de partido politco*/
+	function urlPoliticalParty($value, $row) {
+		return "<a href='".site_url('admin/political_parties/read/'.$row->id_political_party)."'>$value</a>";
+	}	
+	
+	/*obtener url de legislatura*/
+	function urlLegislature($value, $row) {
+		return "<a href='".site_url('admin/legislatures/read/'.$row->id_legislature)."'>$value</a>";
+	}
+	
+	/*obtener nombre unico de un campo*/
+	function unique_field_name($field_name) {
+		return 's'.substr(md5($field_name),0,8); //This s is because is better for a string to begin with a letter and not with a number
+    }
+    
+	/*Genera slug*/
 	function getSlug($post_array) {
 		$post_array['slug'] = slug($post_array['name']);
 		
 		return $post_array;
 	}
 	
-	/*Genera slug y fecha*/
+	/*Genera div del mapa*/
 	function getMap($post_array) {
 		return "<div id='map'></div>";
+	}
+	
+	/*Genera div del mapa*/
+	function getMap2($value) {
+		return "<div id='map'></div><input id='field-latitude' type='hidden' name='longitude' value='$value'>";
 	}
 	
 	/*Nombres en español de los campos*/

@@ -44,16 +44,29 @@ a:hover
     </div>
     
     <script>
-		if(document.getElementById('map')) {
-			var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([19.43268648150198, -99.13318455219269], 6);
+		if(document.getElementById('map') || document.getElementById('latitude')) {
+			if(document.getElementById("field-latitude").value == "") {
+				var lat = 19.43268648150198;
+				var lng = -99.13318455219269;
+			} else {
+				var lat = document.getElementById("field-latitude").value;
+				var lng = document.getElementById("field-longitude").value;
+			}
+			
+			var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([lat, lng], 8);
 
-			var marker = L.marker(new L.LatLng(19.43268648150198, -99.13318455219269), {
+			var marker = L.marker(new L.LatLng(lat, lng), {
 				icon: L.mapbox.marker.icon({'marker-color': 'CC0033'}),
 				draggable: true
 			});
 
 			marker.bindPopup('Mueve el marcador para ubicar al representante');
 			marker.addTo(map);
+			
+			marker.on('dragend', function(e){
+				document.getElementById("field-latitude").value  = e.target._latlng.lat;
+				document.getElementById("field-longitude").value = e.target._latlng.lng;
+			});
 		}
 	</script>
 </body>
