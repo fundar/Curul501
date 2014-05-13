@@ -7,7 +7,11 @@ class Examples extends CI_Controller {
 		parent::__construct();
 
 		$this->load->database();
+		
+		//Helpers
 		$this->load->helper('url');
+		$this->load->helper('slug');
+		$this->load->helper('date');
 
 		$this->load->library('grocery_CRUD');
 	}
@@ -34,16 +38,20 @@ class Examples extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name', 'short_name', 'short_title', 'url_logo');
 		$crud->columns('id_political_party', 'name', 'short_name', 'url_logo');
-		$crud->fields('name', 'short_name', 'url_logo');
+		$crud->fields('name', 'short_name', 'url_logo', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_political_party', 'ID');
 		$crud->display_as('name', 'Nombre');
 		$crud->display_as('short_name', 'Nombre corto');
 		
-		/*Set upload file Logo*/
+		/*Set upload file Logo, Slug*/
 		$crud->display_as('url_logo', 'Logo');
 		$crud->set_field_upload('url_logo', 'assets/uploads/files');
+		$crud->field_type('slug', 'invisible');
+		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
 		
 		$output = $crud->render();
 		
@@ -62,11 +70,15 @@ class Examples extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_legislature', 'name');
-		$crud->fields('name');
+		$crud->fields('name', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_legislature', 'ID');
 		$crud->display_as('name', 'Nombre');
+		$crud->field_type('slug', 'invisible');
+		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
 		
 		$output = $crud->render();
 		
@@ -110,11 +122,21 @@ class Examples extends CI_Controller {
 		$crud->set_field_upload('avatar', 'assets/uploads/files');
 		$crud->field_type('slug', 'invisible');
 		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
+		
 		$output = $crud->render();
 		
 		$this->_example_output($output);
 	}
 	
+	
+	/*Genera slug y fecha*/
+	function getSlug($post_array) {
+		$post_array['slug'] = slug($post_array['name']);
+		
+		return $post_array;
+	}
 	
 	public function multigrids2() {
 		$this->config->load('grocery_crud');
