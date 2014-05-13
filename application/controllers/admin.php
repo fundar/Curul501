@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Examples extends CI_Controller {
+class Admin extends CI_Controller {
 
 	public function __construct()
 	{
@@ -17,7 +17,7 @@ class Examples extends CI_Controller {
 	}
 
 	public function _example_output($output = null) {
-		$this->load->view('example.php', $output);
+		$this->load->view('admin.php', $output);
 	}
 	
 	/* TO-DO
@@ -167,11 +167,7 @@ class Examples extends CI_Controller {
 		
 		$output = $crud->render();
 		
-		if($crud->getState() == 'list') {
-			$this->_example_output($output);
-		} else {
-			return $output;
-		}
+		$this->_example_output($output);
 	}
 	
 	/*Crud de iniciativas*/
@@ -208,8 +204,7 @@ class Examples extends CI_Controller {
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
 
-			
-				$this->_example_output($output);
+			$this->_example_output($output);
 		} catch(Exception $e) {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
@@ -232,7 +227,10 @@ class Examples extends CI_Controller {
 		return true;
 	}
 
+	
 	public function index() {
-		$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
+		header('Location: /examples/political_parties');
+		
+		return false;
 	}
 }
