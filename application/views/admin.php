@@ -28,9 +28,9 @@ a:hover
 </head>
 <body>
 	<div>
-		<a href='<?php echo site_url('examples/political_parties')?>'>Partidos políticos</a> |
-		<a href='<?php echo site_url('examples/legislatures')?>'>Legislaturas</a> |
-		<a href='<?php echo site_url('examples/representatives')?>'>Representantes</a> 
+		<a href='<?php echo site_url('admin/political_parties')?>'>Partidos políticos</a> |
+		<a href='<?php echo site_url('admin/legislatures')?>'>Legislaturas</a> |
+		<a href='<?php echo site_url('admin/representatives')?>'>Representantes</a> 
 	</div>
 	
 	<div style='height:20px;'></div>  
