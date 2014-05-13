@@ -1,5 +1,4 @@
 <?php
-
 define('SHOPIFY_APP_SECRET', 'curul501');
 
 function verify_webhook($data, $hmac_header)
