@@ -44,7 +44,8 @@ a:hover
     </div>
     
     <script>
-		if(document.getElementById('map') || document.getElementById('latitude')) {
+		/*Creaando el mapa de mapbox si esta presenta el div#map y el input#latitude*/
+		if(document.getElementById('map')) {
 			if(document.getElementById("field-latitude").value == "") {
 				var lat = 19.43268648150198;
 				var lng = -99.13318455219269;
@@ -54,10 +55,16 @@ a:hover
 			}
 			
 			var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([lat, lng], 8);
-
+			
+			if(document.getElementById('field-state')) {
+				var draggable = false;
+			} else {
+				var draggable = true;
+			}
+			
 			var marker = L.marker(new L.LatLng(lat, lng), {
 				icon: L.mapbox.marker.icon({'marker-color': 'CC0033'}),
-				draggable: true
+				draggable: draggable
 			});
 
 			marker.bindPopup('Mueve el marcador para ubicar al representante');

@@ -234,7 +234,7 @@ class Admin extends CI_Controller {
 	
 	/*Genera div del mapa*/
 	function getMap2($value) {
-		return "<div id='map'></div><input id='field-latitude' type='hidden' name='longitude' value='$value'>";
+		return "<div id='map'></div><input id='field-latitude' type='hidden' name='longitude' value='$value'><input id='field-state' type='hidden' name='field-state' value='read'>";
 	}
 	
 	/*Nombres en español de los campos*/
