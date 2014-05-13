@@ -10,21 +10,18 @@ class Admin extends CI_Controller {
 		
 		//Helpers
 		$this->load->helper('url');
-		$this->load->helper('slug');
+		$this->load->helper('slug'); /* application/helpers/slug_helper.php */
 		$this->load->helper('date');
 
 		$this->load->library('grocery_CRUD');
 	}
 
+	/*Salida de las vistas*/
 	public function _example_output($output = null) {
 		$this->load->view('admin.php', $output);
 	}
 	
-	/* TO-DO
-	Falta agregar slugs en base de datos, partidos politicos,
-	legislaturas, agregar un función para agregar slugs y  fechas de creación con
-	callback_before_insert
-	*/
+	/*TO-DO*/
 	
 	/*Partidos politicos*/
 	public function political_parties() {
@@ -98,7 +95,7 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('id_political_party', 'id_legislature', 'name');
 		$crud->columns('id_representative', 'id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email');
-		$crud->fields('id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'eleccion_type', 'circumscription', 'latitude', 'longitude');
+		$crud->fields('id_political_party', 'id_legislature', 'name', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'eleccion_type', 'circumscription', 'latitude', 'longitude', 'map');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_representative', 'ID');
@@ -117,53 +114,17 @@ class Admin extends CI_Controller {
 		
 		$crud->display_as('birthday', 'Cumpleaños');
 		$crud->field_type('birthday', 'date');
+		$crud->display_as('map', 'Ubicación');
 		
-		/*Set upload file Avatar & Slug*/
+		/*Set upload file Avatar, slug, latitude & longitude*/
 		$crud->set_field_upload('avatar', 'assets/uploads/files');
 		$crud->field_type('slug', 'invisible');
+		$crud->field_type('latitude', 'invisible');
+		$crud->field_type('longitude', 'invisible');
 		
-		/*Callback Slug*/
+		/*Callback Slug & Map*/
+		$crud->callback_add_field('map', array($this,'getMap'));
 		$crud->callback_before_insert(array($this, 'getSlug'));
-		
-		$output = $crud->render();
-		
-		$this->_example_output($output);
-	}
-	
-	
-	/*Genera slug y fecha*/
-	function getSlug($post_array) {
-		$post_array['slug'] = slug($post_array['name']);
-		
-		return $post_array;
-	}
-	
-	/*Prueba de multigrids*/
-	public function multigrids2() {
-		$this->config->load('grocery_crud');
-		$this->config->set_item('grocery_crud_dialog_forms',true);
-		$this->config->set_item('grocery_crud_default_per_page',10);
-		
-		$output1 = $this->users();
-		$output2 = $this->initiatives();
-
-		$js_files  = $output1->js_files + $output2->js_files;
-		$css_files = $output1->css_files + $output2->css_files;
-		$output    = "<h1>List 1</h1>".$output1->output."<h1>List 2</h1>".$output2->output;
-		
-		$this->_example_output((object)array (
-			'js_files' => $js_files,
-			'css_files' => $css_files,
-			'output'	=> $output
-		));
-	}
-	
-	
-	/*Crud de usuarios*/
-	public function users() {
-		$crud = new grocery_CRUD();
-		$crud->set_theme('datatables');	
-		$crud->set_table('users');
 		
 		$output = $crud->render();
 		
@@ -210,6 +171,29 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	/*Crud de usuarios*/
+	public function users() {
+		$crud = new grocery_CRUD();
+		$crud->set_theme('datatables');	
+		$crud->set_table('users');
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
+	/*Genera slug y fecha*/
+	function getSlug($post_array) {
+		$post_array['slug'] = slug($post_array['name']);
+		
+		return $post_array;
+	}
+	
+	/*Genera slug y fecha*/
+	function getMap($post_array) {
+		return "<div id='map'></div>";
+	}
+	
 	/*Nombres en español de los campos*/
 	public function display_as_initiatives($crud) {
 		$crud->display_as('id_initiative', 'ID Iniciativa');
@@ -226,11 +210,31 @@ class Admin extends CI_Controller {
 		
 		return true;
 	}
-
 	
+	/*TODO - check users sessions, redirecto to main page*/
 	public function index() {
 		header('Location: /admin/political_parties');
 		
 		return false;
+	}
+	
+	/*Prueba de multigrids*/
+	public function multigrids2() {
+		$this->config->load('grocery_crud');
+		$this->config->set_item('grocery_crud_dialog_forms',true);
+		$this->config->set_item('grocery_crud_default_per_page',10);
+		
+		$output1 = $this->users();
+		$output2 = $this->initiatives();
+
+		$js_files  = $output1->js_files + $output2->js_files;
+		$css_files = $output1->css_files + $output2->css_files;
+		$output    = "<h1>List 1</h1>".$output1->output."<h1>List 2</h1>".$output2->output;
+		
+		$this->_example_output((object)array (
+			'js_files' => $js_files,
+			'css_files' => $css_files,
+			'output'	=> $output
+		));
 	}
 }
