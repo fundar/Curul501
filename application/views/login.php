@@ -1,8 +1,7 @@
-<html lang="en-US">
+<!DOCTYPE html>
+<html>
 <head>
-
 	<meta charset="utf-8">
-
 	<title>Curul501 - Login</title>
 	<style>
 		@charset "utf-8";
@@ -146,7 +145,6 @@
 </head>
 
 <body>
-
     <div id="login-form">
         <h3>Login</h3>
         <fieldset>
@@ -163,6 +161,5 @@
             </form>
         </fieldset>
     </div> <!-- end login-form -->
-
 </body>
 </html>
