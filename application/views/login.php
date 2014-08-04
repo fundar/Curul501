@@ -149,11 +149,9 @@
         <h3>Login</h3>
         <fieldset>
             <form action="" method="POST">
-                <input type="email" required value="Email" onBlur="if(this.value=='')this.value='Email'" onFocus="if(this.value=='Email')this.value='' "> <!-- JS because of IE support; better: placeholder="Email" -->
-
-                <input type="password" required value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "> <!-- JS because of IE support; better: placeholder="Password" -->
-
-                <input type="submit" value="Login">
+                <input type="email" required value="Email" placeholder="Email" />
+                <input type="password" required value="Password" placeholder="Password" />
+                <input type="submit" name="submit" value="Login" />
 
                 <footer class="clearfix">
                     <?php if($error) echo "<p>" . $error . "</p>";?>
