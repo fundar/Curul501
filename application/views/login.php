@@ -149,8 +149,8 @@
         <h3>Login</h3>
         <fieldset>
             <form action="" method="POST">
-                <input type="email"    name="email"  required value="Email" placeholder="Email" />
-                <input type="password" name="pwd"    required value="Password" placeholder="Password" />
+                <input type="email"    name="email"  placeholder="email"    required />
+                <input type="password" name="pwd"    placeholder="password" required />
                 <input type="submit"   name="submit" value="Login" />
 
                 <footer class="clearfix">
