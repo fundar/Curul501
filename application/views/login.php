@@ -1,38 +1,168 @@
-<!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-	<meta charset="utf-8" />
-	<title>Cambio Azul - Login</title>
-	<meta name="keywords" content="Cambio Azul - Login" />
-    <meta name="description" content="Cambio Azul - Login" />
-<style type='text/css'>
-body
-{
-	font-family: Arial;
-	font-size: 14px;
-}
-a {
-    color: blue;
-    text-decoration: none;
-    font-size: 14px;
-}
-a:hover
-{
-	text-decoration: underline;
-}
-</style>
+
+	<meta charset="utf-8">
+
+	<title>Curul501 - Login</title>
+	<style>
+		@charset "utf-8";
+		/* CSS Document */
+
+		/* ---------- GENERAL ---------- */
+
+		body {
+			background: #eaeaea;
+			color: #999;
+			font: 100%/1.5em sans-serif;
+			margin: 0;
+		}
+
+		h3 { margin: 0; }
+
+		a {
+			color: #999;
+			text-decoration: none;
+		}
+
+		a:hover { color: #1dabb8; }
+
+		fieldset {
+			border: none;
+			margin: 0;
+		}
+
+		input {
+			border: none;
+			font-family: inherit;
+			font-size: inherit;
+			margin: 0;
+			-webkit-appearance: none;
+		}
+
+		input:focus {
+		  outline: none;
+		}
+
+		input[type="submit"] { cursor: pointer; }
+
+		.clearfix { *zoom: 1; }
+		.clearfix:before, .clearfix:after {
+			content: "";
+			display: table;	
+		}
+		.clearfix:after { clear: both; }
+
+		/* ---------- LOGIN-FORM ---------- */
+
+		#login-form {
+			margin: 50px auto;
+			width: 300px;
+		}
+
+		#login-form h3 {
+			background-color: #282830;
+			border-radius: 5px 5px 0 0;
+			color: #fff;
+			font-size: 14px;
+			padding: 20px;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		#login-form fieldset {
+			background: #fff;
+			border-radius: 0 0 5px 5px;
+			padding: 20px;
+			position: relative;
+		}
+
+		#login-form fieldset:before {
+			background-color: #fff;
+			content: "";
+			height: 8px;
+			left: 50%;
+			margin: -4px 0 0 -4px;
+			position: absolute;
+			top: 0;
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			transform: rotate(45deg);
+			width: 8px;
+		}
+
+		#login-form input {
+			font-size: 14px;
+		}
+
+		#login-form input[type="email"],
+		#login-form input[type="password"] {
+			border: 1px solid #dcdcdc;
+			padding: 12px 10px;
+			width: 238px;
+		}
+
+		#login-form input[type="email"] {
+			border-radius: 3px 3px 0 0;
+		}
+
+		#login-form input[type="password"] {
+			border-top: none;
+			border-radius: 0px 0px 3px 3px;
+		}
+
+		#login-form input[type="submit"] {
+			background: #1dabb8;
+			border-radius: 3px;
+			color: #fff;
+			float: right;
+			font-weight: bold;
+			margin-top: 20px;
+			padding: 12px 20px;
+		}
+
+		#login-form input[type="submit"]:hover { background: #198d98; }
+
+		#login-form footer {
+			font-size: 12px;
+			margin-top: 16px;
+		}
+
+		.info {
+			background: #e5e5e5;
+			border-radius: 50%;
+			display: inline-block;
+			height: 20px;
+			line-height: 20px;
+			margin: 0 10px 0 0;
+			text-align: center;
+			width: 20px;
+		}
+	</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
+
 <body>
-    <div>
-		<?php if($error) echo "<p>" . $error . "</p>";?>
-		
-		<form action="" method="POST">
-			<p>email: <input type="text" name="email" id="email" /></p>
-			<p>password: <input type="password" name="pwd" id="pwd" /></p>
-			<p>
-				<input type="submit" name="submit" value="enviar" />
-			</p>
-		</form>
-    </div>
+
+    <div id="login-form">
+        <h3>Login</h3>
+        <fieldset>
+            <form action="" method="POST">
+                <input type="email" required value="Email" onBlur="if(this.value=='')this.value='Email'" onFocus="if(this.value=='Email')this.value='' "> <!-- JS because of IE support; better: placeholder="Email" -->
+
+                <input type="password" required value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "> <!-- JS because of IE support; better: placeholder="Password" -->
+
+                <input type="submit" value="Login">
+
+                <footer class="clearfix">
+                    <?php if($error) echo "<p>" . $error . "</p>";?>
+                </footer>
+            </form>
+        </fieldset>
+    </div> <!-- end login-form -->
+
 </body>
 </html>
