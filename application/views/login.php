@@ -4,11 +4,6 @@
 	<meta charset="utf-8">
 	<title>Curul501 - Login</title>
 	<style>
-		@charset "utf-8";
-		/* CSS Document */
-
-		/* ---------- GENERAL ---------- */
-
 		body {
 			background: #eaeaea;
 			color: #999;
