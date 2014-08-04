@@ -306,7 +306,7 @@ class Admin extends CI_Controller {
 					$_SESSION['user_id'] = $user->id_user;
 					$_SESSION['email']   = $user->email;
 					
-					header('Location: ' . site_url('admin/initiatives'));
+					header('Location: ' . site_url('admin/'));
 				}
 				
 				$vars["error"] = "datos incorrectos";
