@@ -73,12 +73,14 @@ foreach($css_files as $file): ?>
 </style>
 </head>
 <body>
-	<?php $this->load->view('menu.php', $output); ?>
-	<div style='height:20px;'></div>  
-    <div>
-		<?php echo $output; ?>
+	<div id="container">
+		<?php $this->load->view('menu.php', $output); ?>
+		<div style='height:20px;'></div>  
+		<div>
+			<?php echo $output; ?>
+		</div>
     </div>
-    
+   
     <script>
 		/*Creaando el mapa de mapbox si esta presenta el div#map y el input#latitude*/
 		if(document.getElementById('map')) {
