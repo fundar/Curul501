@@ -149,9 +149,9 @@
         <h3>Login</h3>
         <fieldset>
             <form action="" method="POST">
-                <input type="email" required value="Email" placeholder="Email" />
-                <input type="password" required value="Password" placeholder="Password" />
-                <input type="submit" name="submit" value="Login" />
+                <input type="email"    name="email"  required value="Email" placeholder="Email" />
+                <input type="password" name="pwd"    required value="Password" placeholder="Password" />
+                <input type="submit"   name="submit" value="Login" />
 
                 <footer class="clearfix">
                     <?php if($error) echo "<p>" . $error . "</p>";?>
