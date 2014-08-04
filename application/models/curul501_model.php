@@ -21,7 +21,7 @@ class curul501_Model extends CI_Model  {
 	
 	/*Check if user exists*/
 	public function isUser($email = "", $password = "") {
-		$query = $this->db->get_where("users", array("email" => $email, "pwd" => $password));
+		$query = $this->db->get_where("users", array("email" => $email, "password" => $password));
 		$row   = $query->row(0);
 		
 		if(isset($row->id_user)) {
