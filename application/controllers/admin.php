@@ -304,7 +304,7 @@ class Admin extends CI_Controller {
 					}
 					
 					$_SESSION['user_id'] = $user->id_user;
-					$_SESSION['email'] = $user->email;
+					$_SESSION['email']   = $user->email;
 					
 					header('Location: ' . site_url('admin/initiatives'));
 				}
@@ -324,10 +324,14 @@ class Admin extends CI_Controller {
 		header('Location: ' . site_url('admin/login'));
 	}
 	
-	/*TODO - check users sessions, redirecto to main page*/
+	/*Salida de las vista de bienvenida*/
+	public function _welcome_output($output = null) {
+		$this->load->view('welcome_message.php', $output);
+	}
+	
+	/*index method*/
 	public function index() {
-		header('Location: /admin/login');
-		
-		return false;
+		$user = $this->isUser();
+		$this->_welcome_output();
 	}
 }
