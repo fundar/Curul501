@@ -14,6 +14,12 @@ class Admin extends CI_Controller {
 		$this->load->helper('date');
 
 		$this->load->library('grocery_CRUD');
+		
+		set_time_limit(6000); 
+		ini_set("memory_limit", -1);
+		ini_set("session.cookie_lifetime", "14400");
+		ini_set("session.gc_maxlifetime",  "14400");
+		session_start();
 	}
 
 	/*Salida de las vistas*/
@@ -194,17 +200,6 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	/*Crud de usuarios*/
-	public function users() {
-		$crud = new grocery_CRUD();
-		$crud->set_theme('datatables');	
-		$crud->set_table('users');
-		
-		$output = $crud->render();
-		
-		$this->_example_output($output);
-	}
-	
 	/*obtener url de partido politco*/
 	function urlPoliticalParty($value, $row) {
 		return "<a href='".site_url('admin/political_parties/read/'.$row->id_political_party)."'>$value</a>";
@@ -254,30 +249,85 @@ class Admin extends CI_Controller {
 		return true;
 	}
 	
-	/*TODO - check users sessions, redirecto to main page*/
-	public function index() {
-		header('Location: /admin/political_parties');
-		
-		return false;
+	/*isUser, si es usuario*/
+	private function isUser($redirect = true, $admin = false) {
+		if(isset($_SESSION['user_id'])) {
+			$user_id = $_SESSION['user_id'];
+			
+			$this->load->model('curul501_model');
+			$user = $this->curul501_model->getUser($_SESSION['user_id']);
+			
+			if($user) {
+				if($admin) {
+					if($user->type == "admin") {
+						return $user;
+					} else {
+						if($redirect) {
+							header('Location: ' . site_url('admin/initiatives'));
+						}
+						
+						return false;
+					}
+				}
+				
+				return $user;
+			} else {
+				if($redirect) {
+					header('Location: ' . site_url('admin/login'));
+				}
+				
+				return false;
+			}
+		} else {
+			if($redirect) {
+				header('Location: ' . site_url('admin/login'));
+			}
+			
+			return false;
+		}
 	}
 	
-	/*Prueba de multigrids*/
-	public function multigrids2() {
-		$this->config->load('grocery_crud');
-		$this->config->set_item('grocery_crud_dialog_forms',true);
-		$this->config->set_item('grocery_crud_default_per_page',10);
+	/*login de usuarios*/
+	public function login() {
+		if($this->isUser(false)) {
+			header('Location: ' . site_url('admin/initiatives'));
+		} else {
+			$vars["error"] = false;
+			
+			if(isset($_POST["submit"])) {
+				$this->load->model('curul501_model');
+				$user = $this->curul501_model->isUser(trim(str_replace("'","",$_POST["email"])), md5($_POST["pwd"]));
+				
+				if($user) {
+					if($user->type == "admin") {
+						$_SESSION['admin'] = true;
+					}
+					
+					$_SESSION['user_id'] = $user->id_user;
+					$_SESSION['email'] = $user->email;
+					
+					header('Location: ' . site_url('admin/initiatives'));
+				}
+				
+				$vars["error"] = "datos incorrectos";
+			}
+			
+			$this->load->view('login.php', $vars);
+		}
+	}
+	
+	/*cerrar sesion*/
+	public function logout() {
+		session_unset(); 
+		session_destroy();
 		
-		$output1 = $this->users();
-		$output2 = $this->initiatives();
-
-		$js_files  = $output1->js_files + $output2->js_files;
-		$css_files = $output1->css_files + $output2->css_files;
-		$output    = "<h1>List 1</h1>".$output1->output."<h1>List 2</h1>".$output2->output;
+		header('Location: ' . site_url('admin/login'));
+	}
+	
+	/*TODO - check users sessions, redirecto to main page*/
+	public function index() {
+		header('Location: /admin/login');
 		
-		$this->_example_output((object)array (
-			'js_files' => $js_files,
-			'css_files' => $css_files,
-			'output'	=> $output
-		));
+		return false;
 	}
 }
