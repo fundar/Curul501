@@ -190,6 +190,20 @@ class Admin extends CI_Controller {
 			/*Set relations*/
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			/* TO-DO
+			 * 
+			 * Falta relacionar iniciativas a represtantes y partidos politicos
+			 * initiative2political_party
+			 * initiative2representatives
+			 * 
+			 * Falta poner estatus a las iniciativas 1:1
+			 * initiatives2status
+			 * 
+			 * Falta relaioncar iniciativas a temas 1:N
+			 * initiatives2topics
+			 * 
+			*/
 		
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
