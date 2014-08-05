@@ -67,7 +67,7 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name', 'short_name', 'short_title', 'url_logo');
 		$crud->columns('id_political_party', 'name', 'short_name', 'url_logo');
-		$crud->fields('id_political_party', 'name', 'short_name', 'url_logo', 'slug');
+		$crud->fields('name', 'short_name', 'url_logo', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_political_party', 'ID');
@@ -78,7 +78,6 @@ class Admin extends CI_Controller {
 		$crud->display_as('url_logo', 'Logo');
 		$crud->set_field_upload('url_logo', 'assets/uploads/files');
 		$crud->field_type('slug', 'invisible');
-		$crud->field_type('id_political_party', 'invisible');
 		
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
@@ -100,13 +99,12 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_legislature', 'name');
-		$crud->fields('id_legislature', 'name', 'slug');
+		$crud->fields('name', 'slug');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_legislature', 'ID');
 		$crud->display_as('name', 'Nombre');
 		$crud->field_type('slug', 'invisible');
-		$crud->field_type('id_legislature', 'invisible');
 		
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
@@ -130,7 +128,7 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_political_party', 'id_legislature', 'name');
-			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'map');
+			$crud->columns('name', 'id_political_party', 'id_legislature', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'map');
 			
 			if($state != "read") {
 				$crud->fields('id_representative', 'name','id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email', 'substitute', 'election_type', 'circumscription', 'latitude', 'longitude', 'map');
@@ -159,7 +157,6 @@ class Admin extends CI_Controller {
 			/*Set upload file Avatar, slug, latitude & longitude*/
 			$crud->set_field_upload('avatar', 'assets/uploads/files');
 			$crud->field_type('slug', 'invisible');
-			$crud->field_type('id_representative', 'invisible');
 			$crud->field_type('longitude', 'hidden');
 			
 			/*Callback Para el Mapa*/
@@ -199,13 +196,12 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
 			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
-			$crud->fields('id_initiative', 'id_legislature', 'initiative2political_party', 'initiative2representatives', 'initiatives2topics', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
+			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'initiatives2topics', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
 			
 			/*Votos posibles 0-501*/
 			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
 			
 			/*Invisible fields*/
-			$crud->field_type('id_initiative', 'invisible');
 			$crud->field_type('official_vote_up', 'dropdown', $cvotes);
 			$crud->field_type('official_vote_down', 'dropdown', $cvotes);
 			$crud->field_type('official_vote_abstentions', 'dropdown', $cvotes);
@@ -287,7 +283,7 @@ class Admin extends CI_Controller {
 	
 	/*Nombres en español de los campos*/
 	public function display_as_initiatives($crud) {
-		$crud->display_as('id_initiative', 'ID Iniciativa');
+		$crud->display_as('id_initiative', 'ID');
 		$crud->display_as('title', 'Título');
 		$crud->display_as('short_title', 'Título Corto');
 		$crud->display_as('description', 'Descripción');
