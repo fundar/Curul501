@@ -204,7 +204,10 @@ class Admin extends CI_Controller {
 			 * initiatives2topics
 			 * 
 			*/
-		
+			
+			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
+			$crud->display_as('initiative2political_party', 'Partido politico');
+			
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
 
