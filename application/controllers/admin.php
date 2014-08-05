@@ -261,6 +261,8 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
 			$crud->display_as('initiatives2topics', 'Temas');
 			
+			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
+			
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
 
@@ -273,7 +275,7 @@ class Admin extends CI_Controller {
 	/*obtener url de partido politco*/
 	function urlPoliticalParty($value, $row) {
 		return "<a href='".site_url('admin/political_parties/read/'.$row->id_political_party)."'>$value</a>";
-	}	
+	}
 	
 	/*obtener url de legislatura*/
 	function urlLegislature($value, $row) {
