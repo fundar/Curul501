@@ -177,6 +177,7 @@ DROP TABLE IF EXISTS `initiatives`;
 CREATE TABLE `initiatives` (
   `id_initiative` int(11) NOT NULL AUTO_INCREMENT,
   `id_legislature` int(11) NOT NULL,
+  `id_status` int(11) NOT NULL,
   `presented_at` timestamp NULL DEFAULT NULL,
   `description` text NOT NULL,
   `title` text NOT NULL,
