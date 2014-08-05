@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Topic*/
-	public function topic() {
+	public function topics() {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
