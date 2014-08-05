@@ -14,6 +14,9 @@
 	<a href="<?php echo site_url('admin/topics')?>">
 		<?php if($this->uri->segment(2) == "topics") { ?><strong>Temas</strong><?php } else { ?>Temas<?php } ?>
 	</a> |
+	<a href="<?php echo site_url('admin/status')?>">
+		<?php if($this->uri->segment(2) == "status") { ?><strong>Estatus</strong><?php } else { ?>Estatus<?php } ?>
+	</a> |
 	<?php if(isset($_SESSION['user_id'])) { ?>
 		<a href="<?php echo site_url('admin/logout')?>">Cerrar sesión</a>
 	<?php } ?>
