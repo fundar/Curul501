@@ -173,7 +173,7 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
 			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
-			$crud->fields('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
+			$crud->fields('id_initiative', 'id_legislature', 'initiative2political_party', 'initiative2representatives', 'initiatives2topics', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
 			
 			/*Votos posibles 0-501*/
 			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
@@ -205,8 +205,18 @@ class Admin extends CI_Controller {
 			 * 
 			*/
 			
+			/*Relacion partidos politicos - iniciativas*/
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
-			$crud->display_as('initiative2political_party', 'Partido politico');
+			$crud->display_as('initiative2political_party', 'Partidos políticos');
+			
+			/*Relacion representantes - iniciativas*/
+			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
+			$crud->display_as('initiative2representatives', 'Representantes');
+			
+			/*Relacion topics - iniciativas*/
+			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
+			$crud->display_as('initiatives2topics', 'Temas');
+			
 			
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
