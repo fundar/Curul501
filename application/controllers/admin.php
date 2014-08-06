@@ -27,6 +27,34 @@ class Admin extends CI_Controller {
 		$this->load->view('admin.php', $output);
 	}
 	
+	/*Comisiones*/
+	public function commissions() {
+		$crud = new grocery_CRUD();
+		
+		/*Tabla y título*/
+		$crud->set_theme('datatables');
+		$crud->set_table('commissions');
+		$crud->set_subject('Comisiones');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('name');
+		$crud->columns('id_commission', 'name', 'secretario', 'created_at');
+		$crud->fields('name', 'slug', 'secretario', 'created_at', 'status');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('id_commission', 'ID');
+		$crud->display_as('name', 'Nombre');
+		$crud->display_as('created_at', 'Fecha de creación');
+		$crud->field_type('slug', 'invisible');
+		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
 	/*Topic*/
 	public function topics() {
 		$crud = new grocery_CRUD();
@@ -245,8 +273,10 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_status', 'status', 'name');
 
 			/* TO-DO
-			 * Falta poner estatus a las iniciativas 1:1
-			 * initiatives2status
+			 * Falta relacionar iniciativas a comisiones
+			 * commissions2initiatives
+			 * commissions
+			 * Falta relacionar comisiones a representantes
 			*/
 			
 			/*Relacion partidos politicos - iniciativas*/
