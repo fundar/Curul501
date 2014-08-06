@@ -464,6 +464,8 @@ CREATE TABLE `topics` (
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `description` text,
+  `created_at` timestamp NOT NULL DEFAULT now(),
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_topic`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
