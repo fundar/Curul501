@@ -188,7 +188,7 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Representantes');
 			
 			/*Set requiered fields, columns and fields*/
-			$crud->required_fields('id_political_party', 'id_legislature', 'name');
+			$crud->required_fields('id_political_party', 'name');
 			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email');
 			
 			if($state != "read") {
