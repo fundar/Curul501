@@ -170,13 +170,17 @@ class Admin extends CI_Controller {
 		
 		$this->_example_output($output);
 	}
-
 	
 	/*Representantes*/
 	public function representatives() {
 		try {
 			$crud  = new grocery_CRUD();
 			$state = $crud->getState();
+			
+			/* TO-DO
+			 * 
+			 * Falta relacionar comisiones a representantes
+			*/
 			
 			/*Tabla y título*/
 			$crud->set_theme('datatables');
@@ -253,7 +257,7 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
 			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
-			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'initiatives2topics', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at', 'id_status');
+			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'title', 'description', 'short_title', 'presented_by', 'additional_resources', 'additional_resources_url', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at', 'id_status');
 			
 			/*Votos posibles 0-501*/
 			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
@@ -272,13 +276,6 @@ class Admin extends CI_Controller {
 			
 			$crud->display_as('id_status', 'Estatus');
 			$crud->set_relation('id_status', 'status', 'name');
-
-			/* TO-DO
-			 * Falta relacionar iniciativas a comisiones
-			 * commissions2initiatives
-			 * commissions
-			 * Falta relacionar comisiones a representantes
-			*/
 			
 			/*Relacion partidos politicos - iniciativas*/
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
@@ -287,6 +284,10 @@ class Admin extends CI_Controller {
 			/*Relacion representantes - iniciativas*/
 			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
 			$crud->display_as('initiative2representatives', 'Representantes');
+			
+			/*Relacion Comisiones - iniciativas*/
+			$crud->set_relation_n_n('commissions2initiatives', 'commissions2initiatives', 'commissions', 'id_initiative', 'id_commission', 'name');
+			$crud->display_as('commissions2initiatives', 'Comisiones');
 			
 			/*Relacion topics - iniciativas*/
 			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
