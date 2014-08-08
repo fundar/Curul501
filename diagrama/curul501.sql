@@ -109,8 +109,7 @@ DROP TABLE IF EXISTS `commissions2representatives`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commissions2representatives` (
   `id_commission` int(11) NOT NULL,
-  `id_representative` int(11) NOT NULL,
-  `id_position` int(11) NOT NULL
+  `id_representative` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,9 +117,31 @@ CREATE TABLE `commissions2representatives` (
 -- Dumping data for table `commissions2representatives`
 --
 
-LOCK TABLES `commissions2representatives` WRITE;
-/*!40000 ALTER TABLE `commissions2representatives` DISABLE KEYS */;
-/*!40000 ALTER TABLE `commissions2representatives` ENABLE KEYS */;
+LOCK TABLES `commissions2secretaries` WRITE;
+/*!40000 ALTER TABLE `commissions2secretaries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `commissions2secretaries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `commissions2representatives`
+--
+
+DROP TABLE IF EXISTS `commissions2secretaries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `commissions2secretaries` (
+  `id_commission` int(11) NOT NULL,
+  `id_representative` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `commissions2secretaries`
+--
+
+LOCK TABLES `commissions2secretaries` WRITE;
+/*!40000 ALTER TABLE `commissions2secretaries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `commissions2secretaries` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -183,9 +204,7 @@ CREATE TABLE `initiatives` (
   `title` text NOT NULL,
   `short_title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
-  `presented_by` varchar(255) DEFAULT NULL,
   `additional_resources` text,
-  `additional_resources_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT now(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
