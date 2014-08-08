@@ -189,11 +189,6 @@ class Admin extends CI_Controller {
 			$crud  = new grocery_CRUD();
 			$state = $crud->getState();
 			
-			/* TO-DO
-			 * 
-			 * Falta relacionar comisiones a representantes
-			*/
-			
 			/*Tabla y título*/
 			$crud->set_theme('datatables');
 			$crud->set_table('representatives');
@@ -201,7 +196,7 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_political_party', 'name');
-			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature', 'avatar', 'birthday', 'twitter', 'facebook', 'district', 'phone', 'email');
+			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature', 'email');
 			
 			if($state != "read") {
 				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription', 'latitude', 'longitude', 'map');
