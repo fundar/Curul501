@@ -39,8 +39,20 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_commission', 'name', 'secretario', 'created_at');
-		$crud->fields('name', 'slug', 'secretario', 'created_at', 'status');
+		$crud->fields('name', 'slug', 'id_president', 'commissions2secretaries', 'commissions2representatives', 'created_at', 'status');
 		
+		/*Presidente*/
+		$crud->display_as('id_president', 'Presidente');
+		$crud->set_relation('id_president', 'representatives', 'name');
+		
+		/*Relacion secretarios - comisiones*/
+		$crud->set_relation_n_n('commissions2secretaries', 'commissions2secretaries', 'representatives', 'id_commission', 'id_representative', 'name');
+		$crud->display_as('commissions2secretaries', 'Secretarios');
+		
+		/*Relacion Integrantes - comisiones*/
+		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives', 'id_commission', 'id_representative', 'name');
+		$crud->display_as('commissions2representatives', 'Integrantes');
+			
 		/*Nombres de campos*/	
 		$crud->display_as('id_commission', 'ID');
 		$crud->display_as('name', 'Nombre');
