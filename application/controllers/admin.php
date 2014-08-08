@@ -38,7 +38,7 @@ class Admin extends CI_Controller {
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
-		$crud->columns('id_commission', 'name', 'secretario', 'created_at');
+		$crud->columns('id_commission', 'name', 'id_president', 'created_at');
 		$crud->fields('name', 'slug', 'id_president', 'commissions2secretaries', 'commissions2representatives', 'created_at', 'status');
 		
 		/*Presidente*/
