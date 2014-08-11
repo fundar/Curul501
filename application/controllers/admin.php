@@ -96,7 +96,6 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
-	
 	/*Tags*/
 	public function tags() {
 		$crud = new grocery_CRUD();
