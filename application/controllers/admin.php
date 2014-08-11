@@ -96,7 +96,6 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
-	
 	/*Tags*/
 	public function tags() {
 		$crud = new grocery_CRUD();
@@ -292,7 +291,7 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
 			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
-			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'title', 'description', 'short_title', 'additional_resources', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at', 'id_status');
+			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'additional_resources', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at', 'id_status');
 			
 			/*Votos posibles 0-501*/
 			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
@@ -327,6 +326,11 @@ class Admin extends CI_Controller {
 			/*Relacion topics - iniciativas*/
 			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
 			$crud->display_as('initiatives2topics', 'Temas');
+			
+			/*Relacion tags - iniciativas*/
+			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
+			$crud->display_as('initiatives2tags', 'Etiquetas');
+			
 			
 			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
 			
