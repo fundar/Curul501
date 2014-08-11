@@ -96,6 +96,34 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
+	
+	/*Tags*/
+	public function tags() {
+		$crud = new grocery_CRUD();
+		
+		/*Tabla y título*/
+		$crud->set_theme('datatables');
+		$crud->set_table('tags');
+		$crud->set_subject('Etiquetas');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('name');
+		$crud->columns('id_tag', 'name');
+		$crud->fields('name', 'slug');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('id_tag', 'ID');
+		$crud->display_as('name', 'Nombre');
+		$crud->field_type('slug', 'invisible');
+		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
 	/*Status*/
 	public function status() {
 		$crud = new grocery_CRUD();
