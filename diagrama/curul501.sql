@@ -16,6 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tags` (
+  `id_tag` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT now(),
+  PRIMARY KEY (`id_tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+--
 -- Table structure for table `comments`
 --
 
@@ -274,6 +294,30 @@ LOCK TABLES `initiatives2topics` WRITE;
 /*!40000 ALTER TABLE `initiatives2topics` DISABLE KEYS */;
 /*!40000 ALTER TABLE `initiatives2topics` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Table structure for table `initiatives2tags`
+--
+
+DROP TABLE IF EXISTS `initiatives2tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `initiatives2tags` (
+  `id_initiative` int(11) NOT NULL,
+  `id_tag` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `initiatives2topics`
+--
+
+LOCK TABLES `initiatives2tags` WRITE;
+/*!40000 ALTER TABLE `initiatives2tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `initiatives2tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Table structure for table `legislatures`
