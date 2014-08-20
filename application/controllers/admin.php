@@ -32,7 +32,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('commissions');
 		$crud->set_subject('Comisiones');
 		
@@ -73,7 +73,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('topics');
 		$crud->set_subject('Temas');
 		
@@ -101,7 +101,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('tags');
 		$crud->set_subject('Etiquetas');
 		
@@ -128,7 +128,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('status');
 		$crud->set_subject('Estatus');
 		
@@ -156,7 +156,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('political_parties');
 		$crud->set_subject('Partidos políticos');
 		
@@ -188,7 +188,7 @@ class Admin extends CI_Controller {
 		$crud = new grocery_CRUD();
 		
 		/*Tabla y título*/
-		$crud->set_theme('datatables');
+		//$crud->set_theme('datatables');
 		$crud->set_table('legislatures');
 		$crud->set_subject('Legislaturas');
 		
@@ -284,7 +284,7 @@ class Admin extends CI_Controller {
 			$crud = new grocery_CRUD();
 			
 			/*Tabla y título*/
-			$crud->set_theme('datatables');
+			//$crud->set_theme('datatables');
 			$crud->set_table('initiatives');
 			$crud->set_subject('Iniciativas');
 			
