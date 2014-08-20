@@ -217,7 +217,7 @@ class Admin extends CI_Controller {
 			$state = $crud->getState();
 			
 			/*Tabla y título*/
-			$crud->set_theme('datatables');
+			//$crud->set_theme('datatables');
 			$crud->set_table('representatives');
 			$crud->set_subject('Representantes');
 			
@@ -330,7 +330,6 @@ class Admin extends CI_Controller {
 			/*Relacion tags - iniciativas*/
 			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
 			$crud->display_as('initiatives2tags', 'Etiquetas');
-			
 			
 			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
 			
