@@ -428,6 +428,9 @@ class Admin extends CI_Controller {
 		try {
 			$crud = new grocery_CRUD();
 			
+			#no se pueden agregar
+			$crud->unset_add();
+			
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciatvas scrapper');
