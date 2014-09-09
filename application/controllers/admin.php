@@ -432,7 +432,8 @@ class Admin extends CI_Controller {
 			//$crud->set_theme('datatables');
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciatvas scrapper');
-
+			
+			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
