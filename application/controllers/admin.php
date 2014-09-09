@@ -488,7 +488,7 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Votos Representantes scrapper');
 			
 			/*Columnas*/
-			$crud->columns('id_voto', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
+			$crud->columns('id_voto_representante', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
 			$crud->display_as('id_partido', 'Partido Político');
