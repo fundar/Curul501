@@ -8,6 +8,9 @@
 	<a href="<?php echo site_url('admin/representatives_scrapper')?>">
 		<?php if($this->uri->segment(2) == "representatives_scrapper") { ?><strong>Representantes_scrapper</strong><?php } else { ?>Representantes_scrapper<?php } ?>
 	</a> |
+	<a href="<?php echo site_url('admin/initiatives_scrapper')?>">
+		<?php if($this->uri->segment(2) == "initiatives_scrapper") { ?><strong>Iniciatvas scrapper</strong><?php } else { ?>Iniciatvas scrapper<?php } ?>
+	</a> |
 	
 	<a href="<?php echo site_url('admin/political_parties')?>">
 		<?php if($this->uri->segment(2) == "political_parties") { ?><strong>Partidos políticos</strong><?php } else { ?>Partidos políticos<?php } ?>
