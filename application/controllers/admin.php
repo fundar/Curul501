@@ -423,6 +423,22 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	/*Crud de iniciativas del Scrapping*/
+	public function initiatives_scrapper() {
+		try {
+			$crud = new grocery_CRUD();
+			
+			/*Tabla y título*/
+			//$crud->set_theme('datatables');
+			$crud->set_table('iniciativas_scrapper');
+			$crud->set_subject('Iniciatvas scrapper');
+
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
 	/*obtener url de partido politco*/
 	function urlPoliticalParty($value, $row) {
 		return "<a href='".site_url('admin/political_parties/read/'.$row->id_political_party)."'>$value</a>";
