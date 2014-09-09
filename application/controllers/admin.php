@@ -435,12 +435,34 @@ class Admin extends CI_Controller {
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciatvas scrapper');
 			
-			/*Collumns*/
+			/*Columnas*/
 			$crud->columns('id_iniciativa', 'id_legislatura', 'titulo_listado', 'fecha_listado');
 			
-			/*Set relations*/
+			/*Relaciones*/
 			$crud->display_as('id_legislatura', 'Legislatura');
 			$crud->set_relation('id_legislatura', 'legislatures', 'name');
+			
+			$output = $crud->render();
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*Crud de votaciones de las iniciativas del Scrapping*/
+	public function votaciones_scrapper() {
+		try {
+			$crud = new grocery_CRUD();
+			
+			#No se pueden agregar
+			$crud->unset_add();
+			
+			/*Tabla y título*/
+			$crud->set_table('votaciones');
+			$crud->set_subject('Votaciones scrapper');
+			
+			/*Columnas*/
+			$crud->columns('id_iniciativa', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
 			
 			$output = $crud->render();
 			$this->_example_output($output);
