@@ -5,6 +5,10 @@
 	<a href="<?php echo site_url('admin/representatives')?>">
 		<?php if($this->uri->segment(2) == "representatives") { ?><strong>Representantes</strong><?php } else { ?>Representantes<?php } ?>
 	</a> |
+	<a href="<?php echo site_url('admin/representatives_scrapper')?>">
+		<?php if($this->uri->segment(2) == "representatives_scrapper") { ?><strong>Representantes_scrapper</strong><?php } else { ?>Representantes_scrapper<?php } ?>
+	</a> |
+	
 	<a href="<?php echo site_url('admin/political_parties')?>">
 		<?php if($this->uri->segment(2) == "political_parties") { ?><strong>Partidos políticos</strong><?php } else { ?>Partidos políticos<?php } ?>
 	</a> |
