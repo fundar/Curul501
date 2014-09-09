@@ -14,6 +14,9 @@
 	<a href="<?php echo site_url('admin/votaciones_scrapper')?>">
 		<?php if($this->uri->segment(2) == "votaciones_scrapper") { ?><strong>Votaciones scrapper</strong><?php } else { ?>Votaciones scrapper<?php } ?>
 	</a> |
+	<a href="<?php echo site_url('admin/votos_representantes')?>">
+		<?php if($this->uri->segment(2) == "votos_representantes") { ?><strong>Votos Representantes scrapper</strong><?php } else { ?>Votos Representantes scrapper<?php } ?>
+	</a> |
 	
 	
 	<a href="<?php echo site_url('admin/political_parties')?>">

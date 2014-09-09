@@ -462,7 +462,37 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Votaciones scrapper');
 			
 			/*Columnas*/
-			$crud->columns('id_voto', 'id_iniciativa', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
+			$crud->columns('id_voto', 'id_iniciativa', 'id_partido', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
+			
+			/*Relaciones*/
+			$crud->display_as('id_partido', 'Partido Político');
+			$crud->set_relation('id_partido', 'political_parties', 'name');
+			
+			$output = $crud->render();
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*Crud de los votos de representantes de las iniciativas del Scrapping*/
+	public function votos_representantes() {
+		try {
+			$crud = new grocery_CRUD();
+			
+			#No se pueden agregar
+			$crud->unset_add();
+			
+			/*Tabla y título*/
+			$crud->set_table('votos_representantes');
+			$crud->set_subject('Votos Representantes scrapper');
+			
+			/*Columnas*/
+			$crud->columns('id_voto', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
+			
+			/*Relaciones*/
+			$crud->display_as('id_partido', 'Partido Político');
+			$crud->set_relation('id_partido', 'political_parties', 'name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
