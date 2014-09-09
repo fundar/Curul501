@@ -277,6 +277,87 @@ class Admin extends CI_Controller {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
+	
+	
+	/*Representantes_scrapper*/
+	public function representatives_scrapper() {
+		try {
+			$crud  = new grocery_CRUD();
+			$state = $crud->getState();
+			
+			/*Tabla y título*/
+			//$crud->set_theme('datatables');
+			$crud->set_table('representatives_scrapper');
+			$crud->set_subject('Diputados_Scrapper');
+			
+			/*Set requiered fields, columns and fields*/
+			$crud->required_fields('name');
+			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
+			   
+			if($state != "read") {
+				$crud->fields('name','id_political_party','id_legislature','email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
+			} else {
+				$crud->fields('name','id_political_party','id_legislature','email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
+			}
+			
+			/*Nombres de campos*/	
+			$crud->display_as('id_representative_type', 'Tipo de Representante');
+			$crud->set_relation('id_representative_type', 'representative_type', 'name');
+
+			$crud->display_as('name', 'Nombre');
+			$crud->display_as('substitute', 'Suplente');
+			$crud->display_as('election_type', 'Tipo de elección');
+			
+			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->set_relation('id_political_party', 'political_parties', 'name');
+			
+			
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			
+
+			
+       		$crud->display_as('phone', 'Telefono');
+			$crud->display_as('birth_state', 'Entidad de Nacimiento');
+			$crud->display_as('birth_city', 'Ciudad de Nacimiento');
+			$crud->display_as('zone_state', 'Entidad Representada');
+			$crud->display_as('district_circumscription', 'Distrito o Circunscripcion');
+			$crud->display_as('fecha_protesta', 'Fecha de Protesta');
+			$crud->display_as('ubication', 'Ubicación');
+			$crud->display_as('ultimo_grado_estudios', 'Ultimo Grado de Estudios');
+			$crud->display_as('career', 'Preparacion Academica');
+			$crud->display_as('commisions', 'Comisiones');
+			$crud->display_as('exp_legislative', 'Experiencia Legislativa');
+			$crud->display_as('suplentede', 'Suplente de:');
+
+
+
+			$crud->set_field_upload('avatar_id', 'assets/uploads/files/');
+
+
+	
+			
+			$crud->display_as('birthday', 'Cumpleaños');
+			
+			
+			/*Set upload file Avatar, slug, latitude & longitude*/
+		    $crud->field_type('slug', 'invisible');
+							
+			
+			/*Callbacks para obtener urls y slug*/
+			$crud->callback_before_insert(array($this, 'getSlug'));
+			
+			$output = $crud->render();
+			
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	
     
 	/*Crud de iniciativas*/
 	public function initiatives() {
