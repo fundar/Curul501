@@ -429,9 +429,15 @@ class Admin extends CI_Controller {
 			$crud = new grocery_CRUD();
 			
 			/*Tabla y título*/
-			//$crud->set_theme('datatables');
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciatvas scrapper');
+			
+			/*Collumns*/
+			$crud->columns('id_iniciativa', 'id_legislatura', 'titulo_listado', 'fecha_listado');
+			
+			/*Set relations*/
+			$crud->display_as('id_legislatura', 'Legislatura');
+			$crud->set_relation('id_legislatura', 'legislatures', 'name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
