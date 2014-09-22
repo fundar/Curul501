@@ -352,11 +352,8 @@ class Admin extends CI_Controller {
 			$crud->display_as('suplentede', 'Suplente de:');
 
 
-
 			$crud->set_field_upload('avatar_id', 'assets/uploads/files/');
 
-
-	
 			
 			$crud->display_as('birthday', 'Cumpleaños');
 			
@@ -391,19 +388,21 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
-			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at');
-			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'additional_resources', 'official_vote_up', 'official_vote_down', 'official_vote_abstentions', 'voted_at', 'id_status');
+			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title');
+			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'id_status');
 			
 			/*Votos posibles 0-501*/
 			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
 			
 			/*Invisible fields*/
+			/*
 			$crud->field_type('official_vote_up', 'dropdown', $cvotes);
 			$crud->field_type('official_vote_down', 'dropdown', $cvotes);
 			$crud->field_type('official_vote_abstentions', 'dropdown', $cvotes);
+			*/
 			
 			/*Set displays*/
-			$this->display_as_initiatives($crud);
+			//$this->display_as_initiatives($crud);
 			
 			/*Set relations*/
 			$crud->display_as('id_legislature', 'Legislatura');
@@ -432,7 +431,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
 			$crud->display_as('initiatives2tags', 'Etiquetas');
 			
-			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
+			$crud->callback_column($this->unique_field_name('id_legislature'),  array($this, 'urlLegislature'));
 			
 			$crud->order_by('id_initiative','desc');
 			$output = $crud->render();
