@@ -112,7 +112,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     	}
 		
     	$this->db->select($select, false);
-
+		die(var_dump($select));
     	$results = $this->db->get($this->table_name)->result();
 
         // add information from additional_fields
