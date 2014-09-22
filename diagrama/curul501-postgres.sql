@@ -315,7 +315,8 @@ CREATE TABLE political_parties (
 create index on political_parties(id_political_party);
 
 --Representantes
-CREATE TABLE representatives_scrapper (
+
+CREATE TABLE representatives (
   id_representative serial,
   id_representative_type integer not null,
   name varchar(255) DEFAULT NULL,
@@ -341,9 +342,9 @@ CREATE TABLE representatives_scrapper (
   commisions varchar(255) DEFAULT NULL,
   suplentede varchar(255) DEFAULT NULL
 );
-create index on representatives_scrapper(id_iniciativa);
-create index on representatives_scrapper(id_representative_type);
-create index on representatives_scrapper(id_legislature);
+create index on representatives(id_iniciativa);
+create index on representatives(id_representative_type);
+create index on representatives(id_legislature);
 
  
 CREATE TABLE representative_type (
