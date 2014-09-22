@@ -233,7 +233,7 @@ class Admin extends CI_Controller {
 	/*Representantes*/
 	public function representatives() {
 		try {
-			$crud  = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			$state = $crud->getState();
 			
 			/*Tabla y título*/
