@@ -55,6 +55,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('commissions');
 		$crud->set_subject('Comisiones');
+		$crud->set_primary_key('id_commission');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
@@ -182,6 +183,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('political_parties');
 		$crud->set_subject('Partidos políticos');
+		$crud->set_primary_key('id_political_party');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name', 'short_name', 'short_title', 'url_logo');
@@ -214,6 +216,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('legislatures');
 		$crud->set_subject('Legislaturas');
+		$crud->set_primary_key('id_legislature');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
@@ -243,6 +246,7 @@ class Admin extends CI_Controller {
 			//$crud->set_theme('datatables');
 			$crud->set_table('representatives');
 			$crud->set_subject('Representantes');
+			$crud->set_primary_key('id_representative');
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_political_party', 'name');
@@ -312,6 +316,7 @@ class Admin extends CI_Controller {
 			//$crud->set_theme('datatables');
 			$crud->set_table('representatives_scrapper');
 			$crud->set_subject('Diputados_Scrapper');
+			$crud->set_primary_key('id_representative');
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
@@ -388,6 +393,7 @@ class Admin extends CI_Controller {
 			//$crud->set_theme('datatables');
 			$crud->set_table('initiatives');
 			$crud->set_subject('Iniciativas');
+			$crud->set_primary_key('id_initiative');
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
@@ -456,6 +462,7 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciatvas scrapper');
+			$crud->set_primary_key('id_iniciativa');
 			
 			/*Columnas*/
 			$crud->columns('id_iniciativa', 'id_legislatura', 'titulo_listado', 'fecha_listado', 'periodo');
@@ -482,6 +489,7 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_table('votaciones_partidos_scrapper');
 			$crud->set_subject('Votaciones scrapper');
+			$crud->set_primary_key('id_voto');
 			
 			/*Columnas*/
 			$crud->columns('id_voto', 'id_iniciativa', 'id_partido', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
@@ -508,6 +516,7 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_table('votaciones_representantes_scrapper');
 			$crud->set_subject('Votos Representantes scrapper');
+			$crud->set_primary_key('id_voto_representante');
 			
 			/*Columnas*/
 			$crud->columns('id_voto_representante', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
