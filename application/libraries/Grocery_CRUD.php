@@ -529,7 +529,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 			}
 
 		}
-		die("ok");
+		
 		return $this->basic_model->get_total_results();
 	}
 
