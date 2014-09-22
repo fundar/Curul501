@@ -588,7 +588,9 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 						$this->like($temp_relation[$state_info->search->field] , $state_info->search->text);
 				}
 				elseif(isset($this->relation_n_n[$state_info->search->field]))
-				{					
+				{	
+					die(var_dump(strpos($state_info->search->field, "id_")));
+					
 					if(strpos($state_info->search->field, "id_") !== false or is_int($state_info->search->field)) {
 						die("ok");
 						$this->having($state_info->search->field." = ".$state_info->search->text);
