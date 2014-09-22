@@ -100,16 +100,16 @@ class Admin extends CI_Controller {
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_topic', 'name');
-		$crud->fields('name', 'slug', 'description');
+		$crud->fields('name', 'description');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('id_topic', 'ID');
 		$crud->display_as('name', 'Nombre');
 		$crud->display_as('description', 'Descripción');
-		$crud->field_type('slug', 'invisible');
+		//$crud->field_type('slug', 'invisible');
 		
 		/*Callback Slug*/
-		$crud->callback_before_insert(array($this, 'getSlug'));
+		//$crud->callback_before_insert(array($this, 'getSlug'));
 		
 		$output = $crud->render();
 		
