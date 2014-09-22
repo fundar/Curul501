@@ -272,7 +272,6 @@ class grocery_CRUD_Model  extends CI_Model  {
     		$this->db->limit($limit);
 
     	if($search_like !== null) {
-			die(var_dump($field_name_hash));
     		$this->db->having("$field_name_hash LIKE '%".$this->db->escape_like_str($search_like)."%'");
     	}
 

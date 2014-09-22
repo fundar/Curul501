@@ -234,7 +234,6 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		$this->db->limit($limit);
 
     	if($search_like !== null) {
-			die(var_dump($field_name_hash));
     		$this->db->having($this->protect_identifiers($field_name_hash)." LIKE '%".$this->db->escape_like_str($search_like)."%'");
 		}
 
