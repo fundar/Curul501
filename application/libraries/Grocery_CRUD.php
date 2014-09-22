@@ -601,6 +601,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 				}
 				else
 				{
+					die(var_dump(strpos($state_info->search->field, "id_")));
 					$this->like($state_info->search->field , $state_info->search->text);
 				}
 			}
