@@ -529,7 +529,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 			}
 
 		}
-		
+
 		return $this->basic_model->get_total_results();
 	}
 
@@ -580,34 +580,19 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 				if(isset($temp_relation[$state_info->search->field]))
 				{
 					if(is_array($temp_relation[$state_info->search->field]))
-						foreach($temp_relation[$state_info->search->field] as $search_field) {
-							if(strpos($state_info->search->field, "id_") !== false or is_int($state_info->search->field)) {
-								$this->or_where($search_field , $state_info->search->text, FALSE);
-							} else {
-								$this->or_like($search_field, $state_info->search->text);
-							}
-						}
+						foreach($temp_relation[$state_info->search->field] as $search_field)
+							$this->or_like($search_field , $state_info->search->text);
 					else
 						$this->like($temp_relation[$state_info->search->field] , $state_info->search->text);
 				}
 				elseif(isset($this->relation_n_n[$state_info->search->field]))
-				{	
-					
-					if(strpos($state_info->search->field, "id_") !== false or is_int($state_info->search->field)) {
-
-						$this->having($state_info->search->field." = ".$state_info->search->text, FALSE);
-					} else {
-						$escaped_text = $this->basic_model->escape_str($state_info->search->text);
-						$this->having($state_info->search->field." LIKE '%".$escaped_text."%'");
-					}
+				{
+					$escaped_text = $this->basic_model->escape_str($state_info->search->text);
+					$this->having($state_info->search->field." LIKE '%".$escaped_text."%'");
 				}
 				else
 				{
-					if(strpos($state_info->search->field, "id_") !== false or is_int($state_info->search->field)) {
-						$this->or_where($state_info->search->field , $state_info->search->text, FALSE);
-					} else {
-						$this->like($state_info->search->field , $state_info->search->text);
-					}
+					$this->like($state_info->search->field , $state_info->search->text);
 				}
 			}
 			else
@@ -628,24 +613,12 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 						{
 							foreach($temp_relation[$column->field_name] as $search_field)
 							{
-								if(strpos($search_field, "id_") !== false or is_int($search_text)) {
-									if(is_int($search_text)) {
-										$this->or_where($search_field, $search_text, FALSE);
-									}
-								} else {
-									$this->or_like($search_field, $search_text);
-								}
+								$this->or_like($search_field, $search_text);
 							}
 						}
 						else
 						{
-							if(strpos($temp_relation[$column->field_name], "id_") !== false or is_int($search_text)) {
-								if(is_int($search_text)) {
-									$this->or_where($temp_relation[$column->field_name], $search_text);
-								}
-							} else {
-								$this->or_like($temp_relation[$column->field_name], $search_text);
-							}
+							$this->or_like($temp_relation[$column->field_name], $search_text);
 						}
 					}
 					elseif(isset($this->relation_n_n[$column->field_name]))
@@ -654,13 +627,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 					}
 					else
 					{
-						if(strpos($column->field_name, "id_") !== false) {
-							if(is_int($search_text)) {
-								$this->or_where($column->field_name, $search_text, FALSE);
-							}
-						} else {
-							$this->or_like($column->field_name, $search_text);
-						}
+						$this->or_like($column->field_name, $search_text);
 					}
 				}
 			}
