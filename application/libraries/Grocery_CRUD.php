@@ -588,6 +588,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 				elseif(isset($this->relation_n_n[$state_info->search->field]))
 				{
 					$escaped_text = $this->basic_model->escape_str($state_info->search->text);
+					die(var_dump($state_info->search->field));
 					$this->having($state_info->search->field." LIKE '%".$escaped_text."%'");
 				}
 				else
