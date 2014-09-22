@@ -96,6 +96,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('topics');
 		$crud->set_subject('Temas');
+		$crud->set_primary_key('id_topic');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
@@ -124,6 +125,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('tags');
 		$crud->set_subject('Etiquetas');
+		$crud->set_primary_key('id_tag');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
@@ -151,6 +153,7 @@ class Admin extends CI_Controller {
 		//$crud->set_theme('datatables');
 		$crud->set_table('status');
 		$crud->set_subject('Estatus');
+		$crud->set_primary_key('id_status');
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
