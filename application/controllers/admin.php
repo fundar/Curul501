@@ -478,7 +478,7 @@ class Admin extends CI_Controller {
 			$crud->unset_add();
 			
 			/*Tabla y título*/
-			$crud->set_table('votaciones');
+			$crud->set_table('votaciones_partidos_scrapper');
 			$crud->set_subject('Votaciones scrapper');
 			
 			/*Columnas*/
@@ -504,7 +504,7 @@ class Admin extends CI_Controller {
 			$crud->unset_add();
 			
 			/*Tabla y título*/
-			$crud->set_table('votos_representantes');
+			$crud->set_table('votaciones_representantes_scrapper');
 			$crud->set_subject('Votos Representantes scrapper');
 			
 			/*Columnas*/
