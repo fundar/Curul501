@@ -405,6 +405,10 @@ class Admin extends CI_Controller {
 			/*Set displays*/
 			$this->display_as_initiatives($crud);
 			
+			/*Relacion partidos politicos - iniciativas*/
+			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
+			$crud->display_as('initiative2political_party', 'Partidos políticos');
+			
 			/*Set relations*/
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
@@ -412,9 +416,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_status', 'Estatus');
 			$crud->set_relation('id_status', 'status', 'name');
 			
-			/*Relacion partidos politicos - iniciativas*/
-			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
-			$crud->display_as('initiative2political_party', 'Partidos políticos');
+			
 			
 			/*Relacion representantes - iniciativas*/
 			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
