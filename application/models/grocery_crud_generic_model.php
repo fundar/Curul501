@@ -113,6 +113,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
 		
     	$this->db->select($select, false);
 		die(var_dump($select));
+		
     	$results = $this->db->get($this->table_name)->result();
 
         // add information from additional_fields
@@ -153,7 +154,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		$select .= ", ".
     		  $this->build_relation_n_n_subquery($field, $selection_table, $relation_table, $primary_key_alias_to_selection_table, $primary_key_selection_table, $primary_key_alias_to_this_table, $field_name);
         }
-
+		die(var_dump($select));
     	return $select;
     }
 
