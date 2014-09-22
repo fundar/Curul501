@@ -302,7 +302,7 @@ class Admin extends CI_Controller {
 	/*Representantes_scrapper*/
 	public function representatives_scrapper() {
 		try {
-			$crud  = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			$state = $crud->getState();
 			
 			/*Tabla y título*/
