@@ -154,7 +154,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		$select .= ", ".
     		  $this->build_relation_n_n_subquery($field, $selection_table, $relation_table, $primary_key_alias_to_selection_table, $primary_key_selection_table, $primary_key_alias_to_this_table, $field_name);
         }
-		die(var_dump("as"));
+		
     	return $select;
     }
 
@@ -399,6 +399,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     }
 
     function build_relation_n_n_subquery($field, $selection_table, $relation_table, $primary_key_alias_to_selection_table, $primary_key_selection_table, $primary_key_alias_to_this_table, $field_name){
+        
+        die(var_dump($primary_key_selection_table));
         return "(SELECT GROUP_CONCAT(DISTINCT ".$this->protect_identifiers($field).") FROM ".$this->protect_identifiers($selection_table)
                     ." LEFT JOIN ".$this->protect_identifiers($relation_table)." ON ".$this->protect_identifiers($relation_table.".".$primary_key_alias_to_selection_table)." = ".$this->protect_identifiers($selection_table.".".$primary_key_selection_table)
                     ." WHERE ".$this->protect_identifiers($relation_table.".".$primary_key_alias_to_this_table)." = ".$this->protect_identifiers($this->table_name.".".$this->get_primary_key($this->table_name))." GROUP BY ".$this->protect_identifiers($relation_table.".".$primary_key_alias_to_this_table).") AS ".$this->protect_identifiers($field_name);
