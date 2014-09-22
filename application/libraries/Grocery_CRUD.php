@@ -1550,9 +1550,10 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 			throw new Exception('It is impossible to get data. Please check your model and try again.', 13);
 			$data->list = array();
 		}
-		die(var_dump($data));
+		
 		foreach($data->list as $num_row => $row)
 		{
+			die(var_dump($row));
 			$data->list[$num_row]->edit_url = $data->edit_url.'/'.$row->{$data->primary_key};
 			$data->list[$num_row]->delete_url = $data->delete_url.'/'.$row->{$data->primary_key};
 			$data->list[$num_row]->read_url = $data->read_url.'/'.$row->{$data->primary_key};
