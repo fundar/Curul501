@@ -105,6 +105,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     	}
 
     	//set_relation_n_n special queries. We prefer sub queries from a simple join for the relation_n_n as it is faster and more stable on big tables.
+    	die(var_dump($select));
     	if(!empty($this->relation_n_n))
     	{
 			$select = $this->relation_n_n_queries($select);
