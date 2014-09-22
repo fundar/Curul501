@@ -21,7 +21,27 @@ class Admin extends CI_Controller {
 		ini_set("session.gc_maxlifetime",  "14400");
 		session_start();
 	}
+	
+	/*para conectar el custom grocery con postgres*/
+	public function new_crud() {
+        $db_driver   = $this->db->platform();
+        $model_name  = 'grocery_crud_model_' . $db_driver;
+        $model_alias = 'm' . substr(md5(rand()), 0, rand(4,15));
 
+        unset($this->{$model_name});
+        $this->load->library('grocery_CRUD');
+        $crud = new Grocery_CRUD();
+        
+        if(file_exists(APPPATH . '/models/' . $model_name . '.php')) {
+            $this->load->model('grocery_crud_model');
+            $this->load->model('grocery_crud_generic_model');
+            $this->load->model($model_name,$model_alias);
+            $crud->basic_model = $this->{$model_alias};
+        }
+        
+        return $crud;
+    }
+    
 	/*Salida de las vistas*/
 	public function _example_output($output = null) {
 		$this->load->view('admin.php', $output);
@@ -29,7 +49,7 @@ class Admin extends CI_Controller {
 	
 	/*Comisiones*/
 	public function commissions() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -70,7 +90,7 @@ class Admin extends CI_Controller {
 	
 	/*Topic*/
 	public function topics() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -98,7 +118,7 @@ class Admin extends CI_Controller {
 	
 	/*Tags*/
 	public function tags() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -125,7 +145,7 @@ class Admin extends CI_Controller {
 	
 	/*Status*/
 	public function status() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -153,7 +173,7 @@ class Admin extends CI_Controller {
 	
 	/*Partidos politicos*/
 	public function political_parties() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -185,7 +205,7 @@ class Admin extends CI_Controller {
 	
 	/*Legislaturas*/
 	public function legislatures() {
-		$crud = new grocery_CRUD();
+		$crud  = $this->new_crud();
 		
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
@@ -362,7 +382,7 @@ class Admin extends CI_Controller {
 	/*Crud de iniciativas*/
 	public function initiatives() {
 		try {
-			$crud = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			
 			/*Tabla y título*/
 			//$crud->set_theme('datatables');
@@ -426,7 +446,7 @@ class Admin extends CI_Controller {
 	/*Crud de iniciativas del Scrapping*/
 	public function initiatives_scrapper() {
 		try {
-			$crud = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			
 			#no se pueden agregar
 			$crud->unset_add();
@@ -452,7 +472,7 @@ class Admin extends CI_Controller {
 	/*Crud de votaciones de las iniciativas del Scrapping*/
 	public function votaciones_scrapper() {
 		try {
-			$crud = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			
 			#No se pueden agregar
 			$crud->unset_add();
@@ -478,7 +498,7 @@ class Admin extends CI_Controller {
 	/*Crud de los votos de representantes de las iniciativas del Scrapping*/
 	public function votos_representantes() {
 		try {
-			$crud = new grocery_CRUD();
+			$crud  = $this->new_crud();
 			
 			#No se pueden agregar
 			$crud->unset_add();
