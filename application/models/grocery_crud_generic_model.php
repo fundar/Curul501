@@ -174,7 +174,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
 
     		return $this->db->get($this->table_name)->num_rows();
     	}
-		die("ok");
+		
+		die(var_dump($this->db->ar_select));
     	return $this->db->count_all_results($this->table_name);
     }
 
