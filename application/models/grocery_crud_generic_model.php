@@ -128,15 +128,18 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
 
     protected function relation_n_n_queries($select)
     {
-    	$this_table_primary_key = $this->get_primary_key();
+    	#$this_table_primary_key = $this->get_primary_key();
     	
     	foreach($this->relation_n_n as $relation_n_n)
     	{
-			die(var_dump($relation_n_n));
+			
     		list($field_name, $relation_table, $selection_table, $primary_key_alias_to_this_table,
     					$primary_key_alias_to_selection_table, $title_field_selection_table, $priority_field_relation_table) = array_values((array)$relation_n_n);
-
-    		$primary_key_selection_table = $this->get_primary_key($selection_table);
+			
+			$this_table_primary_key      = $primary_key_alias_to_this_table;
+    		$primary_key_selection_table = $primary_key_alias_to_selection_table;
+    		
+    		#$primary_key_selection_table = $this->get_primary_key($selection_table);
 
 	    	$field = "";
 	    	$use_template = strpos($title_field_selection_table,'{') !== false;
@@ -157,6 +160,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		  $this->build_relation_n_n_subquery($field, $selection_table, $relation_table, $primary_key_alias_to_selection_table, $primary_key_selection_table, $primary_key_alias_to_this_table, $field_name);
         }
 		
+		die(var_dump($select));
     	return $select;
     }
 
