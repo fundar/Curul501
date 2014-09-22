@@ -182,12 +182,12 @@ class grocery_CRUD_Model  extends CI_Model  {
     	{
     		$select = "{$this->table_name}.*";
     		$select = $this->relation_n_n_queries($select);
-			die("ok");
+			
     		$this->db->select($select,false);
 
     		return $this->db->get($this->table_name)->num_rows();
     	}
-		die("ok");
+
     	return $this->db->count_all_results($this->table_name);
 
     }
