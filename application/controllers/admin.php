@@ -263,11 +263,18 @@ class Admin extends CI_Controller {
 			$crud->display_as('election_type', 'Tipo de elección');
 			$crud->display_as('district_circumscription', 'Cirscuncipcion/Distrito');
 			
+			/*Relaciones*/
+			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
+			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			$crud->set_primary_key('id_representative_type', 'representative_type');
+			$crud->display_as('id_representative_type', 'Tipo de Representante');
+			$crud->set_relation('id_representative_type', 'representative_type', 'name');
 			
 			$crud->display_as('birthday', 'Cumpleaños');
 			$crud->field_type('birthday', 'date');
@@ -276,9 +283,7 @@ class Admin extends CI_Controller {
 			$crud->set_field_upload('avatar', 'assets/uploads/files');
 			$crud->field_type('slug', 'invisible');
 			
-			/*tipo de representantes*/
-			$crud->display_as('id_representative_type', 'Tipo de Representante');
-			$crud->set_relation('id_representative_type', 'representative_type', 'name');
+			
 			
 			/*Callback Para el Mapa*/
 			/*
