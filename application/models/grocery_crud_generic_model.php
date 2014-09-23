@@ -200,8 +200,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     	$relation_array = array();
     	$field_name_hash = $this->_unique_field_name($field_name);
 
-    	//$related_primary_key = $this->get_primary_key($related_table);
-    	$related_primary_key = $field_name;
+    	$related_primary_key = $this->get_primary_key($related_table);
+    	#$related_primary_key = $field_name;
 
     	$select = $this->protect_identifiers($related_table).'.'.$this->protect_identifiers($related_primary_key).', ';
 		//$select = "";
