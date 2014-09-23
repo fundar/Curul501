@@ -438,7 +438,7 @@ class Admin extends CI_Controller {
 			
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
-			$crud->set_subject('Iniciatvas scrapper');
+			$crud->set_subject('Iniciativa scrapper');
 			$crud->set_primary_key('id_iniciativa');
 			
 			/*Columnas*/
@@ -448,6 +448,34 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			$output = $crud->render();
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*Crud para los estatus de las iniciativas del Scrapping*/
+	public function estatus_iniciativas_scrapper() {
+		try {
+			$crud  = $this->new_crud();
+			
+			#no se pueden agregar
+			$crud->unset_add();
+			
+			/*Tabla y título*/
+			$crud->set_table('estatus_iniciativas_scrapper');
+			$crud->set_subject('Estatus Iniciativa scrapper');
+			$crud->set_primary_key('id_estatus');
+			
+			/*Columnas*/
+			$crud->columns('id_estatus', 'id_iniciativa', 'titulo_limpio', 'tipo', 'votacion');
+			
+			/*Relaciones*/
+			$crud->set_primary_key('id_iniciativa', 'iniciativas_scrapper');
+			$crud->display_as('id_iniciativa', 'Iniciativa');
+			$crud->set_relation('id_legislature', 'iniciativas_scrapper', 'titulo_listado');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
