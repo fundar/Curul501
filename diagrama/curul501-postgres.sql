@@ -108,6 +108,9 @@ CREATE TABLE representative_type (
 );
 create index on representative_type(id_representative_type);
 create index on representative_type(name);
+insert into representative_type (name, slug) values ('Diputado', 'diputado');
+insert into representative_type (name, slug) values ('Senador', 'senador');
+
 
 truncate table votaciones_partidos_scrapper;
 truncate table iniciativas_scrapper;
