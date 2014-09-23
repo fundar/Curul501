@@ -73,6 +73,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     	//set_relation special queries
     	if(!empty($this->relation))
     	{
+			die("ok");
     		foreach($this->relation as $relation)
     		{
     			list($field_name , $related_table , $related_field_title) = $relation;
