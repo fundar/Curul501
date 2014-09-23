@@ -410,10 +410,7 @@ class Admin extends CI_Controller {
 			$crud->field_type('official_vote_abstentions', 'dropdown', $cvotes);
 			*/
 			
-			/*Set displays*/
-			//$this->display_as_initiatives($crud);
-			
-			/*Set relations*/
+			/*Set displays & Set relations*/
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
