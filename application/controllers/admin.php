@@ -252,13 +252,8 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('id_political_party', 'name');
-			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature');
-			
-			if($state != "read") {
-				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
-			} else {
-				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
-			}
+			$crud->columns('id_representative', 'id_representative_type', 'name', 'id_political_party', 'id_legislature');
+			$crud->fields('name','id_political_party', 'id_representative_type', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
 			
 			/*Nombres de campos*/	
 			$crud->display_as('id_representative', 'ID');
@@ -280,6 +275,10 @@ class Admin extends CI_Controller {
 			/*Set upload file Avatar, slug, latitude & longitude*/
 			$crud->set_field_upload('avatar', 'assets/uploads/files');
 			$crud->field_type('slug', 'invisible');
+			
+			/*tipo de representantes*/
+			$crud->display_as('id_representative_type', 'Tipo de Representante');
+			$crud->set_relation('id_representative_type', 'representative_type', 'name');
 			
 			/*Callback Para el Mapa*/
 			/*
@@ -324,12 +323,7 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
 			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
-			   
-			if($state != "read") {
-				$crud->fields('name','id_political_party','id_legislature','email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
-			} else {
-				$crud->fields('name','id_political_party','id_legislature','email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
-			}
+			$crud->fields('name','id_political_party','id_legislature', 'id_representative_type', 'email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
 			
 			/*Nombres de campos*/	
 			$crud->display_as('id_representative_type', 'Tipo de Representante');
@@ -357,7 +351,6 @@ class Admin extends CI_Controller {
 			$crud->display_as('commisions', 'Comisiones');
 			$crud->display_as('exp_legislative', 'Experiencia Legislativa');
 			$crud->display_as('suplentede', 'Suplente de:');
-			
 			
 			/*Set upload file Avatar, slug*/
 		    $crud->field_type('slug', 'invisible');
