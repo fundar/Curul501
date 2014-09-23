@@ -121,7 +121,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
                 $results[$i]->{$alias} = $results[$i]->{$real_field};
             }
         }
-
+		
+		die(var_dump($results));
     	return $results;
     }
 
