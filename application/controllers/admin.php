@@ -255,15 +255,14 @@ class Admin extends CI_Controller {
 			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature');
 			
 			if($state != "read") {
-				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription', 'latitude', 'longitude', 'map');
+				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
 			} else {
-				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'biography', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription', 'latitude', 'longitude');
+				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
 			}
 			
 			/*Nombres de campos*/	
 			$crud->display_as('id_representative', 'ID');
 			$crud->display_as('name', 'Nombre');
-			$crud->display_as('biography', 'Biografia');
 			$crud->display_as('district', 'Distrito');
 			$crud->display_as('substitute', 'Sustituto');
 			$crud->display_as('election_type', 'Tipo de elección');
@@ -281,9 +280,10 @@ class Admin extends CI_Controller {
 			/*Set upload file Avatar, slug, latitude & longitude*/
 			$crud->set_field_upload('avatar', 'assets/uploads/files');
 			$crud->field_type('slug', 'invisible');
-			$crud->field_type('longitude', 'hidden');
 			
 			/*Callback Para el Mapa*/
+			/*
+			$crud->field_type('longitude', 'hidden');
 			if($state != "read") {
 				$crud->field_type('latitude', 'hidden');
 				$crud->display_as('map', 'Ubicación');
@@ -293,6 +293,7 @@ class Admin extends CI_Controller {
 				$crud->display_as('latitude', 'Ubicación');
 				$crud->callback_field('latitude', array($this, 'getMap2'));
 			}
+			*/
 			
 			/*Callbacks para obtener urls y slug*/
 			$crud->callback_column($this->unique_field_name('id_political_party'), array($this, 'urlPoliticalParty'));
@@ -341,12 +342,8 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
-			
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
-			
-
 			
        		$crud->display_as('phone', 'Telefono');
 			$crud->display_as('birth_state', 'Entidad de Nacimiento');
@@ -360,17 +357,12 @@ class Admin extends CI_Controller {
 			$crud->display_as('commisions', 'Comisiones');
 			$crud->display_as('exp_legislative', 'Experiencia Legislativa');
 			$crud->display_as('suplentede', 'Suplente de:');
-
-
-			$crud->set_field_upload('avatar_id', 'assets/uploads/files/');
-
-			
-			$crud->display_as('birthday', 'Cumpleaños');
 			
 			
-			/*Set upload file Avatar, slug, latitude & longitude*/
+			/*Set upload file Avatar, slug*/
 		    $crud->field_type('slug', 'invisible');
-							
+			$crud->set_field_upload('avatar_id', 'assets/uploads/files/');
+			$crud->display_as('birthday', 'Cumpleaños');				
 			
 			/*Callbacks para obtener urls y slug*/
 			$crud->callback_before_insert(array($this, 'getSlug'));
@@ -384,8 +376,6 @@ class Admin extends CI_Controller {
 	}
 	
 	
-	
-    
 	/*Crud de iniciativas*/
 	public function initiatives() {
 		try {
