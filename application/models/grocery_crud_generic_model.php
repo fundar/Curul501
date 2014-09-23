@@ -266,7 +266,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
                     $this->ESCAPE_CHAR,
                     $this->protect_identifiers($field_name_hash)
                 );
-    		//$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(",", ''),'"),str_replace("'","\\'",$related_field_title))."') as $field_name_hash";
+    		$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(",", ''),'"),str_replace("'","\\'",$related_field_title))."') as $field_name_hash";
     	}
     	else
     	{
@@ -320,7 +320,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
                     $this->ESCAPE_CHAR,
                     $this->protect_identifiers($field_name_hash)
                 );
-    		//$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(",", ''),'"),str_replace("'","\\'",$related_field_title))."') as $field_name_hash";
+    		$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(",", ''),'"),str_replace("'","\\'",$related_field_title))."') as $field_name_hash";
     	}
     	else
     	{
