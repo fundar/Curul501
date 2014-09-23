@@ -475,7 +475,7 @@ class Admin extends CI_Controller {
 			/*Relaciones*/
 			$crud->set_primary_key('id_iniciativa', 'iniciativas_scrapper');
 			$crud->display_as('id_iniciativa', 'Iniciativa');
-			$crud->set_relation('id_legislature', 'iniciativas_scrapper', 'titulo_listado');
+			$crud->set_relation('id_iniciativa', 'iniciativas_scrapper', 'titulo_listado');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
