@@ -255,9 +255,9 @@ class Admin extends CI_Controller {
 			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature');
 			
 			if($state != "read") {
-				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
+				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
 			} else {
-				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'twitter', 'facebook', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
+				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
 			}
 			
 			/*Nombres de campos*/	
@@ -457,7 +457,6 @@ class Admin extends CI_Controller {
 			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
 			
 			/*Relaciones*/
-			
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
