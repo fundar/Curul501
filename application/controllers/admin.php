@@ -242,7 +242,7 @@ class Admin extends CI_Controller {
 	public function representatives() {
 		try {
 			$crud  = $this->new_crud();
-			$state = $crud->getState();
+			//$state = $crud->getState();
 			
 			/*Tabla y título*/
 			//$crud->set_theme('datatables');
