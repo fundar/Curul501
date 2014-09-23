@@ -341,8 +341,13 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
         $results_array = array();
         foreach($results as $row)
         {
-			die(var_dump($field_info));
+			die(var_dump($row));
+			$results_array[$row->{$field_info->primary_key_alias_to_selection_table}] = $row->{$field_name_hash};
+			
+			die(var_dump($row));
+			
             if(!isset($selected_values[$row->$selection_primary_key]))
+            
                 $results_array[$row->$selection_primary_key] = $row->{$field_name_hash};
         }
 
