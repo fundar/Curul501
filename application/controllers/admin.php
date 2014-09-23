@@ -390,16 +390,6 @@ class Admin extends CI_Controller {
 			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title');
 			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'id_status');
 			
-			/*Votos posibles 0-501*/
-			for($i=0; $i <= 501; $i++) $cvotes[] = $i;
-			
-			/*Invisible fields*/
-			/*
-			$crud->field_type('official_vote_up', 'dropdown', $cvotes);
-			$crud->field_type('official_vote_down', 'dropdown', $cvotes);
-			$crud->field_type('official_vote_abstentions', 'dropdown', $cvotes);
-			*/
-			
 			/*Set displays & Set relations*/
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
