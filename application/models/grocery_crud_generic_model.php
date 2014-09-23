@@ -215,7 +215,7 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
                     $this->ESCAPE_CHAR,
                     $this->protect_identifiers($field_name_hash)
                 );
-    		//$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(".$this->ESCAPE_CHAR , $this->ESCAPE_CHAR.", ''),'"),str_replace("'","\\'", $related_field_title))."') as ".$this->protect_identifiers($field_name_hash);
+    		$select .= "CONCAT('".str_replace(array('{','}'),array("',COALESCE(".$this->ESCAPE_CHAR , $this->ESCAPE_CHAR.", ''),'"),str_replace("'","\\'", $related_field_title))."') as ".$this->protect_identifiers($field_name_hash);
     	}
     	else
     	{
