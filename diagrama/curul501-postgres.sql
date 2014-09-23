@@ -318,9 +318,11 @@ create index on political_parties(id_political_party);
 
 CREATE TABLE representatives (
   id_representative serial,
+  id_legislature integer not null,
   id_representative_type integer not null,
-  name varchar(255) DEFAULT NULL,
   id_political_party integer not null,
+  name varchar(255) DEFAULT NULL,
+  slug varchar(255) NOT NULL,
   email varchar(255) DEFAULT NULL,
   phone varchar(255) DEFAULT NULL,
   avatar_id varchar(255) DEFAULT NULL,
@@ -338,13 +340,13 @@ CREATE TABLE representatives (
   ultimo_grado_estudios varchar(255) DEFAULT NULL,
   career varchar(255) DEFAULT NULL,
   exp_legislative varchar(255) DEFAULT NULL,
-  id_legislature integer not null,
   commisions varchar(255) DEFAULT NULL,
   suplentede varchar(255) DEFAULT NULL
 );
-create index on representatives(id_iniciativa);
+create index on representatives(id_representative);
 create index on representatives(id_representative_type);
 create index on representatives(id_legislature);
+create index on representatives(id_political_party);
 
  
 CREATE TABLE representative_type (
