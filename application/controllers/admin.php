@@ -454,14 +454,12 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_iniciativa');
 			
 			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislatura', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
 			
 			/*Relaciones*/
 			
-			/*
-			$crud->display_as('id_legislatura', 'Legislatura');
-			$crud->set_relation('id_legislatura', 'legislatures', 'name');
-			*/
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -484,13 +482,11 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto');
 			
 			/*Columnas*/
-			$crud->columns('id_voto', 'id_contador_voto', 'id_iniciativa', 'id_partido', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
+			$crud->columns('id_voto', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
 			
 			/*Relaciones*/
-			/*
-			$crud->display_as('id_partido', 'Partido Político');
-			$crud->set_relation('id_partido', 'political_parties', 'name');
-			*/
+			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -513,13 +509,11 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto_representante');
 			
 			/*Columnas*/
-			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
+			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
-			/*
-			$crud->display_as('id_partido', 'Partido Político');
-			$crud->set_relation('id_partido', 'political_parties', 'name');
-			*/
+			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
