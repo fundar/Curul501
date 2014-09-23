@@ -111,7 +111,8 @@ class Admin extends CI_Controller {
 		//$crud->field_type('slug', 'invisible');
 		
 		/*Callback Slug*/
-		//$crud->callback_before_insert(array($this, 'getSlug'));
+		$crud->callback_before_insert(array($this, 'getSlug'));
+		$crud->callback_before_update(array($this, 'getSlug'));
 		
 		$output = $crud->render();
 		
@@ -140,6 +141,7 @@ class Admin extends CI_Controller {
 		
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
+		$crud->callback_before_update(array($this, 'getSlug'));
 		
 		$output = $crud->render();
 		
