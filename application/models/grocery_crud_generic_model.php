@@ -73,7 +73,6 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     	//set_relation special queries
     	if(!empty($this->relation))
     	{
-			die("ok");
     		foreach($this->relation as $relation)
     		{
     			list($field_name , $related_table , $related_field_title) = $relation;
@@ -343,12 +342,13 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
         $results_array = array();
         foreach($results as $row)
         {
-			$results_array[$row->{$field_info->primary_key_alias_to_selection_table}] = $row->{$field_name_hash};
 			
-			/*
-            if(!isset($selected_values[$row->$selection_primary_key]))
-                $results_array[$row->$selection_primary_key] = $row->{$field_name_hash};
-            */
+			if(isset($selected_values) and $selected_values != NULL) {
+				if(!isset($selected_values[$row->$selection_primary_key]))
+					$results_array[$row->$selection_primary_key] = $row->{$field_name_hash};
+			} else {
+				$results_array[$row->{$field_info->primary_key_alias_to_selection_table}] = $row->{$field_name_hash};
+			}
         }
 
         return $results_array;
