@@ -255,9 +255,9 @@ class Admin extends CI_Controller {
 			$crud->columns('id_representative', 'name', 'id_political_party', 'id_legislature');
 			
 			if($state != "read") {
-				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
+				$crud->fields('name','id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
 			} else {
-				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district', 'circumscription');
+				$crud->fields('name', 'id_political_party', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
 			}
 			
 			/*Nombres de campos*/	
@@ -266,7 +266,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('district', 'Distrito');
 			$crud->display_as('substitute', 'Sustituto');
 			$crud->display_as('election_type', 'Tipo de elección');
-			$crud->display_as('circumscription', 'Cirscuncipcion');
+			$crud->display_as('district_circumscription', 'Cirscuncipcion/Distrito');
 			
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
