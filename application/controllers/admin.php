@@ -468,8 +468,11 @@ class Admin extends CI_Controller {
 			$crud->columns('id_iniciativa', 'id_legislatura', 'titulo_listado', 'fecha_listado', 'periodo');
 			
 			/*Relaciones*/
+			
+			/*
 			$crud->display_as('id_legislatura', 'Legislatura');
 			$crud->set_relation('id_legislatura', 'legislatures', 'name');
+			*/
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -495,8 +498,10 @@ class Admin extends CI_Controller {
 			$crud->columns('id_voto', 'id_contador_voto', 'id_iniciativa', 'id_partido', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
 			
 			/*Relaciones*/
+			/*
 			$crud->display_as('id_partido', 'Partido Político');
 			$crud->set_relation('id_partido', 'political_parties', 'name');
+			*/
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -522,8 +527,10 @@ class Admin extends CI_Controller {
 			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_partido', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
+			/*
 			$crud->display_as('id_partido', 'Partido Político');
 			$crud->set_relation('id_partido', 'political_parties', 'name');
+			*/
 			
 			$output = $crud->render();
 			$this->_example_output($output);
