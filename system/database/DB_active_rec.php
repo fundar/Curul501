@@ -959,7 +959,7 @@ class CI_DB_active_record extends CI_DB_driver {
 		}
 
 		$sql = $this->_compile_select();
-
+		$sql = str_replace('""', '"', $sql);
 		$result = $this->query($sql);
 		$this->_reset_select();
 		return $result;
@@ -1798,7 +1798,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$sql .= "\n";
 			$sql = $this->_limit($sql, $this->ar_limit, $this->ar_offset);
 		}
-
+		
+		$sql = str_replace('""', '"', $sql);
 		return $sql;
 	}
 
