@@ -457,7 +457,7 @@ class Admin extends CI_Controller {
 			/*callback titulo*/
 			
 			$crud->callback_column($this->unique_field_name('titulo_listado'), array($this, 'getTooltip'));
-			die(var_dump("hola"));
+			
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
