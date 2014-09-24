@@ -443,9 +443,11 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_iniciativa');
 			
 			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo', 'ano');
 			
 			/*Relaciones*/
+			$crud->display_as('ano', 'Año');
+			
 			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
