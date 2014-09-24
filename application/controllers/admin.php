@@ -434,6 +434,8 @@ class Admin extends CI_Controller {
 		try {
 			$crud  = $this->new_crud();
 			
+			$crud->set_theme('twitter-bootstrap');
+			
 			#no se pueden agregar
 			$crud->unset_add();
 			
