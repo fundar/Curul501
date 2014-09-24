@@ -310,14 +310,22 @@ create index on logs(id_user);
 CREATE TABLE political_parties (
   id_political_party serial,
   name varchar(255) NOT NULL,
-  slug varchar(255) NOT NULL,
+  slug varchar(255) NOT NULL default null,
   short_name varchar(255) NOT NULL,
   url_logo varchar(255) NOT NULL default 'logo_partido_default.png',
   active boolean NOT NULL DEFAULT true,
   created_at timestamp NOT NULL DEFAULT now()
 );
 create index on political_parties(id_political_party);
-insert into political_parties () values ();
+insert into political_parties (name, slug, short_name) values ('Partido Revolucionario Institucional','partido-revolucionario-institucional','PRI');
+insert into political_parties (name, slug, short_name) values ('Partido de la Revolución Democrática','partido-de-la-revolucion-democratica','PRD');
+insert into political_parties (name, slug, short_name) values ('Partido Verde Ecologista de México','partido-verde-ecologista-de-mexico','PVEM');
+insert into political_parties (name, slug, short_name) values ('Partido Acción Nacional','partido-accion-nacional','PAN');
+insert into political_parties (name, slug, short_name) values ('Partido del Trabajo','partido-del-trabajo','PT');
+insert into political_parties (name, slug, short_name) values ('Movimiento Ciudadano','movimiento-ciudadano','Movimiento Ciudadano');
+insert into political_parties (name, slug, short_name) values ('Partido Nueva Alianza','partido-nueva-alianza','PANAL');
+insert into political_parties (name, slug, short_name) values ('Sin partido','sin-partido','SP');
+
 --Representantes
 
 CREATE TABLE representatives (
