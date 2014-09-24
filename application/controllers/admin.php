@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
 		
 		$this->_example_output($output);
 	}
-	
+
 	/*Partidos politicos*/
 	public function political_parties() {
 		$crud = new grocery_CRUD();
@@ -284,6 +284,8 @@ class Admin extends CI_Controller {
 		try {
 			$crud  = new grocery_CRUD();
 			$state = $crud->getState();
+			#No se pueden agregar
+			$crud->unset_add();
 			
 			/*Tabla y título*/
 			//$crud->set_theme('datatables');
@@ -314,9 +316,7 @@ class Admin extends CI_Controller {
 			
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
-			
-
+						
 			
        		$crud->display_as('phone', 'Telefono');
 			$crud->display_as('birth_state', 'Entidad de Nacimiento');
