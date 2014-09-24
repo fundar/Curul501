@@ -15,7 +15,8 @@ CREATE TABLE iniciativas_scrapper (
   enviada text DEFAULT NULL,
   turnada text DEFAULT NULL,
   presentada text DEFAULT NULL,
-  periodo varchar(255) DEFAULT NULL
+  periodo varchar(255) DEFAULT NULL,
+  ano varchar(255) DEFAULT NULL
 );
 create index on iniciativas_scrapper(id_iniciativa);
 create index on iniciativas_scrapper(id_parent);
@@ -311,12 +312,12 @@ CREATE TABLE political_parties (
   name varchar(255) NOT NULL,
   slug varchar(255) NOT NULL,
   short_name varchar(255) NOT NULL,
-  url_logo varchar(255) NOT NULL,
+  url_logo varchar(255) NOT NULL default 'logo_partido_default.png',
   active boolean NOT NULL DEFAULT true,
   created_at timestamp NOT NULL DEFAULT now()
 );
 create index on political_parties(id_political_party);
-
+insert into political_parties () values ();
 --Representantes
 
 CREATE TABLE representatives (
