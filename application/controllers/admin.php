@@ -550,8 +550,7 @@ class Admin extends CI_Controller {
 	
 	/*obtener url de partido politco*/
 	function getTooltip($value, $row) {
-		die(var_dump($value));
-		return '<span data-placement="top" data-toggle="tooltip" class="tip-top" data-original-title="Tooltip on top">' . $row->titulo_listado . '</span>';
+		return '<span data-placement="top" data-toggle="tooltip" class="tip-top" data-original-title="' . $value . '">' . (strlen($value) > 35) ? substr($value, 0, 35) . '...' : $value . '</span>';
 	}
 	
 	/*obtener url de partido politco*/
