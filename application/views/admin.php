@@ -82,6 +82,9 @@ foreach($css_files as $file): ?>
     </div>
    
     <script>
+		/*Tooltips*/
+		$(".tip-top").tooltip({placement : 'top'});
+		
 		/*Creaando el mapa de mapbox si esta presenta el div#map y el input#latitude*/
 		if(document.getElementById('map')) {
 			if(document.getElementById("field-latitude").value == "") {

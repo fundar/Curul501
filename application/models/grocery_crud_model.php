@@ -182,7 +182,7 @@ class grocery_CRUD_Model  extends CI_Model  {
     	{
     		$select = "{$this->table_name}.*";
     		$select = $this->relation_n_n_queries($select);
-
+			
     		$this->db->select($select,false);
 
     		return $this->db->get($this->table_name)->num_rows();
@@ -271,8 +271,9 @@ class grocery_CRUD_Model  extends CI_Model  {
     	if($limit !== null)
     		$this->db->limit($limit);
 
-    	if($search_like !== null)
+    	if($search_like !== null) {
     		$this->db->having("$field_name_hash LIKE '%".$this->db->escape_like_str($search_like)."%'");
+    	}
 
     	$order_by !== null
     		? $this->db->order_by($order_by)
