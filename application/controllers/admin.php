@@ -455,6 +455,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*callback titulo*/
+			die(var_dump("hola"));
 			$crud->callback_column($this->unique_field_name('titulo_listado'), array($this, 'getTooltip'));
 			
 			$output = $crud->render();
