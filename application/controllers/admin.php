@@ -455,7 +455,6 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*callback titulo*/
-			
 			$crud->callback_column($this->unique_field_name('titulo_listado'), array($this, 'getTooltip'));
 			
 			$output = $crud->render();
@@ -551,7 +550,7 @@ class Admin extends CI_Controller {
 	
 	/*obtener url de partido politco*/
 	function getTooltip($value, $row) {
-		return '<span data-placement="top" data-toggle="tooltip" class="tip-top" data-original-title="Tooltip on top">' . $value . '</span>';
+		return '<span data-placement="top" data-toggle="tooltip" class="tip-top" data-original-title="Tooltip on top">' . $row->titulo_listado . '</span>';
 	}
 	
 	/*obtener url de partido politco*/
