@@ -445,7 +445,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_iniciativa');
 			
 			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo', 'ano');
+			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
 			
 			/*Relaciones*/
 			$crud->display_as('ano', 'Año');
@@ -455,7 +455,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*callback titulo*/
-			$crud->callback_column('titulo_listado', array($this, 'getTooltip'));
+			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -549,9 +549,8 @@ class Admin extends CI_Controller {
 	}
 	
 	/*obtener url de partido politco*/
-	function getTooltip($value, $row) {
-		$value_str = (strlen($value) > 35) ? substr($value, 0, 35) . '...' : $value;
-		return '<a title="' . $value . '">' . $value . '</a>';
+	function getFullValue($value, $row) {
+		return $value;
 	}
 	
 	/*obtener url de partido politco*/
