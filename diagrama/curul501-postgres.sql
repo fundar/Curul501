@@ -293,6 +293,7 @@ CREATE TABLE legislatures (
   active boolean NOT NULL DEFAULT true
 );
 create index on legislatures(id_legislature);
+insert into legislatures (name, slug) values ('LXII','lxii');
 
 --Logs
 CREATE TABLE logs (
