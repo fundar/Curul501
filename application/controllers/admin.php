@@ -454,6 +454,9 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
+			/*callback titulo*/
+			$crud->callback_column($this->unique_field_name('titulo_listado'),     array($this, 'getTooltip'));
+			
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
@@ -543,6 +546,12 @@ class Admin extends CI_Controller {
 		} catch(Exception $e) {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+	}
+	
+	/*obtener url de partido politco*/
+	function getTooltip($value, $row) {
+		die(var_dump($value));
+		return '<span data-placement="top" data-toggle="tooltip" class="tip-top" data-original-title="Tooltip on top">' . $value . '</span>';
 	}
 	
 	/*obtener url de partido politco*/
