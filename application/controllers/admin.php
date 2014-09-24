@@ -446,6 +446,7 @@ class Admin extends CI_Controller {
 			
 			/*Columnas*/
 			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->unset_fields('id_parent');
 			
 			/*Relaciones*/
 			$crud->display_as('ano', 'Año');
