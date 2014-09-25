@@ -331,7 +331,8 @@ class Admin extends CI_Controller {
 			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
 			$crud->fields('name','id_political_party','id_legislature', 'id_representative_type', 'email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
 			
-			/*Nombres de campos*/	
+			/*Nombres de campos*/
+			$crud->set_primary_key('id_representative_type', 'representative_type');
 			$crud->display_as('id_representative_type', 'Tipo de Representante');
 			$crud->set_relation('id_representative_type', 'representative_type', 'name');
 
@@ -339,9 +340,11 @@ class Admin extends CI_Controller {
 			$crud->display_as('substitute', 'Suplente');
 			$crud->display_as('election_type', 'Tipo de elección');
 			
+			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
+			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
