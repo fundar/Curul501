@@ -538,12 +538,18 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto_representante');
 			
 			/*Columnas*/
-			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'nombre', 'partido', 'tipo');
+			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'id_representative', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
+			
+			/*cambiar por representantes real / prueba con representrantes scrapping*/
+			$crud->set_primary_key('id_representative', 'representatives_scrapper');
+			$crud->display_as('id_representative', 'Representante');
+			$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
+			
 			
 			$output = $crud->render();
 			$this->_example_output($output);
