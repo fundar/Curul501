@@ -550,7 +550,6 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_representative', 'Representante');
 			$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
 			
-			
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
