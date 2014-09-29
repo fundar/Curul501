@@ -68,9 +68,10 @@ create index on votaciones_representantes_scrapper(id_voto_representante);
 create index on votaciones_representantes_scrapper(id_contador_voto);
 create index on votaciones_representantes_scrapper(id_iniciativa);
 create index on votaciones_representantes_scrapper(id_political_party);
-create index on votaciones_representantes_scrapper(tipo);
+create index on votaciones_representantes_scrapper(id_representative);
 create index on votaciones_representantes_scrapper(nombre);
 create index on votaciones_representantes_scrapper(partido);
+create index on votaciones_representantes_scrapper(tipo);
 
 CREATE TABLE representatives_scrapper (
   id_representative serial,
