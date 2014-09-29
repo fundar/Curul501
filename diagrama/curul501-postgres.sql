@@ -59,6 +59,7 @@ CREATE TABLE votaciones_representantes_scrapper (
   id_contador_voto integer NOT NULL default 1,
   id_iniciativa integer NOT NULL,
   id_political_party integer NOT NULL default 0,
+  id_representative integer NOT NULL default 0,
   nombre varchar(255) NOT NULL default 0,
   partido varchar(255) NOT NULL default 0,
   tipo varchar(255) DEFAULT NULL
@@ -112,12 +113,11 @@ create index on representative_type(name);
 insert into representative_type (name, slug) values ('Diputado', 'diputado');
 insert into representative_type (name, slug) values ('Senador', 'senador');
 
-
+-- Truncate tables scrapper
 truncate table votaciones_partidos_scrapper;
 truncate table iniciativas_scrapper;
 truncate table votaciones_representantes_scrapper;
 truncate table estatus_iniciativas_scrapper;
-
 
 
 -- ************ Tablas Admin *************
