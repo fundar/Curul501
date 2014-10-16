@@ -113,7 +113,7 @@ CREATE TABLE representatives_scrapper (
 create index on representatives_scrapper(id_representative);
 create index on representatives_scrapper(id_representative_type);
 create index on representatives_scrapper(id_legislature);
-
+create index on representatives_scrapper(id_political_party);
  
 CREATE TABLE representative_type (
   id_representative_type serial,
@@ -146,14 +146,18 @@ create index on tags(id_tag);
 --comisiones
 CREATE TABLE commissions (
   id_commission serial,
+  id_representative_type integer NOT NULL,
   name varchar(255) NOT NULL,
   slug varchar(255) NOT NULL,
+  type varchar(255) NOT NULL default 'ordinaria',
   created_at timestamp NOT NULL DEFAULT now(),
   updated_at timestamp NOT NULL DEFAULT now(),
-  status boolean NOT NULL DEFAULT true,
-  secretario varchar(255) NOT NULL
+  status boolean NOT NULL DEFAULT true
 );
 create index on commissions(id_commission);
+create index on commissions(id_representative_type);
+create index on commissions(slug);
+create index on commissions(type);
 
 CREATE TABLE commissions2initiatives (
   id_commission integer,
@@ -325,49 +329,6 @@ insert into political_parties (name, slug, short_name) values ('Partido del Trab
 insert into political_parties (name, slug, short_name) values ('Movimiento Ciudadano','movimiento-ciudadano','Movimiento Ciudadano');
 insert into political_parties (name, slug, short_name) values ('Partido Nueva Alianza','partido-nueva-alianza','PANAL');
 insert into political_parties (name, slug, short_name) values ('Sin partido','sin-partido','SP');
-
---Representantes
-
-CREATE TABLE representatives (
-  id_representative serial,
-  id_legislature integer not null,
-  id_representative_type integer not null,
-  id_political_party integer not null,
-  name varchar(255) DEFAULT NULL,
-  slug varchar(255) NOT NULL,
-  email varchar(255) DEFAULT NULL,
-  phone varchar(255) DEFAULT NULL,
-  avatar varchar(255) DEFAULT NULL,
-  birthday varchar(255) DEFAULT NULL,
-  created_at timestamp NOT NULL DEFAULT now(),
-  updated_at timestamp NOT NULL DEFAULT now(),
-  birth_state varchar(255) DEFAULT NULL,
-  birth_city varchar(255) DEFAULT NULL,
-  election_type varchar(255) DEFAULT NULL,
-  zone_state varchar(255) DEFAULT NULL,
-  district_circumscription varchar(255) DEFAULT NULL,
-  fecha_protesta varchar(255) DEFAULT NULL,
-  ubication varchar(255) DEFAULT NULL,
-  substitute varchar(255) DEFAULT NULL,
-  ultimo_grado_estudios varchar(255) DEFAULT NULL,
-  career varchar(255) DEFAULT NULL,
-  exp_legislative varchar(255) DEFAULT NULL,
-  commisions varchar(255) DEFAULT NULL,
-  suplentede varchar(255) DEFAULT NULL
-);
-create index on representatives(id_representative);
-create index on representatives(id_representative_type);
-create index on representatives(id_legislature);
-create index on representatives(id_political_party);
-
- 
-CREATE TABLE representative_type (
-  id_representative_type serial,
-  name varchar(255) DEFAULT NULL,
-  slug varchar(255) DEFAULT NULL
-);
-create index on representative_type(id_representative_type);
-create index on representative_type(name);
 
 --Topics
 CREATE TABLE topics (
