@@ -1,10 +1,12 @@
 -- ************ Tablas scrapping *************
 CREATE TABLE iniciativas_scrapper (
-  id_iniciativa serial,
+  id_initiative serial,
   id_parent integer not null,
   id_legislature integer not null,
   fecha_listado_tm timestamp NULL DEFAULT NULL,
   fecha_listado varchar(255) DEFAULT NULL,
+  fecha_listado_header varchar(255) DEFAULT NULL,
+  numero_iniciativa varchar(255) DEFAULT NULL,
   titulo text DEFAULT NULL,
   titulo_listado text DEFAULT NULL,
   enlace_dictamen_listado varchar(255) DEFAULT NULL,
@@ -16,29 +18,32 @@ CREATE TABLE iniciativas_scrapper (
   turnada text DEFAULT NULL,
   presentada text DEFAULT NULL,
   periodo varchar(255) DEFAULT NULL,
-  ano varchar(255) DEFAULT NULL
+  ano varchar(255) DEFAULT NULL,
+  revisada boolean DEFAULT false,
+  created_at timestamp NOT NULL DEFAULT now(),
+  updated_at timestamp NOT NULL DEFAULT now()
 );
-create index on iniciativas_scrapper(id_iniciativa);
+create index on iniciativas_scrapper(id_initiative);
 create index on iniciativas_scrapper(id_parent);
 create index on iniciativas_scrapper(id_legislature);
 
 CREATE TABLE estatus_iniciativas_scrapper (
   id_estatus serial,
-  id_iniciativa integer not null,
+  id_initiative integer not null,
   titulo text DEFAULT NULL,
   titulo_limpio text DEFAULT NULL,
   tipo varchar(255) DEFAULT NULL,
   votacion boolean default false
 );
 create index on estatus_iniciativas_scrapper(id_estatus);
-create index on estatus_iniciativas_scrapper(id_iniciativa);
+create index on estatus_iniciativas_scrapper(id_initiative);
 create index on estatus_iniciativas_scrapper(tipo);
 create index on estatus_iniciativas_scrapper(votacion);
 
 CREATE TABLE votaciones_partidos_scrapper (
   id_voto serial,
   id_contador_voto integer not null default 1,
-  id_iniciativa integer not null,
+  id_initiative integer not null,
   id_political_party integer not null default 0,
   tipo varchar(255) DEFAULT NULL,
   favor integer NOT NULL default 0,
@@ -50,14 +55,14 @@ CREATE TABLE votaciones_partidos_scrapper (
 );
 create index on votaciones_partidos_scrapper(id_voto);
 create index on votaciones_partidos_scrapper(id_contador_voto);
-create index on votaciones_partidos_scrapper(id_iniciativa);
+create index on votaciones_partidos_scrapper(id_initiative);
 create index on votaciones_partidos_scrapper(id_political_party);
 create index on votaciones_partidos_scrapper(tipo);
 
 CREATE TABLE votaciones_representantes_scrapper (
   id_voto_representante serial,
   id_contador_voto integer NOT NULL default 1,
-  id_iniciativa integer NOT NULL,
+  id_initiative integer NOT NULL,
   id_political_party integer NOT NULL default 0,
   id_representative integer NOT NULL default 0,
   nombre varchar(255) NOT NULL default 0,
@@ -66,7 +71,7 @@ CREATE TABLE votaciones_representantes_scrapper (
 );
 create index on votaciones_representantes_scrapper(id_voto_representante);
 create index on votaciones_representantes_scrapper(id_contador_voto);
-create index on votaciones_representantes_scrapper(id_iniciativa);
+create index on votaciones_representantes_scrapper(id_initiative);
 create index on votaciones_representantes_scrapper(id_political_party);
 create index on votaciones_representantes_scrapper(id_representative);
 create index on votaciones_representantes_scrapper(nombre);
@@ -166,46 +171,6 @@ create index on commissions2secretaries(id_commission);
 create index on commissions2secretaries(id_representative);
 
 --iniciativas
-CREATE TABLE initiative2political_party (
-  id_initiative integer,
-  id_political_party integer
-);
-create index on initiative2political_party(id_initiative);
-create index on initiative2political_party(id_political_party);
-
-CREATE TABLE initiative2representatives (
-  id_initiative integer,
-  id_representative integer
-);
-create index on initiative2representatives(id_initiative);
-create index on initiative2representatives(id_representative);
-
-CREATE TABLE initiatives (
-  id_initiative serial,
-  id_parent integer not null,
-  id_legislature integer,
-  presented_at timestamp NULL DEFAULT NULL,
-  presented_at_str varchar(255) DEFAULT NULL,
-  description text NOT NULL,
-  title text NOT NULL,
-  short_title varchar(255) NOT NULL,
-  slug varchar(255) NOT NULL,
-  url_dictamen varchar(255) DEFAULT NULL,
-  url_published varchar(255) DEFAULT NULL,
-  url_gaceta varchar(255) DEFAULT NULL,
-  content_html text DEFAULT NULL,
-  send_to text DEFAULT NULL,
-  turned_to text DEFAULT NULL,
-  submitted_to text DEFAULT NULL,
-  period varchar(255) DEFAULT NULL,
-  created_at timestamp NOT NULL DEFAULT now(),
-  updated_at timestamp NOT NULL DEFAULT now()
-);
-create index on initiatives(id_initiative);
-create index on initiatives(id_parent);
-create index on initiatives(id_legislature);
-create index on initiatives(slug);
-
 CREATE TABLE status_initiatives (
   id_status serial,
   id_initiative integer not null,
@@ -252,7 +217,39 @@ CREATE TABLE status (
 );
 create index on status(id_status);
 
+CREATE TABLE initiative2political_party (
+  id_initiative integer,
+  id_political_party integer
+);
+create index on initiative2political_party(id_initiative);
+create index on initiative2political_party(id_political_party);
+
+CREATE TABLE initiative2representatives (
+  id_initiative integer,
+  id_representative integer
+);
+create index on initiative2representatives(id_initiative);
+create index on initiative2representatives(id_representative);
+
+CREATE TABLE initiative2dependencies (
+  id_initiative integer,
+  id_dependency integer
+);
+create index on initiative2dependencies(id_initiative);
+create index on initiative2dependencies(id_dependency);
+
+--Dependencias
+CREATE TABLE dependencies (
+  id_dependency serial,
+  name varchar(255) NOT NULL,
+  slug varchar(255) NOT NULL
+);
+create index on dependencies(id_dependency);
+insert into dependencies (name, slug) values ('Ejecutivo federal','ejecutivo-federal');
+insert into dependencies (name, slug) values ('Otro','otro');
+
 --Votaciones
+/*
 CREATE TABLE vote_political_party (
   id_vote serial,
   id_count_vote integer not null default 1,
@@ -284,6 +281,7 @@ create index on vote_representatives(id_initiative);
 create index on vote_representatives(id_political_party);
 create index on vote_representatives(id_representative);
 create index on vote_representatives(vote_type);
+*/
 
 --Legislaturas
 CREATE TABLE legislatures (

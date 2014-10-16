@@ -1,21 +1,15 @@
 <div>
-	<a href="<?php echo site_url('admin/initiatives')?>">
-		<?php if($this->uri->segment(2) == "initiatives") { ?><strong>Iniciativas</strong><?php } else { ?>Iniciativas<?php } ?>
-	</a> |
-	<a href="<?php echo site_url('admin/representatives')?>">
-		<?php if($this->uri->segment(2) == "representatives") { ?><strong>Representantes</strong><?php } else { ?>Representantes<?php } ?>
-	</a> |
 	<a href="<?php echo site_url('admin/representatives_scrapper')?>">
-		<?php if($this->uri->segment(2) == "representatives_scrapper") { ?><strong>Representantes_scrapper</strong><?php } else { ?>Representantes_scrapper<?php } ?>
+		<?php if($this->uri->segment(2) == "representatives_scrapper") { ?><strong>Representantes</strong><?php } else { ?>Representantes<?php } ?>
 	</a> |
 	<a href="<?php echo site_url('admin/initiatives_scrapper')?>">
-		<?php if($this->uri->segment(2) == "initiatives_scrapper") { ?><strong>Iniciatvas scrapper</strong><?php } else { ?>Iniciatvas scrapper<?php } ?>
+		<?php if($this->uri->segment(2) == "initiatives_scrapper") { ?><strong>Iniciatvas</strong><?php } else { ?>Iniciatvas<?php } ?>
 	</a> |
 	<a href="<?php echo site_url('admin/votaciones_scrapper')?>">
-		<?php if($this->uri->segment(2) == "votaciones_scrapper") { ?><strong>Votaciones scrapper</strong><?php } else { ?>Votaciones scrapper<?php } ?>
+		<?php if($this->uri->segment(2) == "votaciones_scrapper") { ?><strong>Votaciones</strong><?php } else { ?>Votaciones<?php } ?>
 	</a> |
 	<a href="<?php echo site_url('admin/votos_representantes')?>">
-		<?php if($this->uri->segment(2) == "votos_representantes") { ?><strong>Votos Representantes scrapper</strong><?php } else { ?>Votos Representantes scrapper<?php } ?>
+		<?php if($this->uri->segment(2) == "votos_representantes") { ?><strong>Votos Representantes</strong><?php } else { ?>Votos Representantes<?php } ?>
 	</a> |
 	
 	
