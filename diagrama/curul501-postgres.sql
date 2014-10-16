@@ -164,17 +164,11 @@ create index on commissions2initiatives(id_initiative);
 
 CREATE TABLE commissions2representatives (
   id_commission integer,
-  id_representative integer
+  id_representative integer,
+  type varchar(10) default "integrante"
 );
 create index on commissions2representatives(id_commission);
 create index on commissions2representatives(id_representative);
-
-CREATE TABLE commissions2secretaries (
-  id_commission integer,
-  id_representative integer
-);
-create index on commissions2secretaries(id_commission);
-create index on commissions2secretaries(id_representative);
 
 --iniciativas
 CREATE TABLE status_initiatives (
