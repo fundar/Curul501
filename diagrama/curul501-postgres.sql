@@ -98,7 +98,8 @@ CREATE TABLE representatives_scrapper (
   birth_city varchar(255) DEFAULT NULL,
   election_type varchar(255) DEFAULT NULL,
   zone_state varchar(255) DEFAULT NULL,
-  district_circumscription varchar(255) DEFAULT NULL,
+  district varchar(255) DEFAULT NULL,
+  circumscription varchar(255) DEFAULT NULL,
   fecha_protesta varchar(255) DEFAULT NULL,
   ubication varchar(255) DEFAULT NULL,
   substitute varchar(255) DEFAULT NULL,
@@ -109,7 +110,7 @@ CREATE TABLE representatives_scrapper (
   commisions varchar(255) DEFAULT NULL,
   suplentede varchar(255) DEFAULT NULL
 );
-create index on representatives_scrapper(id_iniciativa);
+create index on representatives_scrapper(id_representative);
 create index on representatives_scrapper(id_representative_type);
 create index on representatives_scrapper(id_legislature);
 
