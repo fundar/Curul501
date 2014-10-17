@@ -273,8 +273,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		$select .= "$related_field_title as $field_name_hash";
     	}
     	$this->db->select('*, '.$select,false);
-		die(var_dump($field_info));
-    	$selection_primary_key = $this->get_primary_key($field_info->selection_table);
+		
+    	$selection_primary_key = $field_info->primary_key_alias_to_selection_table;
 		
     	if(empty($field_info->priority_field_relation_table))
     	{
