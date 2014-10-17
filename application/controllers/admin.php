@@ -332,7 +332,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('initiative2political_party', 'Partidos políticos');
 			
 			/*Relacion representantes - iniciativas*/
-			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives_scrapper', 'id_initiative', 'id_representative', 'name');
+			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives_scrapper', 'id_initiative', 'id_representative', 'full_name');
 			$crud->display_as('initiative2representatives', 'Representantes');
 			
 			/*Relacion Comisiones - iniciativas*/
