@@ -169,7 +169,7 @@ create index on commissions2initiatives(id_initiative);
 CREATE TABLE commissions2representatives (
   id_commission integer,
   id_representative integer,
-  type varchar(10) default "integrante"
+  type varchar(100) default 'integrante'
 );
 create index on commissions2representatives(id_commission);
 create index on commissions2representatives(id_representative);
