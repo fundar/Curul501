@@ -447,6 +447,7 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Iniciativa scrapper');
 			
 			/*Relacion partidos politicos - iniciativas*/
+			$crud->set_primary_key('political_parties', 'id_political_party');
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
 			$crud->display_as('initiative2political_party', 'Partidos políticos');
 			
