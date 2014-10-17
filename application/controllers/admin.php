@@ -351,6 +351,9 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
 			$crud->display_as('initiatives2tags', 'Etiquetas');
 			
+			/*Revisada*/
+			$crud->field_type('revisada', 'dropdown', array(true => 'Si', false => 'No'));
+		
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
