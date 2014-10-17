@@ -445,24 +445,8 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciativa scrapper');
-			$crud->set_primary_key('id_iniciativa');
-			
-			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
-			$crud->unset_fields('id_parent');
-			
-			/*Relaciones*/
-			$crud->display_as('ano', 'Año');
-			
-			/*Legislatura*/
-			$crud->set_primary_key('id_legislature', 'legislatures');
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*Relacion partidos politicos - iniciativas*/
-			$crud->set_primary_key('initiative2political_party', 'id_political_party');
-			$crud->set_primary_key('political_parties', 'id_initiative');
-			
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
 			$crud->display_as('initiative2political_party', 'Partidos políticos');
 			
@@ -481,6 +465,20 @@ class Admin extends CI_Controller {
 			/*Relacion tags - iniciativas*/
 			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
 			$crud->display_as('initiatives2tags', 'Etiquetas');
+			
+			$crud->set_primary_key('id_iniciativa');
+			
+			/*Columnas*/
+			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->unset_fields('id_parent');
+			
+			/*Relaciones*/
+			$crud->display_as('ano', 'Año');
+			
+			/*Legislatura*/
+			$crud->set_primary_key('id_legislature', 'legislatures');
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
