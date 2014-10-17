@@ -335,7 +335,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives_scrapper', 'id_initiative', 'id_representative', 'full_name');
 			$crud->display_as('initiative2representatives', 'Presentada por los representantes');
 			
-			/*Relacion representantes - iniciativas*/
+			/*Relacion dependencias - iniciativas*/
 			$crud->set_relation_n_n('initiative2dependencies', 'initiative2dependencies', 'dependencies', 'id_initiative', 'id_dependency', 'name');
 			$crud->display_as('initiative2dependencies', 'Presentada por las dependencias');
 			
