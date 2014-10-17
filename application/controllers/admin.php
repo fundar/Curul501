@@ -245,7 +245,7 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
-			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
+			$crud->columns('id_representative_type', 'full_name', 'id_political_party','email','id_legislature');
 			
 			$crud->unset_fields('full_name2');
 			$crud->unset_fields('slug2');
