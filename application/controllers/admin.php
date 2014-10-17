@@ -353,6 +353,7 @@ class Admin extends CI_Controller {
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
+			die(var_dump($e));
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
