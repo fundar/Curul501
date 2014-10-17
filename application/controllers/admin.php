@@ -460,6 +460,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			/*Relacion partidos politicos - iniciativas*/
+			$crud->set_primary_key('initiative2political_party', 'id_initiative');
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
 			$crud->display_as('initiative2political_party', 'Partidos políticos');
 			
