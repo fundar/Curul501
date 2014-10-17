@@ -84,13 +84,14 @@ create index on votaciones_representantes_scrapper(tipo);
 CREATE TABLE representatives_scrapper (
   id_representative serial,
   id_representative_type integer not null,
+  id_legislature integer not null,
+  id_political_party integer not null,
   name varchar(255) DEFAULT NULL,
   last_name varchar(255) DEFAULT NULL,
   full_name varchar(255) DEFAULT NULL,
   full_name2 varchar(255) DEFAULT NULL,
   slug varchar(255) DEFAULT NULL,
   slug2 varchar(255) DEFAULT NULL,
-  id_political_party integer not null,
   email varchar(255) DEFAULT NULL,
   phone varchar(255) DEFAULT NULL,
   avatar_id varchar(255) DEFAULT NULL,
@@ -109,7 +110,6 @@ CREATE TABLE representatives_scrapper (
   ultimo_grado_estudios varchar(255) DEFAULT NULL,
   career varchar(255) DEFAULT NULL,
   exp_legislative varchar(255) DEFAULT NULL,
-  id_legislature integer not null,
   commisions varchar(255) DEFAULT NULL,
   suplentede varchar(255) DEFAULT NULL
 );

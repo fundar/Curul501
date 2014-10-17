@@ -232,80 +232,6 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Representantes*/
-	public function representatives() {
-		try {
-			$crud  = $this->new_crud();
-			//$state = $crud->getState();
-			
-			/*Tabla y título*/
-			//$crud->set_theme('datatables');
-			$crud->set_table('representatives');
-			$crud->set_subject('Representantes');
-			$crud->set_primary_key('id_representative');
-			
-			/*Set requiered fields, columns and fields*/
-			$crud->required_fields('id_political_party', 'name');
-			$crud->columns('id_representative', 'id_representative_type', 'name', 'id_political_party', 'id_legislature');
-			$crud->fields('name','id_political_party', 'id_representative_type', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
-			
-			/*Nombres de campos*/	
-			$crud->display_as('id_representative', 'ID');
-			$crud->display_as('name', 'Nombre');
-			$crud->display_as('district', 'Distrito');
-			$crud->display_as('substitute', 'Sustituto');
-			$crud->display_as('election_type', 'Tipo de elección');
-			$crud->display_as('district_circumscription', 'Cirscuncipcion/Distrito');
-			
-			/*Relaciones*/
-			$crud->set_primary_key('id_political_party', 'political_parties');
-			$crud->display_as('id_political_party', 'Partido Político');
-			$crud->set_relation('id_political_party', 'political_parties', 'name');
-			
-			$crud->set_primary_key('id_legislature', 'legislatures');
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
-			$crud->set_primary_key('id_representative_type', 'representative_type');
-			$crud->display_as('id_representative_type', 'Tipo de Representante');
-			$crud->set_relation('id_representative_type', 'representative_type', 'name');
-			
-			$crud->display_as('birthday', 'Cumpleaños');
-			$crud->field_type('birthday', 'date');
-			
-			/*Set upload file Avatar, slug, latitude & longitude*/
-			$crud->set_field_upload('avatar', 'assets/uploads/files');
-			$crud->field_type('slug', 'invisible');
-			
-			
-			
-			/*Callback Para el Mapa*/
-			/*
-			$crud->field_type('longitude', 'hidden');
-			if($state != "read") {
-				$crud->field_type('latitude', 'hidden');
-				$crud->display_as('map', 'Ubicación');
-				$crud->callback_add_field('map', array($this,'getMap'));
-				$crud->callback_edit_field('map', array($this,'getMap'));
-			} else {
-				$crud->display_as('latitude', 'Ubicación');
-				$crud->callback_field('latitude', array($this, 'getMap2'));
-			}
-			*/
-			
-			/*Callbacks para obtener urls y slug*/
-			$crud->callback_column($this->unique_field_name('id_political_party'), array($this, 'urlPoliticalParty'));
-			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
-			$crud->callback_before_insert(array($this, 'getSlug'));
-			
-			$output = $crud->render();
-			
-			$this->_example_output($output);
-		} catch(Exception $e) {
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-	}
-	
-	/*Representantes_scrapper*/
 	public function representatives_scrapper() {
 		try {
 			$crud  = $this->new_crud();
@@ -320,16 +246,14 @@ class Admin extends CI_Controller {
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
 			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
-			$crud->fields('name','id_political_party','id_legislature', 'id_representative_type', 'email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
 			
-			/*Nombres de campos*/
+			$crud->unset_fields('full_name2');
+			$crud->unset_fields('slug2');
+			
+			/*Relaciones*/
 			$crud->set_primary_key('id_representative_type', 'representative_type');
 			$crud->display_as('id_representative_type', 'Tipo de Representante');
 			$crud->set_relation('id_representative_type', 'representative_type', 'name');
-
-			$crud->display_as('name', 'Nombre');
-			$crud->display_as('substitute', 'Suplente');
-			$crud->display_as('election_type', 'Tipo de elección');
 			
 			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
@@ -339,11 +263,22 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
+			/*Nombres de campos*/
+			$crud->display_as('name', 'Nombres');
+			$crud->display_as('last_name', 'Apellidos');
+			$crud->display_as('full_name', 'Nombre completo');
+			
+			$crud->display_as('substitute', 'Suplente');
+			$crud->display_as('election_type', 'Tipo de elección');
+			
        		$crud->display_as('phone', 'Telefono');
 			$crud->display_as('birth_state', 'Entidad de Nacimiento');
 			$crud->display_as('birth_city', 'Ciudad de Nacimiento');
 			$crud->display_as('zone_state', 'Entidad Representada');
-			$crud->display_as('district_circumscription', 'Distrito o Circunscripcion');
+			
+			$crud->display_as('district', 'Distrito o Circunscripcion');
+			$crud->display_as('circumscription', 'Circunscripcion');
+			
 			$crud->display_as('fecha_protesta', 'Fecha de Protesta');
 			$crud->display_as('ubication', 'Ubicación');
 			$crud->display_as('ultimo_grado_estudios', 'Ultimo Grado de Estudios');
@@ -358,7 +293,8 @@ class Admin extends CI_Controller {
 			$crud->display_as('birthday', 'Cumpleaños');				
 			
 			/*Callbacks para obtener urls y slug*/
-			$crud->callback_before_insert(array($this, 'getSlug'));
+			$crud->callback_before_insert(array($this, 'getSlug2'));
+			$crud->callback_before_update(array($this, 'getSlug2'));
 			
 			$output = $crud->render();
 			
@@ -532,6 +468,13 @@ class Admin extends CI_Controller {
     
 	/*Genera slug*/
 	function getSlug($post_array) {
+		$post_array['slug'] = slug($post_array['name']);
+		
+		return $post_array;
+	}
+	
+	/*Genera slug 2*/
+	function getSlug2($post_array) {
 		$post_array['slug'] = slug($post_array['name']);
 		
 		return $post_array;
