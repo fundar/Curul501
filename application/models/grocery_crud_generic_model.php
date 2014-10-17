@@ -333,7 +333,8 @@ class grocery_CRUD_Generic_Model  extends grocery_CRUD_Model  {
     		$this->db->where($field_info->where_clause);
     	}
 
-    	$selection_primary_key = $this->get_primary_key($field_info->selection_table);
+    	$selection_primary_key = $field_info->primary_key_alias_to_selection_table;
+    	
         if(!$use_template)
         	$this->db->order_by("{$field_info->selection_table}.{$field_info->title_field_selection_table}");
         $results = $this->db->get($field_info->selection_table)->result();
