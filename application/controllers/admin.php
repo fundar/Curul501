@@ -59,16 +59,8 @@ class Admin extends CI_Controller {
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
-		$crud->columns('id_commission', 'name', 'id_president', 'created_at');
-		$crud->fields('name', 'slug', 'id_president', 'commissions2secretaries', 'commissions2representatives', 'created_at', 'status');
-		
-		/*Presidente*/
-		$crud->display_as('id_president', 'Presidente');
-		$crud->set_relation('id_president', 'representatives', 'name');
-		
-		/*Relacion secretarios - comisiones*/
-		$crud->set_relation_n_n('commissions2secretaries', 'commissions2secretaries', 'representatives', 'id_commission', 'id_representative', 'name');
-		$crud->display_as('commissions2secretaries', 'Secretarios');
+		$crud->columns('id_commission', 'name', 'created_at');
+		$crud->fields('name', 'slug', 'commissions2representatives', 'created_at', 'status');
 		
 		/*Relacion Integrantes - comisiones*/
 		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives', 'id_commission', 'id_representative', 'name');
@@ -313,7 +305,6 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	
 	/*Representantes_scrapper*/
 	public function representatives_scrapper() {
 		try {
@@ -377,70 +368,11 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	
-	/*Crud de iniciativas*/
-	public function initiatives() {
-		try {
-			$crud  = $this->new_crud();
-			
-			/*Tabla y título*/
-			//$crud->set_theme('datatables');
-			$crud->set_table('initiatives');
-			$crud->set_subject('Iniciativas');
-			$crud->set_primary_key('id_initiative');
-			
-			/*Set requiered fields, columns and fields*/
-			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
-			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title');
-			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'id_status');
-			
-			/*Set displays & Set relations*/
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
-			$crud->display_as('id_status', 'Estatus');
-			$crud->set_relation('id_status', 'status', 'name');
-			
-			/*Relacion partidos politicos - iniciativas*/
-			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
-			$crud->display_as('initiative2political_party', 'Partidos políticos');
-			
-			/*Relacion representantes - iniciativas*/
-			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
-			$crud->display_as('initiative2representatives', 'Representantes');
-			
-			/*Relacion Comisiones - iniciativas*/
-			$crud->set_relation_n_n('commissions2initiatives', 'commissions2initiatives', 'commissions', 'id_initiative', 'id_commission', 'name');
-			$crud->display_as('commissions2initiatives', 'Comisiones');
-			
-			/*Relacion topics - iniciativas*/
-			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
-			$crud->display_as('initiatives2topics', 'Temas');
-			
-			/*Relacion tags - iniciativas*/
-			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
-			$crud->display_as('initiatives2tags', 'Etiquetas');
-			
-			$crud->callback_column($this->unique_field_name('id_legislature'),  array($this, 'urlLegislature'));
-			
-			$crud->order_by('id_initiative','desc');
-			$output = $crud->render();
-
-			$this->_example_output($output);
-		} catch(Exception $e) {
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-	}
-	
 	/*Crud de iniciativas del Scrapping*/
 	public function initiatives_scrapper() {
 		try {
-			$crud  = $this->new_crud();
-			
+			$crud = $this->new_crud();
 			$crud->set_theme('datatables');
-			
-			#no se pueden agregar
-			$crud->unset_add();
 			
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
