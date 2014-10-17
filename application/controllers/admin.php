@@ -408,7 +408,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto');
 			
 			/*Columnas*/
-			$crud->columns('id_voto', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
+			$crud->columns('id_voto', 'id_contador_voto', 'id_initiative', 'id_political_party', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
@@ -436,7 +436,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto_representante');
 			
 			/*Columnas*/
-			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'id_representative', 'nombre', 'partido', 'tipo');
+			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_initiative', 'id_political_party', 'id_representative', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
