@@ -313,10 +313,10 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciativa scrapper');
-			$crud->set_primary_key('id_iniciativa');
+			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
 			$crud->unset_fields('id_parent');
 			
 			/*Relaciones*/
