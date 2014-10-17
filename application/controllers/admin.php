@@ -454,9 +454,30 @@ class Admin extends CI_Controller {
 			/*Relaciones*/
 			$crud->display_as('ano', 'Año');
 			
+			/*Legislatura*/
 			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			/*Relacion partidos politicos - iniciativas*/
+			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
+			$crud->display_as('initiative2political_party', 'Partidos políticos');
+			
+			/*Relacion representantes - iniciativas*/
+			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
+			$crud->display_as('initiative2representatives', 'Representantes');
+			
+			/*Relacion Comisiones - iniciativas*/
+			$crud->set_relation_n_n('commissions2initiatives', 'commissions2initiatives', 'commissions', 'id_initiative', 'id_commission', 'name');
+			$crud->display_as('commissions2initiatives', 'Comisiones');
+			
+			/*Relacion topics - iniciativas*/
+			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
+			$crud->display_as('initiatives2topics', 'Temas');
+			
+			/*Relacion tags - iniciativas*/
+			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
+			$crud->display_as('initiatives2tags', 'Etiquetas');
 			
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));

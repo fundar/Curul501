@@ -27,6 +27,7 @@ create index on iniciativas_scrapper(id_initiative);
 create index on iniciativas_scrapper(id_parent);
 create index on iniciativas_scrapper(id_legislature);
 
+--Estatus iniciativas
 CREATE TABLE estatus_iniciativas_scrapper (
   id_estatus serial,
   id_initiative integer not null,
@@ -40,6 +41,7 @@ create index on estatus_iniciativas_scrapper(id_initiative);
 create index on estatus_iniciativas_scrapper(tipo);
 create index on estatus_iniciativas_scrapper(votacion);
 
+--Votaciones
 CREATE TABLE votaciones_partidos_scrapper (
   id_voto serial,
   id_contador_voto integer not null default 1,
@@ -78,10 +80,16 @@ create index on votaciones_representantes_scrapper(nombre);
 create index on votaciones_representantes_scrapper(partido);
 create index on votaciones_representantes_scrapper(tipo);
 
+--Representantes
 CREATE TABLE representatives_scrapper (
   id_representative serial,
   id_representative_type integer not null,
   name varchar(255) DEFAULT NULL,
+  last_name varchar(255) DEFAULT NULL,
+  full_name varchar(255) DEFAULT NULL,
+  full_name2 varchar(255) DEFAULT NULL,
+  slug varchar(255) DEFAULT NULL,
+  slug2 varchar(255) DEFAULT NULL,
   id_political_party integer not null,
   email varchar(255) DEFAULT NULL,
   phone varchar(255) DEFAULT NULL,
@@ -93,7 +101,8 @@ CREATE TABLE representatives_scrapper (
   birth_city varchar(255) DEFAULT NULL,
   election_type varchar(255) DEFAULT NULL,
   zone_state varchar(255) DEFAULT NULL,
-  district_circumscription varchar(255) DEFAULT NULL,
+  district varchar(255) DEFAULT NULL,
+  circumscription varchar(255) DEFAULT NULL,
   fecha_protesta varchar(255) DEFAULT NULL,
   ubication varchar(255) DEFAULT NULL,
   substitute varchar(255) DEFAULT NULL,
@@ -104,10 +113,10 @@ CREATE TABLE representatives_scrapper (
   commisions varchar(255) DEFAULT NULL,
   suplentede varchar(255) DEFAULT NULL
 );
-create index on representatives_scrapper(id_iniciativa);
+create index on representatives_scrapper(id_representative);
 create index on representatives_scrapper(id_representative_type);
 create index on representatives_scrapper(id_legislature);
-
+create index on representatives_scrapper(id_political_party);
  
 CREATE TABLE representative_type (
   id_representative_type serial,
@@ -125,9 +134,6 @@ truncate table iniciativas_scrapper;
 truncate table votaciones_representantes_scrapper;
 truncate table estatus_iniciativas_scrapper;
 
-
--- ************ Tablas Admin *************
-
 --tags
 CREATE TABLE tags (
   id_tag serial,
@@ -140,14 +146,18 @@ create index on tags(id_tag);
 --comisiones
 CREATE TABLE commissions (
   id_commission serial,
+  id_representative_type integer NOT NULL,
   name varchar(255) NOT NULL,
   slug varchar(255) NOT NULL,
+  type varchar(255) NOT NULL default 'ordinaria',
   created_at timestamp NOT NULL DEFAULT now(),
   updated_at timestamp NOT NULL DEFAULT now(),
-  status boolean NOT NULL DEFAULT true,
-  secretario varchar(255) NOT NULL
+  status boolean NOT NULL DEFAULT true
 );
 create index on commissions(id_commission);
+create index on commissions(id_representative_type);
+create index on commissions(slug);
+create index on commissions(type);
 
 CREATE TABLE commissions2initiatives (
   id_commission integer,
@@ -158,17 +168,11 @@ create index on commissions2initiatives(id_initiative);
 
 CREATE TABLE commissions2representatives (
   id_commission integer,
-  id_representative integer
+  id_representative integer,
+  type varchar(100) default 'integrante'
 );
 create index on commissions2representatives(id_commission);
 create index on commissions2representatives(id_representative);
-
-CREATE TABLE commissions2secretaries (
-  id_commission integer,
-  id_representative integer
-);
-create index on commissions2secretaries(id_commission);
-create index on commissions2secretaries(id_representative);
 
 --iniciativas
 CREATE TABLE status_initiatives (
@@ -248,41 +252,6 @@ create index on dependencies(id_dependency);
 insert into dependencies (name, slug) values ('Ejecutivo federal','ejecutivo-federal');
 insert into dependencies (name, slug) values ('Otro','otro');
 
---Votaciones
-/*
-CREATE TABLE vote_political_party (
-  id_vote serial,
-  id_count_vote integer not null default 1,
-  id_initiative integer not null,
-  id_political_party integer not null default 0,
-  favor integer NOT NULL default 0,
-  contra integer NOT NULL default 0,
-  abstencion integer NOT NULL default 0,
-  quorum integer NOT NULL default 0,
-  ausente integer NOT NULL default 0,
-  total integer NOT NULL default 0
-);
-create index on vote_political_party(id_vote);
-create index on vote_political_party(id_count_vote);
-create index on vote_political_party(id_initiative);
-create index on vote_political_party(id_political_party);
-
-CREATE TABLE vote_representatives (
-  id_vote_representative serial,
-  id_count_vote integer NOT NULL default 1,
-  id_initiative integer NOT NULL,
-  id_political_party integer NOT NULL default 0,
-  id_representative integer NOT NULL default 0,
-  vote_type varchar(255) DEFAULT NULL
-);
-create index on vote_representatives(id_vote_representative);
-create index on vote_representatives(id_count_vote);
-create index on vote_representatives(id_initiative);
-create index on vote_representatives(id_political_party);
-create index on vote_representatives(id_representative);
-create index on vote_representatives(vote_type);
-*/
-
 --Legislaturas
 CREATE TABLE legislatures (
   id_legislature serial,
@@ -325,49 +294,6 @@ insert into political_parties (name, slug, short_name) values ('Partido del Trab
 insert into political_parties (name, slug, short_name) values ('Movimiento Ciudadano','movimiento-ciudadano','Movimiento Ciudadano');
 insert into political_parties (name, slug, short_name) values ('Partido Nueva Alianza','partido-nueva-alianza','PANAL');
 insert into political_parties (name, slug, short_name) values ('Sin partido','sin-partido','SP');
-
---Representantes
-
-CREATE TABLE representatives (
-  id_representative serial,
-  id_legislature integer not null,
-  id_representative_type integer not null,
-  id_political_party integer not null,
-  name varchar(255) DEFAULT NULL,
-  slug varchar(255) NOT NULL,
-  email varchar(255) DEFAULT NULL,
-  phone varchar(255) DEFAULT NULL,
-  avatar varchar(255) DEFAULT NULL,
-  birthday varchar(255) DEFAULT NULL,
-  created_at timestamp NOT NULL DEFAULT now(),
-  updated_at timestamp NOT NULL DEFAULT now(),
-  birth_state varchar(255) DEFAULT NULL,
-  birth_city varchar(255) DEFAULT NULL,
-  election_type varchar(255) DEFAULT NULL,
-  zone_state varchar(255) DEFAULT NULL,
-  district_circumscription varchar(255) DEFAULT NULL,
-  fecha_protesta varchar(255) DEFAULT NULL,
-  ubication varchar(255) DEFAULT NULL,
-  substitute varchar(255) DEFAULT NULL,
-  ultimo_grado_estudios varchar(255) DEFAULT NULL,
-  career varchar(255) DEFAULT NULL,
-  exp_legislative varchar(255) DEFAULT NULL,
-  commisions varchar(255) DEFAULT NULL,
-  suplentede varchar(255) DEFAULT NULL
-);
-create index on representatives(id_representative);
-create index on representatives(id_representative_type);
-create index on representatives(id_legislature);
-create index on representatives(id_political_party);
-
- 
-CREATE TABLE representative_type (
-  id_representative_type serial,
-  name varchar(255) DEFAULT NULL,
-  slug varchar(255) DEFAULT NULL
-);
-create index on representative_type(id_representative_type);
-create index on representative_type(name);
 
 --Topics
 CREATE TABLE topics (
