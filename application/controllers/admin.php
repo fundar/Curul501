@@ -72,6 +72,9 @@ class Admin extends CI_Controller {
 		$crud->display_as('created_at', 'Fecha de creación');
 		$crud->field_type('slug', 'invisible');
 		
+		/*Revisada*/
+		$crud->field_type('status', 'dropdown', array(true => 'Activa', false => 'Inactiva'));
+			
 		/*Callback Slug*/
 		$crud->callback_before_insert(array($this, 'getSlug'));
 		$crud->callback_before_update(array($this, 'getSlug'));
