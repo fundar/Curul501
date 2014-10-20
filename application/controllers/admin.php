@@ -59,16 +59,8 @@ class Admin extends CI_Controller {
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
-		$crud->columns('id_commission', 'name', 'id_president', 'created_at');
-		$crud->fields('name', 'slug', 'id_president', 'commissions2secretaries', 'commissions2representatives', 'created_at', 'status');
-		
-		/*Presidente*/
-		$crud->display_as('id_president', 'Presidente');
-		$crud->set_relation('id_president', 'representatives', 'name');
-		
-		/*Relacion secretarios - comisiones*/
-		$crud->set_relation_n_n('commissions2secretaries', 'commissions2secretaries', 'representatives', 'id_commission', 'id_representative', 'name');
-		$crud->display_as('commissions2secretaries', 'Secretarios');
+		$crud->columns('id_commission', 'name', 'created_at');
+		$crud->fields('name', 'slug', 'commissions2representatives', 'created_at', 'status');
 		
 		/*Relacion Integrantes - comisiones*/
 		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives', 'id_commission', 'id_representative', 'name');
@@ -240,81 +232,6 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Representantes*/
-	public function representatives() {
-		try {
-			$crud  = $this->new_crud();
-			//$state = $crud->getState();
-			
-			/*Tabla y título*/
-			//$crud->set_theme('datatables');
-			$crud->set_table('representatives');
-			$crud->set_subject('Representantes');
-			$crud->set_primary_key('id_representative');
-			
-			/*Set requiered fields, columns and fields*/
-			$crud->required_fields('id_political_party', 'name');
-			$crud->columns('id_representative', 'id_representative_type', 'name', 'id_political_party', 'id_legislature');
-			$crud->fields('name','id_political_party', 'id_representative_type', 'id_legislature', 'slug', 'avatar', 'birthday', 'phone', 'email', 'substitute', 'election_type', 'district_circumscription');
-			
-			/*Nombres de campos*/	
-			$crud->display_as('id_representative', 'ID');
-			$crud->display_as('name', 'Nombre');
-			$crud->display_as('district', 'Distrito');
-			$crud->display_as('substitute', 'Sustituto');
-			$crud->display_as('election_type', 'Tipo de elección');
-			$crud->display_as('district_circumscription', 'Cirscuncipcion/Distrito');
-			
-			/*Relaciones*/
-			$crud->set_primary_key('id_political_party', 'political_parties');
-			$crud->display_as('id_political_party', 'Partido Político');
-			$crud->set_relation('id_political_party', 'political_parties', 'name');
-			
-			$crud->set_primary_key('id_legislature', 'legislatures');
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
-			$crud->set_primary_key('id_representative_type', 'representative_type');
-			$crud->display_as('id_representative_type', 'Tipo de Representante');
-			$crud->set_relation('id_representative_type', 'representative_type', 'name');
-			
-			$crud->display_as('birthday', 'Cumpleaños');
-			$crud->field_type('birthday', 'date');
-			
-			/*Set upload file Avatar, slug, latitude & longitude*/
-			$crud->set_field_upload('avatar', 'assets/uploads/files');
-			$crud->field_type('slug', 'invisible');
-			
-			
-			
-			/*Callback Para el Mapa*/
-			/*
-			$crud->field_type('longitude', 'hidden');
-			if($state != "read") {
-				$crud->field_type('latitude', 'hidden');
-				$crud->display_as('map', 'Ubicación');
-				$crud->callback_add_field('map', array($this,'getMap'));
-				$crud->callback_edit_field('map', array($this,'getMap'));
-			} else {
-				$crud->display_as('latitude', 'Ubicación');
-				$crud->callback_field('latitude', array($this, 'getMap2'));
-			}
-			*/
-			
-			/*Callbacks para obtener urls y slug*/
-			$crud->callback_column($this->unique_field_name('id_political_party'), array($this, 'urlPoliticalParty'));
-			$crud->callback_column($this->unique_field_name('id_legislature'),     array($this, 'urlLegislature'));
-			$crud->callback_before_insert(array($this, 'getSlug'));
-			
-			$output = $crud->render();
-			
-			$this->_example_output($output);
-		} catch(Exception $e) {
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-	}
-	
-	
-	/*Representantes_scrapper*/
 	public function representatives_scrapper() {
 		try {
 			$crud  = $this->new_crud();
@@ -328,17 +245,15 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
-			$crud->columns('id_representative_type', 'name', 'id_political_party','email','id_legislature');
-			$crud->fields('name','id_political_party','id_legislature', 'id_representative_type', 'email', 'phone','avatar_id', 'birthday','birth_state','birth_city','election_type','zone_state','district_circumscription','fecha_protesta','ubication','substitute','ultimo_grado_estudios','career','exp_legislative','commisions','suplentede');
+			$crud->columns('id_representative_type', 'full_name', 'id_political_party','email','id_legislature');
 			
-			/*Nombres de campos*/
+			$crud->unset_fields('full_name2');
+			$crud->unset_fields('slug2');
+			
+			/*Relaciones*/
 			$crud->set_primary_key('id_representative_type', 'representative_type');
 			$crud->display_as('id_representative_type', 'Tipo de Representante');
 			$crud->set_relation('id_representative_type', 'representative_type', 'name');
-
-			$crud->display_as('name', 'Nombre');
-			$crud->display_as('substitute', 'Suplente');
-			$crud->display_as('election_type', 'Tipo de elección');
 			
 			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
@@ -348,11 +263,22 @@ class Admin extends CI_Controller {
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
+			/*Nombres de campos*/
+			$crud->display_as('name', 'Nombres');
+			$crud->display_as('last_name', 'Apellidos');
+			$crud->display_as('full_name', 'Nombre completo');
+			
+			$crud->display_as('substitute', 'Suplente');
+			$crud->display_as('election_type', 'Tipo de elección');
+			
        		$crud->display_as('phone', 'Telefono');
 			$crud->display_as('birth_state', 'Entidad de Nacimiento');
 			$crud->display_as('birth_city', 'Ciudad de Nacimiento');
 			$crud->display_as('zone_state', 'Entidad Representada');
-			$crud->display_as('district_circumscription', 'Distrito o Circunscripcion');
+			
+			$crud->display_as('district', 'Distrito o Circunscripcion');
+			$crud->display_as('circumscription', 'Circunscripcion');
+			
 			$crud->display_as('fecha_protesta', 'Fecha de Protesta');
 			$crud->display_as('ubication', 'Ubicación');
 			$crud->display_as('ultimo_grado_estudios', 'Ultimo Grado de Estudios');
@@ -367,7 +293,8 @@ class Admin extends CI_Controller {
 			$crud->display_as('birthday', 'Cumpleaños');				
 			
 			/*Callbacks para obtener urls y slug*/
-			$crud->callback_before_insert(array($this, 'getSlug'));
+			$crud->callback_before_insert(array($this, 'getSlug2'));
+			$crud->callback_before_update(array($this, 'getSlug2'));
 			
 			$output = $crud->render();
 			
@@ -377,37 +304,41 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	
-	/*Crud de iniciativas*/
-	public function initiatives() {
+	/*Crud de iniciativas del Scrapping*/
+	public function initiatives_scrapper() {
 		try {
-			$crud  = $this->new_crud();
+			$crud = $this->new_crud();
+			$crud->set_theme('datatables');
 			
 			/*Tabla y título*/
-			//$crud->set_theme('datatables');
-			$crud->set_table('initiatives');
-			$crud->set_subject('Iniciativas');
+			$crud->set_table('iniciativas_scrapper');
+			$crud->set_subject('Iniciativa scrapper');
 			$crud->set_primary_key('id_initiative');
 			
-			/*Set requiered fields, columns and fields*/
-			$crud->required_fields('id_legislature', 'title', 'description', 'short_title');
-			$crud->columns('id_initiative', 'id_legislature', 'initiative2political_party', 'title', 'description', 'short_title');
-			$crud->fields('id_legislature', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'initiatives2tags', 'title', 'description', 'short_title', 'id_status');
+			/*Columnas*/
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->unset_fields('id_parent');
 			
-			/*Set displays & Set relations*/
+			/*Relaciones y displays*/
+			$crud->display_as('id_initiative', '#Iniciativa');
+			$crud->display_as('ano', 'Año');
+			
+			/*Legislatura*/
+			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
-			$crud->display_as('id_status', 'Estatus');
-			$crud->set_relation('id_status', 'status', 'name');
-			
 			/*Relacion partidos politicos - iniciativas*/
 			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
-			$crud->display_as('initiative2political_party', 'Partidos políticos');
+			$crud->display_as('initiative2political_party', 'Presentada por los partidos políticos');
 			
 			/*Relacion representantes - iniciativas*/
-			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives', 'id_initiative', 'id_representative', 'name');
-			$crud->display_as('initiative2representatives', 'Representantes');
+			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives_scrapper', 'id_initiative', 'id_representative', 'full_name');
+			$crud->display_as('initiative2representatives', 'Presentada por los representantes');
+			
+			/*Relacion dependencias - iniciativas*/
+			$crud->set_relation_n_n('initiative2dependencies', 'initiative2dependencies', 'dependencies', 'id_initiative', 'id_dependency', 'name');
+			$crud->display_as('initiative2dependencies', 'Presentada por las dependencias');
 			
 			/*Relacion Comisiones - iniciativas*/
 			$crud->set_relation_n_n('commissions2initiatives', 'commissions2initiatives', 'commissions', 'id_initiative', 'id_commission', 'name');
@@ -421,49 +352,16 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
 			$crud->display_as('initiatives2tags', 'Etiquetas');
 			
-			$crud->callback_column($this->unique_field_name('id_legislature'),  array($this, 'urlLegislature'));
-			
-			$crud->order_by('id_initiative','desc');
-			$output = $crud->render();
-
-			$this->_example_output($output);
-		} catch(Exception $e) {
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-	}
-	
-	/*Crud de iniciativas del Scrapping*/
-	public function initiatives_scrapper() {
-		try {
-			$crud  = $this->new_crud();
-			
-			$crud->set_theme('datatables');
-			
-			#no se pueden agregar
-			$crud->unset_add();
-			
-			/*Tabla y título*/
-			$crud->set_table('iniciativas_scrapper');
-			$crud->set_subject('Iniciativa scrapper');
-			$crud->set_primary_key('id_iniciativa');
-			
-			/*Columnas*/
-			$crud->columns('id_iniciativa', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
-			$crud->unset_fields('id_parent');
-			
-			/*Relaciones*/
-			$crud->display_as('ano', 'Año');
-			
-			$crud->set_primary_key('id_legislature', 'legislatures');
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
+			/*Revisada*/
+			$crud->field_type('revisada', 'dropdown', array(true => 'Si', false => 'No'));
+		
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
+			die(var_dump($e));
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
@@ -510,7 +408,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto');
 			
 			/*Columnas*/
-			$crud->columns('id_voto', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
+			$crud->columns('id_voto', 'id_contador_voto', 'id_initiative', 'id_political_party', 'tipo', 'favor', 'contra', 'abstencion', "quorum", "ausente", "total");
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
@@ -538,12 +436,17 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_voto_representante');
 			
 			/*Columnas*/
-			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_iniciativa', 'id_political_party', 'nombre', 'partido', 'tipo');
+			$crud->columns('id_voto_representante', 'id_contador_voto', 'id_initiative', 'id_political_party', 'id_representative', 'nombre', 'partido', 'tipo');
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Partido Político');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
+			
+			/*cambiar por representantes real / prueba con representrantes scrapping*/
+			$crud->set_primary_key('id_representative', 'representatives_scrapper');
+			$crud->display_as('id_representative', 'Representante');
+			$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -574,6 +477,13 @@ class Admin extends CI_Controller {
     
 	/*Genera slug*/
 	function getSlug($post_array) {
+		$post_array['slug'] = slug($post_array['name']);
+		
+		return $post_array;
+	}
+	
+	/*Genera slug 2*/
+	function getSlug2($post_array) {
 		$post_array['slug'] = slug($post_array['name']);
 		
 		return $post_array;
