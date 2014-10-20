@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 		$crud->fields('name', 'slug', 'commissions2representatives', 'created_at', 'status');
 		
 		/*Relacion Integrantes - comisiones*/
-		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives', 'id_commission', 'id_representative', 'name');
+		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives_scrapper', 'id_commission', 'id_representative', 'name');
 		$crud->display_as('commissions2representatives', 'Integrantes');
 			
 		/*Nombres de campos*/	
