@@ -25,9 +25,6 @@
 	<a href="<?php echo site_url('admin/topics')?>">
 		<?php if($this->uri->segment(2) == "topics") { ?><strong>Temas</strong><?php } else { ?>Temas<?php } ?>
 	</a> |
-	<a href="<?php echo site_url('admin/tags')?>">
-		<?php if($this->uri->segment(2) == "tags") { ?><strong>Etiquetas</strong><?php } else { ?>Etiquetas<?php } ?>
-	</a> |
 	<a href="<?php echo site_url('admin/status')?>">
 		<?php if($this->uri->segment(2) == "status") { ?><strong>Estatus</strong><?php } else { ?>Estatus<?php } ?>
 	</a> |
