@@ -114,35 +114,6 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
-	/*Tags*/
-	public function tags() {
-		$crud  = $this->new_crud();
-		
-		/*Tabla y título*/
-		//$crud->set_theme('datatables');
-		$crud->set_table('tags');
-		$crud->set_subject('Etiquetas');
-		$crud->set_primary_key('id_tag');
-		
-		/*Set requiered fields, columns and fields*/
-		$crud->required_fields('name');
-		$crud->columns('id_tag', 'name');
-		$crud->fields('name', 'slug');
-		
-		/*Nombres de campos*/	
-		$crud->display_as('id_tag', 'ID');
-		$crud->display_as('name', 'Nombre');
-		$crud->field_type('slug', 'invisible');
-		
-		/*Callback Slug*/
-		$crud->callback_before_insert(array($this, 'getSlug'));
-		$crud->callback_before_update(array($this, 'getSlug'));
-		
-		$output = $crud->render();
-		
-		$this->_example_output($output);
-	}
-	
 	/*Status*/
 	public function status() {
 		$crud  = $this->new_crud();
@@ -350,10 +321,6 @@ class Admin extends CI_Controller {
 			/*Relacion topics - iniciativas*/
 			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
 			$crud->display_as('initiatives2topics', 'Temas');
-			
-			/*Relacion tags - iniciativas*/
-			$crud->set_relation_n_n('initiatives2tags', 'initiatives2tags', 'tags', 'id_initiative', 'id_tag', 'name');
-			$crud->display_as('initiatives2tags', 'Etiquetas');
 			
 			/*Revisada*/
 			$crud->field_type('revisada', 'dropdown', array(true => 'Si', false => 'No'));
