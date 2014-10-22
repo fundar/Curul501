@@ -114,35 +114,6 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
-	/*Status*/
-	public function status() {
-		$crud  = $this->new_crud();
-		
-		/*Tabla y título*/
-		//$crud->set_theme('datatables');
-		$crud->set_table('status');
-		$crud->set_subject('Estatus');
-		$crud->set_primary_key('id_status');
-		
-		/*Set requiered fields, columns and fields*/
-		$crud->required_fields('name');
-		$crud->columns('id_status', 'name');
-		$crud->fields('name', 'slug', 'description');
-		
-		/*Nombres de campos*/	
-		$crud->display_as('id_status', 'ID');
-		$crud->display_as('name', 'Nombre');
-		$crud->display_as('description', 'Descripción');
-		$crud->field_type('slug', 'invisible');
-		
-		/*Callback Slug*/
-		$crud->callback_before_insert(array($this, 'getSlug'));
-		
-		$output = $crud->render();
-		
-		$this->_example_output($output);
-	}
-	
 	/*Partidos politicos*/
 	public function political_parties() {
 		$crud  = $this->new_crud();
