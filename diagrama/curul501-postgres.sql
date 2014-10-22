@@ -189,24 +189,6 @@ CREATE TABLE initiatives2topics (
 create index on initiatives2topics(id_initiative);
 create index on initiatives2topics(id_topic);
 
-CREATE TABLE initiatives2status (
-  id_initiative integer NOT NULL,
-  id_status integer NOT NULL,
-  description text NOT NULL,
-  created_at timestamp NOT NULL DEFAULT now(),
-  status boolean NOT NULL DEFAULT true
-);
-create index on initiatives2status(id_initiative);
-create index on initiatives2status(id_status);
-
-CREATE TABLE status (
-  id_status serial,
-  name varchar(255) NOT NULL,
-  slug varchar(255) NOT NULL,
-  description text NOT NULL
-);
-create index on status(id_status);
-
 CREATE TABLE initiative2political_party (
   id_initiative integer,
   id_political_party integer
