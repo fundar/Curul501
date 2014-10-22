@@ -14,6 +14,7 @@ CREATE TABLE iniciativas_scrapper (
   enlace_gaceta varchar(255) DEFAULT NULL,
   html_listado text DEFAULT NULL,
   contenido_html_iniciativa text DEFAULT NULL,
+  resumen text DEFAULT NULL,
   enviada text DEFAULT NULL,
   turnada text DEFAULT NULL,
   presentada text DEFAULT NULL,
@@ -134,15 +135,6 @@ truncate table iniciativas_scrapper;
 truncate table votaciones_representantes_scrapper;
 truncate table estatus_iniciativas_scrapper;
 
---tags
-CREATE TABLE tags (
-  id_tag serial,
-  name varchar(255) NOT NULL,
-  slug varchar(255) NOT NULL,
-  created_at timestamp NOT NULL DEFAULT now()
-);
-create index on tags(id_tag);
-
 --comisiones
 CREATE TABLE commissions (
   id_commission serial,
@@ -195,13 +187,6 @@ CREATE TABLE initiatives2topics (
 );
 create index on initiatives2topics(id_initiative);
 create index on initiatives2topics(id_topic);
-
-CREATE TABLE initiatives2tags (
-  id_initiative integer not null,
-  id_tag integer not null
-);
-create index on initiatives2tags(id_initiative);
-create index on initiatives2tags(id_tag);
 
 CREATE TABLE initiatives2status (
   id_initiative integer NOT NULL,
