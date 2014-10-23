@@ -403,8 +403,9 @@ class Admin extends CI_Controller {
 	/*obtener el texto limpio (solo en las relaciones n_n)*/
 	function cleanText($value, $row) {
 		$array_replace = array('{', '}', '"');
+		$value = str_replace($array_replace, '', $value);
 		
-		return str_replace($array_replace, '', $value);
+		return str_replace(',', ' , ', $value);
 	}
 	
 	/*obtener el valor completo*/
