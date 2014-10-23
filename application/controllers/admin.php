@@ -121,7 +121,7 @@ class Admin extends CI_Controller {
 		/*Tabla y título*/
 		//$crud->set_theme('datatables');
 		$crud->set_table('political_parties');
-		$crud->set_subject('Partidos políticos');
+		$crud->set_subject('Grupos parlamentarios');
 		$crud->set_primary_key('id_political_party');
 		
 		/*Set requiered fields, columns and fields*/

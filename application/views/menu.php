@@ -14,7 +14,7 @@
 	
 	
 	<a href="<?php echo site_url('admin/political_parties')?>">
-		<?php if($this->uri->segment(2) == "political_parties") { ?><strong>Partidos políticos</strong><?php } else { ?>Partidos políticos<?php } ?>
+		<?php if($this->uri->segment(2) == "political_parties") { ?><strong>Grupos parlamentarios</strong><?php } else { ?>Grupos parlamentarios<?php } ?>
 	</a> |
 	<a href="<?php echo site_url('admin/legislatures')?>">
 		<?php if($this->uri->segment(2) == "legislatures") { ?><strong>Legislaturas</strong><?php } else { ?>Legislaturas<?php } ?>
