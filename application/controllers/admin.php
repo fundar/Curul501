@@ -201,7 +201,7 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_representative_type', 'representative_type', 'name');
 			
 			$crud->set_primary_key('id_political_party', 'political_parties');
-			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->display_as('id_political_party', 'Grupo parlamentario');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
 			$crud->set_primary_key('id_legislature', 'legislatures');
