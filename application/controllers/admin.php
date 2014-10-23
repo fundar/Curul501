@@ -249,8 +249,72 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	/*Crud de iniciativas del Scrapping*/
-	public function initiatives_scrapper() {
+	/*Crud de iniciativas del Scrapping - Revisadas*/
+	public function initiatives_scrapper_true() {
+		try {
+			$crud = $this->new_crud();
+			$crud->set_theme('datatables');
+			
+			$crud->where('revisada', "t");
+			
+			/*Tabla y título*/
+			$crud->set_table('iniciativas_scrapper');
+			$crud->set_subject('Iniciativa scrapper');
+			$crud->set_primary_key('id_initiative');
+			
+			/*Columnas*/
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'fecha_votacion', 'periodo', 'initiative2political_party', 'commissions2initiatives', 'initiatives2topics', 'revisada');
+			$crud->unset_fields('id_parent');
+			
+			/*Relaciones y displays*/
+			$crud->display_as('id_initiative', '#Iniciativa');
+			$crud->display_as('ano', 'Año');
+			
+			/*Legislatura*/
+			$crud->set_primary_key('id_legislature', 'legislatures');
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
+			/*Relacion partidos politicos - iniciativas*/
+			$crud->set_relation_n_n('initiative2political_party', 'initiative2political_party', 'political_parties', 'id_initiative', 'id_political_party', 'name');
+			$crud->display_as('initiative2political_party', 'Presentada por los partidos políticos');
+			
+			/*Relacion representantes - iniciativas*/
+			$crud->set_relation_n_n('initiative2representatives', 'initiative2representatives', 'representatives_scrapper', 'id_initiative', 'id_representative', 'full_name');
+			$crud->display_as('initiative2representatives', 'Presentada por los representantes');
+			
+			/*Relacion dependencias - iniciativas*/
+			$crud->set_relation_n_n('initiative2dependencies', 'initiative2dependencies', 'dependencies', 'id_initiative', 'id_dependency', 'name');
+			$crud->display_as('initiative2dependencies', 'Presentada por las dependencias');
+			
+			/*Relacion Comisiones - iniciativas*/
+			$crud->set_relation_n_n('commissions2initiatives', 'commissions2initiatives', 'commissions', 'id_initiative', 'id_commission', 'name');
+			$crud->display_as('commissions2initiatives', 'Comisiones');
+			
+			/*Relacion topics - iniciativas*/
+			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
+			$crud->display_as('initiatives2topics', 'Temas');
+			
+			/*Revisada*/
+			$crud->field_type('revisada', 'dropdown', array(true => 'Si', false => 'No'));
+		
+			/*callback titulo*/
+			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
+			
+			$crud->callback_column('initiative2political_party', array($this, 'cleanText'));
+			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
+			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
+			
+			$output = $crud->render();
+			$this->_example_output($output);
+		} catch(Exception $e) {
+			die(var_dump($e));
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*Crud de iniciativas del Scrapping - No revisadas*/
+	public function initiatives_scrapper_false() {
 		try {
 			$crud = $this->new_crud();
 			$crud->set_theme('datatables');

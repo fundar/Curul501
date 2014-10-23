@@ -2,8 +2,11 @@
 	<a href="<?php echo site_url('admin/representatives_scrapper')?>">
 		<?php if($this->uri->segment(2) == "representatives_scrapper") { ?><strong>Representantes</strong><?php } else { ?>Representantes<?php } ?>
 	</a> |
-	<a href="<?php echo site_url('admin/initiatives_scrapper')?>">
-		<?php if($this->uri->segment(2) == "initiatives_scrapper") { ?><strong>Iniciatvas</strong><?php } else { ?>Iniciatvas<?php } ?>
+	<a href="<?php echo site_url('admin/initiatives_scrapper_true')?>">
+		<?php if($this->uri->segment(2) == "initiatives_scrapper_true") { ?><strong>Iniciatvas Revisadas</strong><?php } else { ?>Iniciatvas Revisadas<?php } ?>
+	</a> |
+	<a href="<?php echo site_url('admin/initiatives_scrapper_false')?>">
+		<?php if($this->uri->segment(2) == "initiatives_scrapper_false") { ?><strong>Iniciatvas NO Revisadas</strong><?php } else { ?>Iniciatvas NO Revisadas<?php } ?>
 	</a> |
 	<a href="<?php echo site_url('admin/votaciones_scrapper')?>">
 		<?php if($this->uri->segment(2) == "votaciones_scrapper") { ?><strong>Votaciones</strong><?php } else { ?>Votaciones<?php } ?>
