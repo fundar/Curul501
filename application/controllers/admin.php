@@ -389,12 +389,12 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_estatus');
 			
 			/*Columnas*/
-			$crud->columns('id_estatus', 'id_iniciativa', 'titulo_limpio', 'tipo', 'votacion');
+			$crud->columns('id_estatus', 'id_initiative', 'titulo_limpio', 'tipo', 'votacion');
 			
 			/*Relaciones*/
-			$crud->set_primary_key('id_iniciativa', 'iniciativas_scrapper');
-			$crud->display_as('id_iniciativa', 'Iniciativa');
-			$crud->set_relation('id_iniciativa', 'iniciativas_scrapper', 'titulo_listado');
+			$crud->set_primary_key('id_initiative', 'iniciativas_scrapper');
+			$crud->display_as('id_initiative', 'Iniciativa');
+			$crud->set_relation('id_initiative', 'iniciativas_scrapper', 'titulo_listado');
 			
 			$output = $crud->render();
 			$this->_example_output($output);
