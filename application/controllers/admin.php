@@ -263,7 +263,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'fecha_votacion', 'periodo', 'initiative2political_party', 'initiative2representatives', 'commissions2initiatives', 'initiatives2topics', 'revisada');
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'fecha_votacion', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
 			$crud->unset_fields('id_parent');
 			
 			/*Relaciones y displays*/
@@ -301,10 +301,8 @@ class Admin extends CI_Controller {
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
-			$crud->callback_column('initiative2political_party', array($this, 'cleanText'));
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
 			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
-			$crud->callback_column('initiative2representatives', array($this, 'cleanText'));
 			
 			$output = $crud->render();
 			$this->_example_output($output);
@@ -366,10 +364,8 @@ class Admin extends CI_Controller {
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
-			$crud->callback_column('initiative2political_party', array($this, 'cleanText'));
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
 			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
-			$crud->callback_column('initiative2representatives', array($this, 'cleanText'));
 			
 			$output = $crud->render();
 			$this->_example_output($output);
