@@ -261,7 +261,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'periodo');
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado', 'fecha_votacion', 'periodo', 'initiative2political_party', 'commissions2initiatives', 'initiatives2topics');
 			$crud->unset_fields('id_parent');
 			
 			/*Relaciones y displays*/
