@@ -359,7 +359,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('initiatives2topics', 'Temas');
 			
 			/*Revisada*/
-			$crud->field_type('revisada', 'dropdown', array(true => 'Si', false => 'No'));
+			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
