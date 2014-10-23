@@ -357,7 +357,7 @@ class Admin extends CI_Controller {
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
-			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->display_as('id_political_party', 'Grupo parlamentario');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
 			$output = $crud->render();
@@ -385,7 +385,7 @@ class Admin extends CI_Controller {
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_political_party', 'political_parties');
-			$crud->display_as('id_political_party', 'Partido Político');
+			$crud->display_as('id_political_party', 'Grupo parlamentario');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
 			
 			/*cambiar por representantes real / prueba con representrantes scrapping*/
