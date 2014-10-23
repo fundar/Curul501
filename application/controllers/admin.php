@@ -405,7 +405,7 @@ class Admin extends CI_Controller {
 		$array_replace = array('{', '}', '"');
 		$value = str_replace($array_replace, '', $value);
 		
-		return str_replace(',', ' , ', $value);
+		return str_replace(',', ', ', $value);
 	}
 	
 	/*obtener el valor completo*/
