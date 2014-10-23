@@ -255,6 +255,8 @@ class Admin extends CI_Controller {
 			$crud = $this->new_crud();
 			$crud->set_theme('datatables');
 			
+			$crud->where('revisada', true);
+			
 			/*Tabla y título*/
 			$crud->set_table('iniciativas_scrapper');
 			$crud->set_subject('Iniciativa scrapper');
