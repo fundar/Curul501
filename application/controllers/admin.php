@@ -299,6 +299,10 @@ class Admin extends CI_Controller {
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
+			$crud->callback_column('initiative2political_party', array($this, 'cleanText'));
+			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
+			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
+			
 			$output = $crud->render();
 			$this->_example_output($output);
 		} catch(Exception $e) {
@@ -396,7 +400,14 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	/*obtener url de partido politco*/
+	/*obtener el texto limpio (solo en las relaciones n_n)*/
+	function cleanText($value, $row) {
+		$array_replace = array('{', '}', '"');
+		
+		return str_replace($array_replace, '', $value);
+	}
+	
+	/*obtener el valor completo*/
 	function getFullValue($value, $row) {
 		return $value;
 	}
