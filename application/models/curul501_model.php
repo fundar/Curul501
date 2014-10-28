@@ -78,8 +78,6 @@ class curul501_Model extends CI_Model  {
 			
 			$this->db->where('id_initiative', $value["id_initiative"]);
 			$this->db->update('iniciativas_scrapper', $update);
-			
-			die("ok");
 		}
 	}
 	
