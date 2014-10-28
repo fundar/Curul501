@@ -43,7 +43,7 @@ class curul501_Model extends CI_Model  {
 			$fecha_listado = str_replace(" de ", " ", $fecha_listado);
 			$fecha_listado = explode(" ", $fecha_listado);
 			
-			var_dump($fecha_listado[1] . '-' . getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
+			var_dump($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
 			
 			$timestamp = strtotime($fecha_listado[1] . '-' . getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
 			
