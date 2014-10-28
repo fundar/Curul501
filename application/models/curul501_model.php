@@ -38,7 +38,10 @@ class curul501_Model extends CI_Model  {
 		
 		foreach($data as $value) {
 			//fecha_listado fecha_listado_header fecha_votacion
-			die(var_dump($value));
+			setlocale(LC_TIME,"es_ES");
+			$fecha = date("d/m/Y", strtotime($value["fecha_listado"]));
+			
+			die(var_dump($fecha));
 		}
 	}
 }
