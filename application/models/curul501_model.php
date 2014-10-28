@@ -40,7 +40,7 @@ class curul501_Model extends CI_Model  {
 			//fecha_listado fecha_listado_header fecha_votacion
 			
 			$fecha_listado = $value["fecha_listado"];
-			$fecha_listado = str_replace(" de ", "", $fecha_listado);
+			$fecha_listado = str_replace(" de ", " ", $fecha_listado);
 			$fecha_listado = explode(" ", $fecha_listado);
 			
 			var_dump($fecha_listado);
