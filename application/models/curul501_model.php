@@ -39,6 +39,8 @@ class curul501_Model extends CI_Model  {
 		//select fecha_listado, fecha_listado_tm, fecha_listado_header, fecha_listado_header_tm, fecha_votacion, fecha_votacion_tm from iniciativas_scrapper;
 		
 		foreach($data as $value) {
+			$update = array();
+			
 			/*Fecha listado - presentada*/
 			if($value["fecha_listado"] != "") {
 				$fecha_listado    = $value["fecha_listado"];
@@ -49,7 +51,7 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado    = trim($fecha_listado);
 				$fecha_listado    = explode(" ", $fecha_listado);
 				$fecha_listado_tm = strtotime($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
-				$data["fecha_listado_tm"] = date("Y-m-d H:i:s", $fecha_listado_tm);
+				$fecha_votacion_tm["fecha_listado_tm"] = date("Y-m-d H:i:s", $fecha_listado_tm);
 			}
 			
 			/*Fecha listado header*/
@@ -59,7 +61,7 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado_header    = trim($fecha_listado_header);
 				$fecha_listado_header    = explode(" ", $fecha_listado_header);
 				$fecha_listado_header_tm = strtotime($fecha_listado_header[1] . '-' . $this->getMes(ucfirst($fecha_listado_header[2])) . '-' . $fecha_listado_header[3]);
-				$data["fecha_listado_header_tm"] = date("Y-m-d H:i:s", $fecha_listado_header_tm);
+				$fecha_votacion_tm["fecha_listado_header_tm"] = date("Y-m-d H:i:s", $fecha_listado_header_tm);
 			}
 			
 			/*Fecha votacion*/
@@ -68,10 +70,10 @@ class curul501_Model extends CI_Model  {
 				$fecha_votacion            = str_replace(" de ", " ", $fecha_votacion);
 				$fecha_votacion            = explode(" ", $fecha_votacion);
 				$fecha_votacion_tm         = strtotime($fecha_votacion[0] . '-' . $this->getMes(ucfirst($fecha_votacion[1])) . '-' . $fecha_votacion[2]);
-				$data["fecha_votacion_tm"] = date("Y-m-d H:i:s", $fecha_votacion_tm);
+				$update["fecha_votacion_tm"] = date("Y-m-d H:i:s", $fecha_votacion_tm);
 			}
 			
-			var_dump($data);
+			var_dump($fecha_votacion_tm);
 			var_dump($value["id_initiative"]);
 			
 			echo "<br><br>";
