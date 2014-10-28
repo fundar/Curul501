@@ -132,6 +132,13 @@ create index on representative_type(name);
 insert into representative_type (name, slug) values ('Diputado', 'diputado');
 insert into representative_type (name, slug) values ('Senador', 'senador');
 
+CREATE TABLE representative_repeat (
+  id_repeat serial,
+  id_representative integer NOT NULL default 0,
+  name varchar(255) DEFAULT NULL
+);
+create index on representative_repeat(id_representative);
+
 -- Truncate tables scrapper
 truncate table votaciones_partidos_scrapper;
 truncate table iniciativas_scrapper;

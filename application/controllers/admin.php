@@ -464,6 +464,33 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	/*Representantes repetidos*/
+	public function representative_repeat() {
+		$crud  = $this->new_crud();
+		
+		/*Tabla y título*/
+		$crud->set_table('representative_repeat');
+		$crud->set_subject('Similutudes Representes');
+		$crud->set_primary_key('id_repeat');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('id_representative', 'name');
+		$crud->columns('name', 'id_representative');
+		
+		/*Nombres de campos*/	
+		$crud->set_primary_key('id_representative', 'representatives_scrapper');
+		$crud->display_as('id_representative', 'Representante');
+		$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
+		
+		$crud->display_as('name', 'Nombre');
+		
+		/*Callback Slug*/
+		//$crud->callback_before_insert(array($this, 'getSlug'));
+		
+		$output = $crud->render();
+		$this->_example_output($output);
+	}
+	
 	/*obtener el texto limpio (solo en las relaciones n_n)*/
 	function cleanText($value, $row) {
 		$array_replace = array('{', '}', '"');
