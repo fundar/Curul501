@@ -37,6 +37,7 @@ class curul501_Model extends CI_Model  {
 		$data  = $query->result_array();
 		
 		foreach($data as $value) {
+			//fecha_listado fecha_listado_header fecha_votacion
 			die(var_dump($value));
 		}
 	}
