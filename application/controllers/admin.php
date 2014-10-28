@@ -619,7 +619,7 @@ class Admin extends CI_Controller {
 	
 	
 	/*metodo para arreglar fechas*/
-	public function index() {
+	public function fixDates() {
 		$this->load->model('curul501_model');
 		$result = $this->curul501_model->fixDates();
 	}
