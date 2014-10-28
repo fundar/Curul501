@@ -137,6 +137,7 @@ CREATE TABLE representative_repeat (
   id_representative integer NOT NULL default 0,
   name varchar(255) DEFAULT NULL
 );
+create index on representative_repeat(id_repeat);
 create index on representative_repeat(id_representative);
 
 -- Truncate tables scrapper

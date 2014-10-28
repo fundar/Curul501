@@ -475,7 +475,6 @@ class Admin extends CI_Controller {
 		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('id_representative', 'name');
-		$crud->columns('name', 'id_representative');
 		
 		/*Nombres de campos*/	
 		$crud->set_primary_key('id_representative', 'representatives_scrapper');
