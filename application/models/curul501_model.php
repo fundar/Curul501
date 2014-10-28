@@ -36,6 +36,8 @@ class curul501_Model extends CI_Model  {
 		$query = $this->db->query("select * from iniciativas_scrapper");
 		$data  = $query->result_array();
 		
+		//select fecha_listado, fecha_listado_tm, fecha_listado_header, fecha_listado_header_tm, fecha_votacion, fecha_votacion_tm from iniciativas_scrapper;
+		
 		foreach($data as $value) {
 			/*Fecha listado - presentada*/
 			if($value["fecha_listado"] != "") {
@@ -47,7 +49,7 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado    = trim($fecha_listado);
 				$fecha_listado    = explode(" ", $fecha_listado);
 				$fecha_listado_tm = strtotime($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
-				var_dump(date("Y-m-d H:i:s", $fecha_listado_tm));
+				$data["fecha_listado_tm"] = date("Y-m-d H:i:s", $fecha_listado_tm);
 			}
 			
 			/*Fecha listado header*/
@@ -57,17 +59,24 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado_header    = trim($fecha_listado_header);
 				$fecha_listado_header    = explode(" ", $fecha_listado_header);
 				$fecha_listado_header_tm = strtotime($fecha_listado_header[1] . '-' . $this->getMes(ucfirst($fecha_listado_header[2])) . '-' . $fecha_listado_header[3]);
-				var_dump(date("Y-m-d H:i:s", $fecha_listado_header_tm));
+				$data["fecha_listado_header_tm"] = date("Y-m-d H:i:s", $fecha_listado_header_tm);
 			}
 			
 			/*Fecha votacion*/
 			if($value["fecha_votacion"] != "") {
-				$fecha_votacion    = $value["fecha_votacion"];
-				$fecha_votacion    = str_replace(" de ", " ", $fecha_votacion);
-				$fecha_votacion    = explode(" ", $fecha_votacion);
-				$fecha_votacion_tm = strtotime($fecha_votacion[0] . '-' . $this->getMes(ucfirst($fecha_votacion[1])) . '-' . $fecha_votacion[2]);
-				var_dump(date("Y-m-d H:i:s", $fecha_votacion_tm));
+				$fecha_votacion            = $value["fecha_votacion"];
+				$fecha_votacion            = str_replace(" de ", " ", $fecha_votacion);
+				$fecha_votacion            = explode(" ", $fecha_votacion);
+				$fecha_votacion_tm         = strtotime($fecha_votacion[0] . '-' . $this->getMes(ucfirst($fecha_votacion[1])) . '-' . $fecha_votacion[2]);
+				$data["fecha_votacion_tm"] = date("Y-m-d H:i:s", $fecha_votacion_tm);
 			}
+			
+			var_dump($data);
+			var_dump($value["id_initiative"]);
+			
+			echo "<br><br>";
+			//$this->db->where('id_initiative', $value["id_initiative"]);
+			//$this->db->update('iniciativas_scrapper', $data);
 		}
 	}
 	
