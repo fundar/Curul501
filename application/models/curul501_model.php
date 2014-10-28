@@ -38,6 +38,7 @@ class curul501_Model extends CI_Model  {
 		
 		foreach($data as $value) {
 			//fecha_listado fecha_listado_header fecha_votacion
+			die(var_dump($value["fecha_votacion"]));
 			
 			$fecha_listado = $value["fecha_listado"];
 			$fecha_listado = str_replace(" de ", " ", $fecha_listado);
