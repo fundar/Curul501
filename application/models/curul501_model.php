@@ -43,13 +43,30 @@ class curul501_Model extends CI_Model  {
 			$fecha_listado = str_replace(" de ", " ", $fecha_listado);
 			$fecha_listado = explode(" ", $fecha_listado);
 			
-			var_dump($fecha_listado);
+			var_dump($fecha_listado[1] . '-' . getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
 			
-			$timestamp = strtotime('22-09-2008');
+			$timestamp = strtotime($fecha_listado[1] . '-' . getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
 			
 			var_dump($timestamp);
 			
-			die(var_dump($fecha));
+			die("ok");
+		}
+	}
+	
+	public function getMes($mes) {
+		switch($mes) {
+		   case 'Enero'; return 1; break;
+		   case 'Febrero'; return 2; break;
+		   case 'Marzo'; return 3; break;
+		   case 'Abril'; return 4; break;
+		   case 'Mayo'; return 5; break;
+		   case 'Junio'; return 6; break;
+		   case 'Julio'; return 7; break;
+		   case 'Agosto'; return 8; break;
+		   case 'Septiembre'; return 9; break;
+		   case 'ctubre'; return 10; break;
+		   case 'Noviembre'; return 11; break;
+		   case 'Diciembre' return 12; break;
 		}
 	}
 }
