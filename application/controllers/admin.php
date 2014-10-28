@@ -474,21 +474,26 @@ class Admin extends CI_Controller {
 		$crud->set_primary_key('id_repeat');
 		
 		/*Set requiered fields, columns and fields*/
+		$crud->columns('id_representative', 'name');
 		$crud->required_fields('id_representative', 'name');
 		$crud->unset_fields('id_repeat');
 		
 		/*Nombres de campos*/	
 		$crud->display_as('name', 'Nombre');
-		
 		$crud->set_primary_key('id_representative', 'representatives_scrapper');
 		$crud->display_as('id_representative', 'Representante');
 		$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
 		
 		/*Callback Slug*/
-		//$crud->callback_before_insert(array($this, 'getSlug'));
+		$crud->callback_before_insert(array($this, 'updateRepresentatives'));
 		
 		$output = $crud->render();
 		$this->_example_output($output);
+	}
+	
+	/*Actualiza representantes en votos y comisiones*/
+	function updateRepresentatives($value, $row) {
+		return $value;
 	}
 	
 	/*obtener el texto limpio (solo en las relaciones n_n)*/
