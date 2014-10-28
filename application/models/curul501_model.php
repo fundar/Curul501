@@ -72,12 +72,13 @@ class curul501_Model extends CI_Model  {
 				$fecha_votacion_tm         = strtotime($fecha_votacion[0] . '-' . $this->getMes(ucfirst($fecha_votacion[1])) . '-' . $fecha_votacion[2]);
 				$update["fecha_votacion_tm"] = date("Y-m-d H:i:s", $fecha_votacion_tm);
 			}
-			
+			/*
 			var_dump($update);
 			var_dump($value["id_initiative"]);
 			
 			$this->db->where('id_initiative', $value["id_initiative"]);
 			$this->db->update('iniciativas_scrapper', $update);
+			*/
 		}
 	}
 	
