@@ -77,6 +77,7 @@ class curul501_Model extends CI_Model  {
 			var_dump($value["id_initiative"]);
 			
 			echo "<br><br>";
+			die("as");
 			//$this->db->where('id_initiative', $value["id_initiative"]);
 			//$this->db->update('iniciativas_scrapper', $data);
 		}
