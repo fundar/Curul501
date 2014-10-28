@@ -38,20 +38,22 @@ class curul501_Model extends CI_Model  {
 		
 		foreach($data as $value) {
 			//fecha_listado fecha_listado_header fecha_votacion
-			die(var_dump($value["fecha_votacion"]));
+			die(var_dump($value["fecha_listado_header"]));
 			
-			$fecha_listado = $value["fecha_listado"];
-			$fecha_listado = str_replace(" de ", " ", $fecha_listado);
-			$fecha_listado = explode(" ", $fecha_listado);
+			/*Fecha listado - presentada*/
+			$fecha_listado    = $value["fecha_listado"];
+			$fecha_listado    = str_replace(" de ", " ", $fecha_listado);
+			$fecha_listado    = explode(" ", $fecha_listado);
+			$fecha_listado_tm = strtotime($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
+			var_dump(date("Y-m-d H:i:s", $fecha_listado_tm));
 			
-			var_dump($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
-			
-			$timestamp = strtotime($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
-			
-			var_dump($timestamp);
-			
-			var_dump(date("Y-m-d H:i:s",$timestamp));
-			
+			/*Fecha votacion*/
+			$fecha_votacion    = $value["fecha_votacion"];
+			$fecha_votacion    = str_replace(" de ", " ", $fecha_votacion);
+			$fecha_votacion    = explode(" ", $fecha_votacion);
+			$fecha_votacion_tm = strtotime($fecha_listado[0] . '-' . $this->getMes(ucfirst($fecha_listado[1])) . '-' . $fecha_listado[2]);
+			var_dump(date("Y-m-d H:i:s", $fecha_votacion_tm));
+
 			die("ok");
 		}
 	}
