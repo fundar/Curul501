@@ -477,11 +477,11 @@ class Admin extends CI_Controller {
 		$crud->required_fields('id_representative', 'name');
 		
 		/*Nombres de campos*/	
+		$crud->display_as('name', 'Nombre');
+		
 		$crud->set_primary_key('id_representative', 'representatives_scrapper');
 		$crud->display_as('id_representative', 'Representante');
 		$crud->set_relation('id_representative', 'representatives_scrapper', 'full_name');
-		
-		$crud->display_as('name', 'Nombre');
 		
 		/*Callback Slug*/
 		//$crud->callback_before_insert(array($this, 'getSlug'));
