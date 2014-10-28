@@ -30,4 +30,14 @@ class curul501_Model extends CI_Model  {
 			return false;
 		}
 	}
+	
+	/*fix dates*/
+	public function fixDates() {
+		$query = $this->db->query("select * from iniciativas_scrapper");
+		$data  = $query->result_array();
+		
+		foreach($data as $value) {
+			die(var_dump($value));
+		}
+	}
 }

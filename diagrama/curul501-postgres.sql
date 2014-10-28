@@ -7,6 +7,7 @@ CREATE TABLE iniciativas_scrapper (
   fecha_listado varchar(255) DEFAULT NULL,
   fecha_listado_header varchar(255) DEFAULT NULL,
   fecha_votacion varchar(255) DEFAULT NULL,
+  fecha_votacion_tm timestamp NULL DEFAULT NULL,
   numero_iniciativa varchar(255) DEFAULT NULL,
   titulo text DEFAULT NULL,
   titulo_listado text DEFAULT NULL,

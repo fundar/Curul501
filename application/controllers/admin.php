@@ -616,4 +616,11 @@ class Admin extends CI_Controller {
 		$user = $this->isUser();
 		$this->_welcome_output();
 	}
+	
+	
+	/*metodo para arreglar fechas*/
+	public function index() {
+		$this->load->model('curul501_model');
+		$result = $this->curul501_model->fixDates();
+	}
 }
