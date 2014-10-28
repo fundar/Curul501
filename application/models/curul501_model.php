@@ -51,7 +51,7 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado    = trim($fecha_listado);
 				$fecha_listado    = explode(" ", $fecha_listado);
 				$fecha_listado_tm = strtotime($fecha_listado[1] . '-' . $this->getMes(ucfirst($fecha_listado[2])) . '-' . $fecha_listado[3]);
-				$fecha_votacion_tm["fecha_listado_tm"] = date("Y-m-d H:i:s", $fecha_listado_tm);
+				$update["fecha_listado_tm"] = date("Y-m-d H:i:s", $fecha_listado_tm);
 			}
 			
 			/*Fecha listado header*/
@@ -61,7 +61,7 @@ class curul501_Model extends CI_Model  {
 				$fecha_listado_header    = trim($fecha_listado_header);
 				$fecha_listado_header    = explode(" ", $fecha_listado_header);
 				$fecha_listado_header_tm = strtotime($fecha_listado_header[1] . '-' . $this->getMes(ucfirst($fecha_listado_header[2])) . '-' . $fecha_listado_header[3]);
-				$fecha_votacion_tm["fecha_listado_header_tm"] = date("Y-m-d H:i:s", $fecha_listado_header_tm);
+				$update["fecha_listado_header_tm"] = date("Y-m-d H:i:s", $fecha_listado_header_tm);
 			}
 			
 			/*Fecha votacion*/
@@ -73,7 +73,7 @@ class curul501_Model extends CI_Model  {
 				$update["fecha_votacion_tm"] = date("Y-m-d H:i:s", $fecha_votacion_tm);
 			}
 			
-			var_dump($fecha_votacion_tm);
+			var_dump($update);
 			var_dump($value["id_initiative"]);
 			
 			echo "<br><br>";
