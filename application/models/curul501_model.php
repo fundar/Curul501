@@ -49,6 +49,8 @@ class curul501_Model extends CI_Model  {
 			
 			var_dump($timestamp);
 			
+			var_dump(date("Y-m-d H:i:s",$timestamp));
+			
 			die("ok");
 		}
 	}
