@@ -495,7 +495,7 @@ class Admin extends CI_Controller {
 	function updateRepresentatives($post_array) {
 		
 		$this->load->model('curul501_model');
-		$result = $this->curul501_model->updateRepresentatives($post_array);
+		$result = $this->curul501_model->updateRepresentatives($post_array["id_representative"], $post_array["name"]);
 		
 		return $post_array;
 	}
