@@ -492,8 +492,12 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Actualiza representantes en votos y comisiones*/
-	function updateRepresentatives($value, $row) {
-		return $value;
+	function updateRepresentatives($post_array) {
+		
+		$this->load->model('curul501_model');
+		$result = $this->curul501_model->updateRepresentatives($post_array);
+		
+		return $post_array;
 	}
 	
 	/*obtener el texto limpio (solo en las relaciones n_n)*/

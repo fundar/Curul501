@@ -31,6 +31,11 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
+	/*update representantes en votos y comisiones*/
+	public function updateRepresentatives($array) {
+		die(var_dump($array));
+	}
+	
 	/*fix dates*/
 	public function fixDates() {
 		$query = $this->db->query("select * from iniciativas_scrapper");
