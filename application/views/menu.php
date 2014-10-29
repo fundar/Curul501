@@ -35,6 +35,4 @@
 	<?php if(isset($_SESSION['user_id'])) { ?>
 		<a href="<?php echo site_url('admin/logout')?>">Cerrar sesión</a>
 	<?php } ?>
-	
-	<span class="link" id="ver-catalogos"></span>
 </div>
