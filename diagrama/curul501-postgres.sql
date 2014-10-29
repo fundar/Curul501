@@ -229,6 +229,7 @@ CREATE TABLE dependencies (
 create index on dependencies(id_dependency);
 insert into dependencies (name, slug) values ('Ejecutivo federal','ejecutivo-federal');
 insert into dependencies (name, slug) values ('Otro','otro');
+insert into dependencies (name, slug) values ('Cámara de Senadores','camara-de-senadores');
 
 --Legislaturas
 CREATE TABLE legislatures (
