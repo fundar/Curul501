@@ -115,7 +115,9 @@ CREATE TABLE representatives_scrapper (
   career varchar(255) DEFAULT NULL,
   exp_legislative varchar(255) DEFAULT NULL,
   commisions varchar(255) DEFAULT NULL,
-  suplentede varchar(255) DEFAULT NULL
+  suplentede varchar(255) DEFAULT NULL,
+  status boolean DEFAULT true,
+  type character varying(255) DEFAULT 'Propietario'::character varying
 );
 create index on representatives_scrapper(id_representative);
 create index on representatives_scrapper(id_representative_type);
