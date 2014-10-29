@@ -14,8 +14,9 @@
 	<a href="<?php echo site_url('admin/votos_representantes')?>">
 		<?php if($this->uri->segment(2) == "votos_representantes") { ?><strong>Votos Representantes</strong><?php } else { ?>Votos Representantes<?php } ?>
 	</a> |
-	
-	
+		<a href="<?php echo site_url('admin/representative_repeat')?>">
+		<?php if($this->uri->segment(2) == "representative_repeat") { ?><strong>Representantes similares</strong><?php } else { ?>Representantes similares<?php } ?>
+	</a> |
 	<a href="<?php echo site_url('admin/political_parties')?>">
 		<?php if($this->uri->segment(2) == "political_parties") { ?><strong>Grupos parlamentarios</strong><?php } else { ?>Grupos parlamentarios<?php } ?>
 	</a> |
@@ -27,6 +28,9 @@
 	</a> |
 	<a href="<?php echo site_url('admin/topics')?>">
 		<?php if($this->uri->segment(2) == "topics") { ?><strong>Temas</strong><?php } else { ?>Temas<?php } ?>
+	</a> |
+	<a href="<?php echo site_url('admin/dependencies')?>">
+		<?php if($this->uri->segment(2) == "dependencies") { ?><strong>Dependencias</strong><?php } else { ?>Dependencias<?php } ?>
 	</a> |
 	<?php if(isset($_SESSION['user_id'])) { ?>
 		<a href="<?php echo site_url('admin/logout')?>">Cerrar sesión</a>

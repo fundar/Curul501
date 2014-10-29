@@ -114,6 +114,34 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 	
+	/*Dependencies*/
+	public function dependencies() {
+		$crud  = $this->new_crud();
+		
+		/*Tabla y título*/
+		//$crud->set_theme('datatables');
+		$crud->set_table('dependencies');
+		$crud->set_subject('Dependencias');
+		$crud->set_primary_key('id_dependency');
+		
+		/*Set requiered fields, columns and fields*/
+		$crud->required_fields('name');
+		$crud->columns('name');
+		$crud->fields('name', 'slug');
+		
+		/*Nombres de campos*/	
+		$crud->display_as('name', 'Nombre');
+		$crud->field_type('slug', 'invisible');
+		
+		/*Callback Slug*/
+		$crud->callback_before_insert(array($this, 'getSlug'));
+		$crud->callback_before_update(array($this, 'getSlug'));
+		
+		$output = $crud->render();
+		
+		$this->_example_output($output);
+	}
+	
 	/*Partidos politicos*/
 	public function political_parties() {
 		$crud  = $this->new_crud();
