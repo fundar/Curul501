@@ -34,7 +34,8 @@ class curul501_Model extends CI_Model  {
 	/*update representantes en votos y comisiones*/
 	public function updateRepresentatives($id_representative = 0, $name = "") {
 		$update = array('id_representative' => $id_representative);
-		
+
+		//votaciones
 		$this->db->where('nombre', $name);
 		$this->db->update('votaciones_representantes_scrapper', $update);
 	}
