@@ -291,7 +291,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada', 'publicada');
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'publicada');
 			$crud->unset_fields('id_parent', 'publicada');
 			
 			/*custom action - publish*/
@@ -449,7 +449,7 @@ class Admin extends CI_Controller {
 					echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
 				}
 			} else {
-				echo '<p>No se encuentra el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+				echo '<p>No se encuentra el registro o ya esta publicado. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
 			}
 		} else {
 			echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
