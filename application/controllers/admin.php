@@ -331,6 +331,7 @@ class Admin extends CI_Controller {
 			$crud->field_type('publicada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 			
 			/*callback titulo*/
+			$crud->field_type('slug', 'invisible');
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
@@ -390,7 +391,11 @@ class Admin extends CI_Controller {
 			$crud->set_relation_n_n('initiatives2topics', 'initiatives2topics', 'topics', 'id_initiative', 'id_topic', 'name');
 			$crud->display_as('initiatives2topics', 'Temas');
 			
-			/*Revisada*/
+			/*Slug*/
+			$crud->field_type('slug', 'invisible');		
+			
+			/*Callbacks para obtener urls y slug*/
+			$crud->callback_before_insert(array($this, 'getSlugTitle'));
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
 			/*callback titulo*/
@@ -425,6 +430,7 @@ class Admin extends CI_Controller {
 				$content['custom_fields'] = array(
 					array('key' => 'id_initiative',		'value' => $id_initiative),
 					array('key' => 'titulo', 		    'value' => $initiative["titulo"]),
+					array('key' => 'slug', 		    	'value' => $initiative["slug"]),
 					array('key' => 'titulo_listado',    'value' => $initiative["titulo_listado"]),
 					array('key' => 'fecha_listado_tm',  'value' => $initiative["fecha_listado_tm"]),
 					array('key' => 'fecha_votacion_tm', 'value' => $initiative["fecha_votacion_tm"])
@@ -623,6 +629,13 @@ class Admin extends CI_Controller {
 	/*Genera slug 2*/
 	function getSlug2($post_array) {
 		$post_array['slug'] = slug($post_array['name']);
+		
+		return $post_array;
+	}
+	
+	/*Genera slug 2*/
+	function getSlugTitle($post_array) {
+		$post_array['slug'] = slug($post_array['titulo']);
 		
 		return $post_array;
 	}

@@ -12,6 +12,7 @@ CREATE TABLE iniciativas_scrapper (
   numero_iniciativa varchar(255) DEFAULT NULL,
   titulo varchar(255) DEFAULT NULL,
   titulo_listado text DEFAULT NULL,
+  slug varchar(255) DEFAULT NULL,
   enlace_dictamen_listado varchar(255) DEFAULT NULL,
   enlace_publicado_listado varchar(255) DEFAULT NULL,
   enlace_gaceta varchar(255) DEFAULT NULL,
