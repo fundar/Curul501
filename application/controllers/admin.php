@@ -395,12 +395,11 @@ class Admin extends CI_Controller {
 			$crud->field_type('slug', 'invisible');		
 			
 			/*Callbacks para obtener urls y slug*/
-			$crud->callback_before_insert(array($this, 'getSlugTitle'));
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
 			/*callback titulo*/
+			$crud->callback_before_update(array($this, 'getSlugTitle'));
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
-			
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
 			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
 			
