@@ -294,6 +294,9 @@ class Admin extends CI_Controller {
 			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
 			$crud->unset_fields('id_parent');
 			
+			/*custom action - publish*/
+			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'publish'));
+			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
 			$crud->display_as('ano', 'Año');
@@ -326,6 +329,7 @@ class Admin extends CI_Controller {
 			/*Revisada*/
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
+			
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
@@ -401,6 +405,10 @@ class Admin extends CI_Controller {
 			die(var_dump($e));
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+	}
+	
+	function publish($primary_key , $row) {
+		return site_url('demo/action/action_photos').'?country='.$row->country;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
@@ -680,7 +688,6 @@ class Admin extends CI_Controller {
 		$user = $this->isUser();
 		$this->_welcome_output();
 	}
-	
 	
 	/*metodo para arreglar fechas*/
 	public function fixDates() {
