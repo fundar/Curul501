@@ -457,11 +457,7 @@ class Admin extends CI_Controller {
 	}
 	
 	function getUrlPublish($primary_key, $row) {
-		if($row->publicada == "f") {
-			return site_url('admin/publish').'/' . $row->id_initiative;
-		} else {
-			return false;
-		}
+		return site_url('admin/publish').'/' . $row->id_initiative;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
