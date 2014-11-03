@@ -408,7 +408,7 @@ class Admin extends CI_Controller {
 	}
 	
 	function publish($primary_key , $row) {
-		return site_url('demo/action/action_photos').'?id_initiative=' . $row->id_initiative . '&title=' . $row->title;
+		return site_url('xmlrpc/publish.php').'?id_initiative=' . $row->id_initiative . '&title=' . $row->titulo;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
