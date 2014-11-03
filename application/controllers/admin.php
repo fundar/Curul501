@@ -295,7 +295,7 @@ class Admin extends CI_Controller {
 			$crud->unset_fields('id_parent');
 			
 			/*custom action - publish*/
-			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'publish'));
+			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
@@ -407,8 +407,14 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	function publish($primary_key, $row) {
-		return site_url('xmlrpc/publish.php').'?id_initiative=' . $row->id_initiative . '&titulo=' . $row->titulo;
+	public function publish($id_initiative = false) {
+		if($id_initiative and is_numeric($id_initiative)) {
+			
+		}
+	}
+	
+	function getUrlPublish($primary_key, $row) {
+		return site_url('admin/publish').'/' . $row->id_initiative;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
