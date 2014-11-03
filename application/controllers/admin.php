@@ -411,6 +411,7 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	/*Metodo para publicar una iniciativa en WP*/
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
 			//get initiative
@@ -419,12 +420,12 @@ class Admin extends CI_Controller {
 			
 			if($initiative) {
 				//include configs  & create instance
-				include_once "xmlrpc/config/config.php";
+				require("xmlrpc/config/config.php");
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
-				//Insert post into WP - cambiar titulo_listado por titulo
-				$content['title']         = $initiative["titulo_listado"];
+				//Insert post into WP
+				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
 				$content['custom_fields'] = array(
 					array('key' => 'id_initiative',		'value' => $id_initiative),
