@@ -49,8 +49,8 @@ class curul501_Model extends CI_Model  {
 		}
 		
 		$data = $query->result_array();
-		
-		return $data;
+		if(is_array($data)) return $data[0];
+		return false;
 	}
 	
 	/*poner en true publicada en la iniciativa*/
