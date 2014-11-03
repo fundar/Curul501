@@ -12,9 +12,13 @@ $client = new IXR_Client($config["url"]);
 if(isset($_GET["titulo"]) and isset($_GET["id_initiative"]) and is_numeric($_GET["id_initiative"]) and $_GET["titulo"] != "") {
 	//Insert post
 	$content['title']         = $_GET["titulo"];
-	$content['custom_fields'] = array('id_initiative' => $_GET["id_initiative"]);
+	$content['custom_fields'] = array(
+		array('key' => 'id_initiative', 'value' => $_GET["id_initiative"]),
+		array('key' => 'titulo', 'value' => $_GET["titulo"])
+	);
 	
 	//$content['categories']    = array("NewCategory", "Nothing");
+	//$content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
 	//$content['description']   = '<p>Lorem ipsum dolor sit amet</p>';
 	//$content['mt_keywords']   = array('foo', 'bar');
 	
