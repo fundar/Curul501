@@ -462,6 +462,7 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	/*obtiene la url para publicar en wp*/
 	function getUrlPublish($primary_key, $row) {
 		return site_url('admin/publish').'/' . $row->id_initiative;
 	}
@@ -633,7 +634,7 @@ class Admin extends CI_Controller {
 		return $post_array;
 	}
 	
-	/*Genera slug 2*/
+	/*Genera slug por titulo*/
 	function getSlugTitle($post_array) {
 		$post_array['slug'] = slug($post_array['titulo']);
 		
