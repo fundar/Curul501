@@ -409,9 +409,11 @@ class Admin extends CI_Controller {
 	
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
+			//get initiative
 			$this->load->model('curul501_model');
 			$initiative = $this->curul501_model->getInitiative($id_initiative, "publicada=false");
 			
+			die(var_dump($initiative));
 			if($initiative) {
 				//include configs  & create instance
 				include_once "xmlrpc/config/config.php";
