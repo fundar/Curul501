@@ -407,7 +407,7 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	function publish($primary_key , $row) {
+	function publish($primary_key, $row) {
 		return site_url('xmlrpc/publish.php').'?id_initiative=' . $row->id_initiative . '&title=' . $row->titulo;
 	}
 	
