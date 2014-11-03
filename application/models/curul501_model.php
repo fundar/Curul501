@@ -55,7 +55,7 @@ class curul501_Model extends CI_Model  {
 	
 	/*poner en true publicada en la iniciativa*/
 	public function setPublish($id_initiative = 0) {
-		$update = array('publicada' => true);
+		$update = array('publicada' => "t");
 
 		//update initiative
 		$this->db->where('id_initiative', $id_initiative);
