@@ -413,23 +413,24 @@ class Admin extends CI_Controller {
 			$this->load->model('curul501_model');
 			$initiative = $this->curul501_model->getInitiative($id_initiative, "publicada=false");
 			
-			die(var_dump($initiative));
 			if($initiative) {
 				//include configs  & create instance
 				include_once "xmlrpc/config/config.php";
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
-				//Insert post into WP
-				$content['title']         = "test";
+				//Insert post into WP - cambiar titulo_listado por titulo
+				$content['title']         = $initiative["titulo_listado"];
+				$content['description']   = $initiative["resumen"];
 				$content['custom_fields'] = array(
-					array('key' => 'id_initiative', 'value' => $_GET["id_initiative"]),
-					array('key' => 'titulo', 'value' => $_GET["titulo"])
+					array('key' => 'id_initiative',		'value' => $id_initiative),
+					array('key' => 'titulo', 		    'value' => $initiative["titulo"]),
+					array('key' => 'titulo_listado',    'value' => $initiative["titulo_listado"]),
+					array('key' => 'fecha_listado_tm',  'value' => $initiative["fecha_listado_tm"]),
+					array('key' => 'fecha_votacion_tm', 'value' => $initiative["fecha_votacion_tm"])
 				);
 				
 				//$content['categories']    = array("NewCategory", "Nothing");
-				//$content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
-				//$content['description']   = '<p>Lorem ipsum dolor sit amet</p>';
 				//$content['mt_keywords']   = array('foo', 'bar');
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
