@@ -291,8 +291,8 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
-			$crud->unset_fields('id_parent');
+			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada', 'publicada');
+			$crud->unset_fields('id_parent', 'publicada');
 			
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
@@ -328,7 +328,7 @@ class Admin extends CI_Controller {
 			
 			/*Revisada*/
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
-		
+			$crud->field_type('publicada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 			
 			/*callback titulo*/
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
