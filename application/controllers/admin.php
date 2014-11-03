@@ -409,40 +409,44 @@ class Admin extends CI_Controller {
 	
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
-			//include configs
-			include_once "xmlrpc/config/config.php";
-
-			//create instance
-			require("xmlrpc/IXR_Library.php");
-			$client = new IXR_Client($config["url"]);
+			$this->load->model('curul501_model');
+			$initiative = $this->curul501_model->getInitiative($id_initiative, "publicada=false");
 			
-			die(var_dump($client));
-			//falta validar que no este agregado en wp
-			//falta agregar un status de publicado en db-postgres y cambiarlo a true cuando se agregue
-			
-			//Insert post
-			$content['title']         = "test";
-			$content['custom_fields'] = array(
-				array('key' => 'id_initiative', 'value' => $_GET["id_initiative"]),
-				array('key' => 'titulo', 'value' => $_GET["titulo"])
-			);
-			
-			//$content['categories']    = array("NewCategory", "Nothing");
-			//$content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
-			//$content['description']   = '<p>Lorem ipsum dolor sit amet</p>';
-			//$content['mt_keywords']   = array('foo', 'bar');
-			
-			if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
-				echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
-				die("");
-			}
-			
-			$ID = $client->getResponse();
-			
-			if($ID) {
-				echo '<p>Post published with ID:#' . $ID . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+			if($initiative) {
+				//include configs  & create instance
+				include_once "xmlrpc/config/config.php";
+				require("xmlrpc/IXR_Library.php");
+				$client = new IXR_Client($config["url"]);
+				
+				//Insert post into WP
+				$content['title']         = "test";
+				$content['custom_fields'] = array(
+					array('key' => 'id_initiative', 'value' => $_GET["id_initiative"]),
+					array('key' => 'titulo', 'value' => $_GET["titulo"])
+				);
+				
+				//$content['categories']    = array("NewCategory", "Nothing");
+				//$content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
+				//$content['description']   = '<p>Lorem ipsum dolor sit amet</p>';
+				//$content['mt_keywords']   = array('foo', 'bar');
+				
+				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
+					echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+					die("");
+				}
+				
+				$ID = $client->getResponse();
+				
+				if($ID) {
+					//update publicada=true
+					$this->curul501_model->setPublish($id_initiative);
+					
+					echo '<p>Post published with ID:#' . $ID . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+				} else {
+					echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+				}
 			} else {
-				echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+				echo '<p>No se encuentra el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
 			}
 		} else {
 			echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
@@ -450,6 +454,7 @@ class Admin extends CI_Controller {
 	}
 	
 	function getUrlPublish($primary_key, $row) {
+		die(var_dump($row));
 		return site_url('admin/publish').'/' . $row->id_initiative;
 	}
 	

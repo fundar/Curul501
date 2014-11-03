@@ -40,6 +40,28 @@ class curul501_Model extends CI_Model  {
 		$this->db->update('votaciones_representantes_scrapper', $update);
 	}
 	
+	/*obtiene toda la información de una iniciativa*/
+	public function getInitiative($id_initiative = 0, $andWhere = "") {
+		if($andWhere != "") {
+			$query = $this->db->query("select * from iniciativas_scrapper where id_initiative=" . $id_initiative . " and " . $andWhere);
+		} else {
+			$query = $this->db->query("select * from iniciativas_scrapper where id_initiative=" . $id_initiative);
+		}
+		
+		$data = $query->result_array();
+		
+		return $data;
+	}
+	
+	/*poner en true publicada en la iniciativa*/
+	public function setPublish($id_initiative = 0) {
+		$update = array('publicada' => true);
+
+		//update initiative
+		$this->db->where('id_initiative', $id_initiative);
+		$this->db->update('iniciativas_scrapper', $update);
+	}
+	
 	/*fix dates*/
 	public function fixDates() {
 		$query = $this->db->query("select * from iniciativas_scrapper");
@@ -91,6 +113,7 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
+	/*obtiene el mes - numerico*/
 	public function getMes($mes) {
 		switch($mes) {
 		   case 'Enero': return 1; break;

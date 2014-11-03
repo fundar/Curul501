@@ -24,6 +24,7 @@ CREATE TABLE iniciativas_scrapper (
   periodo varchar(255) DEFAULT NULL,
   ano varchar(255) DEFAULT NULL,
   revisada boolean DEFAULT false,
+  publicada boolean DEFAULT false,
   created_at timestamp NOT NULL DEFAULT now(),
   updated_at timestamp NOT NULL DEFAULT now()
 );
