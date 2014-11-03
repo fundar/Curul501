@@ -359,7 +359,7 @@ class Admin extends CI_Controller {
 			
 			/*Columnas*/
 			$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
-			$crud->unset_fields('id_parent');
+			$crud->unset_fields('id_parent', 'publicada');
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
