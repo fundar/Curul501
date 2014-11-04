@@ -481,7 +481,7 @@ class Admin extends CI_Controller {
 				
 				if($ID) {
 					/*update publicada=true*/
-					$this->curul501_model->setPublish($id_initiative);
+					//$this->curul501_model->setPublish($id_initiative);
 					
 					echo '<p>Post published with ID:#' . $ID . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
 				} else {
