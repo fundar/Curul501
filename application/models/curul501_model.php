@@ -49,6 +49,7 @@ class curul501_Model extends CI_Model  {
 		}
 		
 		$data = $query->result_array();
+		die(var_dump($data));
 		if(is_array($data)) return $data[0];
 		return false;
 	}
