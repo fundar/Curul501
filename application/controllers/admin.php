@@ -469,8 +469,8 @@ class Admin extends CI_Controller {
 				);
 				
 				/*keywords $ categorires wp*/
-				$content['categories']  = explode("|", $string_topics);
-				$content['mt_keywords'] = str_replace("|", ",", $string_topics);
+				$content['categories']  = implode("|", $string_commissions);
+				$content['mt_keywords'] = str_replace("|", ",", $string_commissions);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
 					echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
