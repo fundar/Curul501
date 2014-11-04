@@ -71,10 +71,12 @@
 <div id="container">
 	<?php $this->load->view('menu.php'); ?>
 	
+	<h1>Pulicación en WP Curul501.org</h1>
+	
 	<div id="body">		
 		<?php if(isset($success)) { ?>
 			<p>
-				Se ha publicado la iniciativa correctamente con el ID: <strong><?php echo $ID;?></strong><br/>
+				Se ha publicado la iniciativa <strong><?php echo $titulo;?></strong> correctamente con el ID: <strong><?php echo $ID;?></strong><br/>
 				<a href="http://curul501.org/?p=<?php echo $ID;?>" target="_blank" title="<?php echo $titulo;?>">Ver post en Curul501.org</a>
 			</p>
 		<?php } ?>
