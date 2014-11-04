@@ -477,7 +477,7 @@ class Admin extends CI_Controller {
 					
 					if($ID) {
 						/*update publicada=true*/
-						//$this->curul501_model->setPublish($id_initiative);
+						$this->curul501_model->setPublish($id_initiative);
 						
 						$response["success"] = true;
 						$response["ID"]      = $ID;
