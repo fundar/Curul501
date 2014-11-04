@@ -430,16 +430,10 @@ class Admin extends CI_Controller {
 					foreach($topics as $topic) {
 						$string_topics 			 .= $topic["name"] . "|";
 						$string_topics_slug 	 .= $topic["slug"] . "|";
-						
-						/*keywords $ categorires wp*/
-						$content['categories'][]  = $topic["name"];
-						$content['mt_keywords'][] = $topic["name"];
 					}
 				}
 				$string_topics 		= rtrim($string_topics, "|");
 				$string_topics_slug = rtrim($string_topics_slug, "|");
-				
-				die(var_dump($content));
 				
 				/*commissions*/
 				$string_commissions 	 = "";
@@ -473,6 +467,10 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_commissions',	   'value' => $string_commissions),
 					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
 				);
+				
+				/*keywords $ categorires wp*/
+				$content['categories']  = explode("|", $string_topics);
+				$content['mt_keywords'] = explode("|", $string_topics);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
 					echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
