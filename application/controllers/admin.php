@@ -414,31 +414,64 @@ class Admin extends CI_Controller {
 	/*Metodo para publicar una iniciativa en WP*/
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
-			//get initiative
+			/*get initiative*/
 			$this->load->model('curul501_model');
 			$initiative = $this->curul501_model->getInitiative($id_initiative, "publicada=false");
 			
 			if($initiative) {
-				//include configs  & create instance
+				/*get topics & commissions*/
+				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
+				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
+				
+				/*topic*/
+				$string_topics		= "";
+				$string_topics_slug = "";
+				if($topics and is_array($topics)) {
+					foreach($topics as $topic) {
+						$string_topics 		.= $topic["name"] . "|";
+						$string_topics_slug .= $topic["slug"] . "|";
+					}
+				}
+				$string_topics 		= rtrim($string_topics, "|");
+				$string_topics_slug = rtrim($string_topics_slug, "|");
+				
+				/*commissions*/
+				$string_commissions 	 = "";
+				$string_commissions_slug = "";
+				if($commissions and is_array($commissions)) {
+					foreach($commissions as $commission) {
+						$string_commissions 	 .= $commission["name"] . "|";
+						$string_commissions_slug .= $commission["slug"] . "|";
+					}
+				}
+				$string_commissions 	 = rtrim($string_commissions, "|");
+				$string_commissions_slug = rtrim($string_commissions_slug, "|");
+				
+				/*include configs  & create instance*/
 				require("xmlrpc/config/config.php");
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
-				//falta guardar presentadores, temas, comisiones o se hace directamente en wp incluyendo una consulta para sacar los datos
-				//Insert post into WP
+				/*insert post into WP*/
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
 				$content['custom_fields'] = array(
-					array('key' => 'id_initiative',		'value' => $id_initiative),
-					array('key' => 'titulo', 		    'value' => $initiative["titulo"]),
-					array('key' => 'slug', 		    	'value' => $initiative["slug"]),
-					array('key' => 'titulo_listado',    'value' => $initiative["titulo_listado"]),
-					array('key' => 'fecha_listado_tm',  'value' => $initiative["fecha_listado_tm"]),
-					array('key' => 'fecha_votacion_tm', 'value' => $initiative["fecha_votacion_tm"])
+					array('key' => 'wp_id_initiative',	   'value' => $id_initiative),
+					array('key' => 'wp_titulo', 		   'value' => $initiative["titulo"]),
+					array('key' => 'wp_slug', 		       'value' => $initiative["slug"]),
+					array('key' => 'wp_titulo_listado',    'value' => $initiative["titulo_listado"]),
+					array('key' => 'wp_fecha_listado_tm',  'value' => $initiative["fecha_listado_tm"]),
+					array('key' => 'wp_fecha_votacion_tm', 'value' => $initiative["fecha_votacion_tm"]),
+					array('key' => 'wp_topics', 		   'value' => $string_topics),
+					array('key' => 'wp_topics_slug',	   'value' => $string_topics_slug),
+					array('key' => 'wp_commissions',	   'value' => $string_commissions),
+					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
 				);
 				
-				//$content['categories']    = array("NewCategory", "Nothing");
-				//$content['mt_keywords']   = array('foo', 'bar');
+				/*
+				$content['categories']    = array("NewCategory", "Nothing");
+				$content['mt_keywords']   = array('foo', 'bar');
+				*/
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
 					echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
@@ -448,7 +481,7 @@ class Admin extends CI_Controller {
 				$ID = $client->getResponse();
 				
 				if($ID) {
-					//update publicada=true
+					/*update publicada=true*/
 					$this->curul501_model->setPublish($id_initiative);
 					
 					echo '<p>Post published with ID:#' . $ID . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';

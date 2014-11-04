@@ -53,6 +53,24 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*obtiene los temas de una iniciativa*/
+	public function getTopicsByInitiative($id_initiative = 0) {
+		$query = $this->db->query("select * from topics where id_topic in (select id_topic from initiatives2topics where id_initiative=" . $id_initiative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data)) return $data;
+		return false;
+	}
+	
+	/*obtiene las comisiones de una iniciativa*/
+	public function getCommissionsByInitiative($id_initiative = 0) {
+		$query = $this->db->query("select * from commissions where id_commission in (select id_commission from commissions2initiatives where id_initiative=" . $id_initiative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data)) return $data;
+		return false;
+	}
+	
 	/*poner en true publicada en la iniciativa*/
 	public function setPublish($id_initiative = 0) {
 		$update = array('publicada' => "t");
