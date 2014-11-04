@@ -439,6 +439,8 @@ class Admin extends CI_Controller {
 				$string_topics 		= rtrim($string_topics, "|");
 				$string_topics_slug = rtrim($string_topics_slug, "|");
 				
+				die(var_dump($content));
+				
 				/*commissions*/
 				$string_commissions 	 = "";
 				$string_commissions_slug = "";
