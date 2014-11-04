@@ -49,8 +49,8 @@ class curul501_Model extends CI_Model  {
 		}
 		
 		$data = $query->result_array();
-		die(var_dump($data));
-		if(is_array($data)) return $data[0];
+		
+		if(is_array($data) and isset($data[0])) return $data[0];
 		return false;
 	}
 	
@@ -59,7 +59,7 @@ class curul501_Model extends CI_Model  {
 		$query = $this->db->query("select * from topics where id_topic in (select id_topic from initiatives2topics where id_initiative=" . $id_initiative . ")");
 		$data  = $query->result_array();
 		
-		if(is_array($data)) return $data;
+		if(is_array($data) and isset($data[0])) return $data;
 		return false;
 	}
 	
@@ -68,7 +68,7 @@ class curul501_Model extends CI_Model  {
 		$query = $this->db->query("select * from commissions where id_commission in (select id_commission from commissions2initiatives where id_initiative=" . $id_initiative . ")");
 		$data  = $query->result_array();
 		
-		if(is_array($data)) return $data;
+		if(is_array($data) and isset($data[0])) return $data;
 		return false;
 	}
 	
