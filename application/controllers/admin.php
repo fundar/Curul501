@@ -471,28 +471,29 @@ class Admin extends CI_Controller {
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
-					echo '<p>Error while creating a new post ' . $client->getErrorCode() . " : " . $client->getErrorMessage() . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
-					die("");
-				}
-				
-				$ID = $client->getResponse();
-				
-				if($ID) {
-					/*update publicada=true*/
-					//$this->curul501_model->setPublish($id_initiative);
-					
-					echo '<p>Post published with ID:#' . $ID . ' <br/>';
-					echo '<a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a><br/>';
-					echo '<a href="http://curul501.org/?p=' . $ID . '" target="_blank" title="' . $initiative["titulo"] . '">Ver post</a></p>';
+					$response["error"] = 'Error mientras se creaba el post ' . $client->getErrorCode() . " : " . $client->getErrorMessage();
 				} else {
-					echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+					$ID = $client->getResponse();
+					
+					if($ID) {
+						/*update publicada=true*/
+						//$this->curul501_model->setPublish($id_initiative);
+						
+						$response["success"] = true;
+						$response["ID"]      = $ID;
+						$response["titulo"]  = $initiative["titulo"];
+					} else {
+						$response["error"] = 'Error al insertar el registro';
+					}
 				}
 			} else {
-				echo '<p>No se encuentra el registro o ya esta publicado. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+				$response["error"] = 'No se encuentra el registro o ya esta publicado';
 			}
 		} else {
-			echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+			$response["error"] = 'Error al insertar el registro';
 		}
+		
+		$this->load->view('publish_wp.php', $response);
 	}
 	
 	/*obtiene la url para publicar en wp*/
