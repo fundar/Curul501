@@ -424,6 +424,7 @@ class Admin extends CI_Controller {
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
+				//falta guardar presentadores, temas, comisiones o se hace directamente en wp incluyendo una consulta para sacar los datos
 				//Insert post into WP
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
