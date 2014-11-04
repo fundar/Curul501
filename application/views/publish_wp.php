@@ -63,7 +63,7 @@
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
 	
-	.red { color:#D89A9A; }
+	.red { color:#CF5959; }
 	</style>
 </head>
 <body>
