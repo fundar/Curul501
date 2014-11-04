@@ -469,7 +469,7 @@ class Admin extends CI_Controller {
 				);
 				
 				/*keywords $ categorires wp*/
-				$content['categories']  = str_replace("|", ",", $string_commissions);
+				$content['categories']  = array(str_replace("|", ",", $string_commissions));
 				$content['mt_keywords'] = str_replace("|", ",", $string_commissions);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
@@ -483,7 +483,9 @@ class Admin extends CI_Controller {
 					/*update publicada=true*/
 					//$this->curul501_model->setPublish($id_initiative);
 					
-					echo '<p>Post published with ID:#' . $ID . ' <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
+					echo '<p>Post published with ID:#' . $ID . ' <br/>';
+					echo '<a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a><br/>';
+					echo '<a href="http://curul501.org/?p=' . $ID . '" target="_blank" title="' . $initiative["titulo"] . '">Ver post</a></p>';
 				} else {
 					echo '<p>Error al insertar el registro. <a href="http://curul501-admin.fundarlabs.mx/admin/initiatives_scrapper_true">Regresar</a></p>';
 				}
