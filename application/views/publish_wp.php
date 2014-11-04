@@ -74,7 +74,7 @@
 	<div id="body">		
 		<?php if(isset($success)) { ?>
 			<p>
-				Se ha publicado la iniciativa correctamente con el ID: <?php echo $ID;?><br/>
+				Se ha publicado la iniciativa correctamente con el ID: <strong><?php echo $ID;?></strong><br/>
 				<a href="http://curul501.org/?p=<?php echo $ID;?>" target="_blank" title="<?php echo $titulo;?>">Ver post en Curul501.org</a>
 			</p>
 		<?php } ?>
