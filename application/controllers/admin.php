@@ -469,7 +469,7 @@ class Admin extends CI_Controller {
 				);
 				
 				/*keywords $ categorires wp*/
-				$content['categories']  = implode("|", $string_commissions);
+				$content['categories']  = str_replace("|", ",", $string_commissions);
 				$content['mt_keywords'] = str_replace("|", ",", $string_commissions);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
