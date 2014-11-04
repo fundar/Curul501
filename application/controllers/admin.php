@@ -428,8 +428,8 @@ class Admin extends CI_Controller {
 				$string_topics_slug = "";
 				if($topics and is_array($topics)) {
 					foreach($topics as $topic) {
-						$string_topics 			 .= $topic["name"] . "|";
-						$string_topics_slug 	 .= $topic["slug"] . "|";
+						$string_topics 		.= $topic["name"] . "|";
+						$string_topics_slug .= $topic["slug"] . "|";
 					}
 				}
 				$string_topics 		= rtrim($string_topics, "|");
@@ -473,10 +473,11 @@ class Admin extends CI_Controller {
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
 					$response["error"] = 'Error mientras se creaba el post ' . $client->getErrorCode() . " : " . $client->getErrorMessage();
 				} else {
+					/*get ID*/
 					$ID = $client->getResponse();
 					
 					if($ID) {
-						/*update publicada=true*/
+						/*update publicada*/
 						$this->curul501_model->setPublish($id_initiative);
 						
 						$response["success"] = true;
