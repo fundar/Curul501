@@ -75,11 +75,11 @@
 		<p>Puedes ver: </p>
 		
 		<p>
-			<a href="<?php echo site_url('admin/initiatives')?>" title="Iniciativas">Iniciativas</a>
+			<a href="<?php echo site_url('admin/initiatives_scrapper_true')?>" title="Iniciativas">Iniciativas</a>
 		</p>
 		
 		<p>
-			<a href="<?php echo site_url('admin/representatives')?>" title="Representantes">Representantes</a>
+			<a href="<?php echo site_url('admin/representatives_scrapper')?>" title="Representantes">Representantes</a>
 		</p>
 	</div>
 </div>
