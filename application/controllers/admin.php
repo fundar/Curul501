@@ -299,6 +299,7 @@ class Admin extends CI_Controller {
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
+			$crud->display_as('numero_iniciativa', 'Numero iniciativa Gaceta');
 			$crud->display_as('ano', 'Año');
 			
 			/*Legislatura*/
@@ -364,6 +365,7 @@ class Admin extends CI_Controller {
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
+			$crud->display_as('numero_iniciativa', 'Numero iniciativa Gaceta');
 			$crud->display_as('ano', 'Año');
 			
 			/*Legislatura*/
@@ -412,6 +414,7 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Metodo para publicar una iniciativa en WP*/
+	//falta el slug de la iniciativa
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
 			/*get initiative*/
