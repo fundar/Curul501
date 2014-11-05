@@ -350,7 +350,7 @@ class Admin extends CI_Controller {
 	public function initiatives_scrapper_false() {
 		try {
 			$crud = $this->new_crud();
-			//$crud->set_theme('datatables');
+			$crud->set_theme('datatables');
 			
 			$crud->where('revisada', "f");
 			
@@ -414,7 +414,7 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Metodo para publicar una iniciativa en WP*/
-	//falta el slug de la iniciativa
+	//falta presentada
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
 			/*get initiative*/
