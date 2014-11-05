@@ -304,8 +304,6 @@ CREATE TABLE users (
   avatar_url varchar(255) NOT NULL default 'temporal.png'
 );
 create index on users(id_user);
-insert into users (username, slug, email, password, name, admin, type) values ('caarloshugo', 'caarloshugo', 'carlos@fundar.org.mx', md5('Curul_3.14159265359'), 'Carlos Gonzalez', true, 'admin');
-insert into users (username, slug, email, password, name, admin, type) values ('guillermo', 'guillermo', 'guillermo@fundar.org.mx', md5('Curul501_Admin_3.141592654'), 'guillermo Avila', true, 'admin');
 
 --Visitas
 CREATE TABLE visits2initiatives (

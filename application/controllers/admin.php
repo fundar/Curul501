@@ -502,7 +502,7 @@ class Admin extends CI_Controller {
 	
 	/*obtiene la url para publicar en wp*/
 	function getUrlPublish($primary_key, $row) {
-		return site_url('admin/publish').'/' . $row->id_initiative;
+		return site_url('admin/publish') . '/' . $row->id_initiative;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
