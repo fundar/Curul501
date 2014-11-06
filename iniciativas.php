@@ -53,6 +53,21 @@ class Iniciativas {
 		return false;
 	}
 	
+	/*Obtiene las iniciativas por fecha de presentación*/
+	public function getInitiativesByDate($date = false) {
+		return false;
+	}
+	
+	/*Obtiene las iniciativas por fecha de votación*/
+	public function getInitiativesByVoteDate($date = false) {
+		return false;
+	}
+	
+	/*Obtiene los estatus de una iniciativa*/
+	public function getStatusByInitiative($id_initiative = false, $order = "desc") {
+		return false;
+	}
+	
 	/*Busca y regresa el representante*/
 	public function getIDRepresentante($slug = false, $field = "slug") {
 		if($slug) {
