@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 			$crud->required_fields('name');
 			$crud->columns('full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			
-			$crud->unset_fields('full_name2', 'slug2', 'status');
+			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status');
 			
 			/*Relaciones*/
 			$crud->set_primary_key('id_representative_type', 'representative_type');
@@ -290,7 +290,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'initiatives2topics', 'publicada');
+			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'publicada');
 			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'publicada');
 			$crud->unset_fields('id_parent', 'publicada', 'id_initiative');
 			
@@ -360,7 +360,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'initiatives2topics', 'revisada');
+			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'revisada');
 			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
 			$crud->unset_fields('id_parent', 'publicada', 'id_initiative');
 			
