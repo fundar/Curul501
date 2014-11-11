@@ -423,13 +423,11 @@ class Admin extends CI_Controller {
 			
 			if($initiative) {
 				/*presentada por [representantes, partidos politicos y dependencias]*/
-				/*
 				$presentada["representatives"]  = $this->curul501_model->byRepresentatives($id_initiative);
 				$presentada["dependencies"]		= $this->curul501_model->byDependencies($id_initiative);
 				$presentada["politicalparties"] = $this->curul501_model->byPoliticalParties($id_initiative);
 				
 				die(var_dump($presentada));
-				*/
 				
 				/*get topics & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
