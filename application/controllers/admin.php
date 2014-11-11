@@ -335,6 +335,9 @@ class Admin extends CI_Controller {
 			$crud->field_type('slug', 'invisible');
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
+			/*required fields*/
+			$crud->required_fields('titulo', 'resumen');
+			
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
 			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
 			
@@ -400,6 +403,9 @@ class Admin extends CI_Controller {
 			/*Callbacks para obtener urls y slug*/
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
+			/*required fields*/
+			$crud->required_fields('titulo', 'resumen');
+			
 			/*callback titulo*/
 			$crud->callback_before_update(array($this, 'getSlugTitle'));
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
