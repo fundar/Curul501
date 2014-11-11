@@ -455,10 +455,6 @@ class Admin extends CI_Controller {
 				$string_presentada 		= rtrim($string_presentada, "|");
 				$string_presentada_slug = rtrim($string_presentada_slug, "|");
 				
-				var_dump($string_presentada);
-				var_dump($string_presentada_slug);
-				die("ok");
-				
 				/*get topics & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
@@ -507,7 +503,9 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_topics', 		   'value' => $string_topics),
 					array('key' => 'wp_topics_slug',	   'value' => $string_topics_slug),
 					array('key' => 'wp_commissions',	   'value' => $string_commissions),
-					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
+					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug),
+					array('key' => 'wp_presentada',	  	   'value' => $string_presentada),
+					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug)
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
