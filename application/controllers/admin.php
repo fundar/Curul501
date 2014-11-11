@@ -432,21 +432,21 @@ class Admin extends CI_Controller {
 				$string_presentada_slug = "";
 				
 				if($presentada["representatives"] and is_array($presentada["representatives"])) {
-					foreach($$presentada["representatives"] as $value) {
+					foreach($presentada["representatives"] as $value) {
 						$string_presentada 		.= $value["full_name"] . "|";
 						$string_presentada_slug .= $value["slug"] . "|";
 					}
 				}
 				
 				if($presentada["dependencies"] and is_array($presentada["dependencies"])) {
-					foreach($$presentada["dependencies"] as $value) {
+					foreach($presentada["dependencies"] as $value) {
 						$string_presentada 		.= $value["name"] . "|";
 						$string_presentada_slug .= $value["slug"] . "|";
 					}
 				}
 				
 				if($presentada["politicalparties"] and is_array($presentada["politicalparties"])) {
-					foreach($$presentada["politicalparties"] as $value) {
+					foreach($presentada["politicalparties"] as $value) {
 						$string_presentada 		.= $value["name"] . "|";
 						$string_presentada_slug .= $value["slug"] . "|";
 					}
