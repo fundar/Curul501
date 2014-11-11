@@ -427,7 +427,37 @@ class Admin extends CI_Controller {
 				$presentada["dependencies"]		= $this->curul501_model->byDependencies($id_initiative);
 				$presentada["politicalparties"] = $this->curul501_model->byPoliticalParties($id_initiative);
 				
-				die(var_dump($presentada));
+				/*presentada*/
+				$string_presentada		= "";
+				$string_presentada_slug = "";
+				
+				if($presentada["representatives"] and is_array($presentada["representatives"])) {
+					foreach($$presentada["representatives"] as $value) {
+						$string_presentada 		.= $value["full_name"] . "|";
+						$string_presentada_slug .= $value["slug"] . "|";
+					}
+				}
+				
+				if($presentada["dependencies"] and is_array($presentada["dependencies"])) {
+					foreach($$presentada["dependencies"] as $value) {
+						$string_presentada 		.= $value["name"] . "|";
+						$string_presentada_slug .= $value["slug"] . "|";
+					}
+				}
+				
+				if($presentada["politicalparties"] and is_array($presentada["politicalparties"])) {
+					foreach($$presentada["politicalparties"] as $value) {
+						$string_presentada 		.= $value["name"] . "|";
+						$string_presentada_slug .= $value["slug"] . "|";
+					}
+				}
+				
+				$string_presentada 		= rtrim($string_presentada, "|");
+				$string_presentada_slug = rtrim($string_presentada_slug, "|");
+				
+				var_dump($string_presentada);
+				var_dump($string_presentada_slug);
+				die("ok");
 				
 				/*get topics & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
