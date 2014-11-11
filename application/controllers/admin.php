@@ -360,7 +360,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'revisada');
+			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
 			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
 			$crud->unset_fields('id_parent', 'publicada', 'id_initiative');
 			
@@ -415,7 +415,6 @@ class Admin extends CI_Controller {
 	}
 	
 	/*Metodo para publicar una iniciativa en WP*/
-	//falta presentada
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
 			/*get initiative*/
@@ -423,6 +422,15 @@ class Admin extends CI_Controller {
 			$initiative = $this->curul501_model->getInitiative($id_initiative, "publicada=false");
 			
 			if($initiative) {
+				/*presentada por [representantes, partidos politicos y dependencias]*/
+				/*
+				$presentada["representatives"]  = $this->curul501_model->byRepresentatives($id_initiative);
+				$presentada["dependencies"]		= $this->curul501_model->byDependencies($id_initiative);
+				$presentada["politicalparties"] = $this->curul501_model->byPoliticalParties($id_initiative);
+				
+				die(var_dump($presentada));
+				*/
+				
 				/*get topics & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);

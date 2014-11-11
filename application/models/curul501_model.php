@@ -54,6 +54,33 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*Obtiene los representantes que la presentaron*/
+	public function byRepresentatives($id_initiative = 0) {
+		$query = $this->db->query("select * from representatives_scrapper where id_representative in (select id_representative from initiative2representatives where id_initiative=" . $id_initiative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
+	/*Obtiene las dependencias que la presentaron*/
+	public function byDependencies($id_initiative = 0) {
+		$query = $this->db->query("select * from dependencies where id_dependency in (select id_dependency from initiative2dependencies where id_initiative=" . $id_initiative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
+	/*Obtiene los partidos politicos que la presentaron*/
+	public function byPoliticalParties($id_initiative = 0) {
+		$query = $this->db->query("select * from political_parties where id_political_party in (select id_political_party from initiative2political_party where id_initiative=" . $id_initiative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
 	/*obtiene los temas de una iniciativa*/
 	public function getTopicsByInitiative($id_initiative = 0) {
 		$query = $this->db->query("select * from topics where id_topic in (select id_topic from initiatives2topics where id_initiative=" . $id_initiative . ")");
