@@ -55,22 +55,84 @@ class Iniciativas {
 	
 	/*Obtiene las iniciativas por estatus*/
 	public function getInitiativesByStatus($slug = false) {
-		return false;
+		if($slug) {
+			$query  = "select * from iniciativas_scrapper where id_initiative in (select distinct(id_initiative) from estatus_iniciativas_scrapper";
+			$query .= " where slug='" . $slug . "');";
+			
+			$data  = $this->pgsql->query($query);
+			
+			if(is_array($data)) {
+				return $data;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
-	/*Obtiene las iniciativas por fecha de presentación*/
+	/*Obtiene las iniciativas por fecha de presentación date("Y-m-d H:i:s")*/
 	public function getInitiativesByDate($date = false) {
-		return false;
+		if($date) {
+			$query = "select * from iniciativas_scrapper where fecha_listado_tm='" . $date ."';";
+			$data  = $this->pgsql->query($query);
+			
+			if(is_array($data)) {
+				return $data;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	/*Obtiene las iniciativas por fecha de votación*/
 	public function getInitiativesByVoteDate($date = false) {
-		return false;
+		if($date) {
+			$query = "select * from iniciativas_scrapper where fecha_votacion_tm='" . $date ."';";
+			$data  = $this->pgsql->query($query);
+			
+			if(is_array($data)) {
+				return $data;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	/*Obtiene los estatus de una iniciativa*/
-	public function getStatusByInitiative($id_initiative = false, $order = "desc") {
-		return false;
+	public function getStatusByInitiative($id_initiative = false) {
+		if($id_initiative) {
+			$query = "select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus desc;";
+			$data  = $this->pgsql->query($query);
+			
+			if(is_array($data)) {
+				return $data;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	/*Obtiene los estatus de una iniciativa*/
+	public function getLastStatusByInitiative($id_initiative = false) {
+		if($id_initiative) {
+			$query = "select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus desc limit 1;";
+			$data  = $this->pgsql->query($query);
+			
+			if(is_array($data) and isset($data[0])) {
+				return $data[0];
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	/*Obtiene las votaciones de los partidos policitos por iniciativa*/
@@ -179,7 +241,7 @@ class Iniciativas {
 	private function defaultQuerySlug($table = false, $id_realtion = false, $relation_table = false, $slug = false) {
 		if($slug) {
 			$query  = "select * from iniciativas_scrapper where id_initiative in (select distinct(id_initiative) from ";
-			$uqery .= $relation_table . " where " . $id_realtion . "=(select " . $id_realtion ." from " . $table . " where slug='" . $slug . "'));"
+			$query .= $relation_table . " where " . $id_realtion . "=(select " . $id_realtion ." from " . $table . " where slug='" . $slug . "'));"
 			$data  = $this->pgsql->query($query);
 			
 			if(is_array($data)) {
