@@ -99,6 +99,15 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*obtiene los estatus de una iniciativa*/
+	public function getStatusInitiative($id_initiative = 0, $order = "asc") {
+		$query = $this->db->query("select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus " . $order);
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
 	/*poner en true publicada en la iniciativa*/
 	public function setPublish($id_initiative = 0) {
 		$update = array('publicada' => "t");

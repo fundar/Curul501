@@ -104,9 +104,9 @@ class Iniciativas {
 	}
 	
 	/*Obtiene los estatus de una iniciativa*/
-	public function getStatusByInitiative($id_initiative = false) {
+	public function getStatusByInitiative($id_initiative = false, $order = "asc") {
 		if($id_initiative) {
-			$query = "select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus desc;";
+			$query = "select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus ". $order;
 			$data  = $this->pgsql->query($query);
 			
 			if(is_array($data)) {

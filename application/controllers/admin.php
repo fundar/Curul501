@@ -461,9 +461,10 @@ class Admin extends CI_Controller {
 				$string_presentada 		= rtrim($string_presentada, "|");
 				$string_presentada_slug = rtrim($string_presentada_slug, "|");
 				
-				/*get topics & commissions*/
+				/*get topics, status & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
+				$status		 = $this->curul501_model->getStatusInitiative($id_initiative);
 				
 				/*topic*/
 				$string_topics		= "";
@@ -476,6 +477,21 @@ class Admin extends CI_Controller {
 				}
 				$string_topics 		= rtrim($string_topics, "|");
 				$string_topics_slug = rtrim($string_topics_slug, "|");
+				
+				/*status*/
+				$string_status		= "";
+				$string_status_slug = "";
+				if($status and is_array($status)) {
+					foreach($status as $value) {
+						$string_status 		.= $value["tipo"] . "|";
+						$string_status_slug .= $value["slug"] . "|";
+					}
+				}
+				$string_status 		= rtrim($string_status, "|");
+				$string_status_slug = rtrim($string_status_slug, "|");
+				
+				var_dump($string_status);
+				die(var_dump($string_status_slug));
 				
 				/*commissions*/
 				$string_commissions 	 = "";
