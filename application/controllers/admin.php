@@ -836,4 +836,10 @@ class Admin extends CI_Controller {
 		$this->load->model('curul501_model');
 		$result = $this->curul501_model->fixDates();
 	}
+	
+	/*metodo para arreglar slug de estatus*/
+	public function fixSlugStatus() {
+		$this->load->model('curul501_model');
+		$result = $this->curul501_model->fixSlugStatus();
+	}
 }

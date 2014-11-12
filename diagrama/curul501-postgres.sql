@@ -40,6 +40,7 @@ CREATE TABLE estatus_iniciativas_scrapper (
   titulo text DEFAULT NULL,
   titulo_limpio text DEFAULT NULL,
   tipo varchar(255) DEFAULT NULL,
+  slug varchar(255) DEFAULT NULL,
   votacion boolean default false
 );
 create index on estatus_iniciativas_scrapper(id_estatus);

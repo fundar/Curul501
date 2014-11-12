@@ -159,6 +159,23 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
+	/*fix slug status*/
+	public function fixSlugStatus() {
+		$query = $this->db->query("select * from estatus_iniciativas_scrapper");
+		$data  = $query->result_array();
+		
+		foreach($data as $value) {
+			$update["slug"] = slug($value["tipo"]);
+			
+			var_dump($update);
+			
+			/*
+			$this->db->where('id_estatus', $value["id_estatus"]);
+			$this->db->update('estatus_iniciativas_scrapper', $update);
+			*/
+		}
+	}
+	
 	/*obtiene el mes - numerico*/
 	public function getMes($mes) {
 		switch($mes) {
