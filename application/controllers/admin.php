@@ -490,9 +490,6 @@ class Admin extends CI_Controller {
 				$string_status 		= rtrim($string_status, "|");
 				$string_status_slug = rtrim($string_status_slug, "|");
 				
-				var_dump($string_status);
-				die(var_dump($string_status_slug));
-				
 				/*commissions*/
 				$string_commissions 	 = "";
 				$string_commissions_slug = "";
@@ -527,7 +524,9 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_commissions',	   'value' => $string_commissions),
 					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug),
 					array('key' => 'wp_presentada',	  	   'value' => $string_presentada),
-					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug)
+					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug),
+					array('key' => 'wp_status',		  	   'value' => $string_status),
+					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug)
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
