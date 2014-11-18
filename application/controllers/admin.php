@@ -292,7 +292,8 @@ class Admin extends CI_Controller {
 			/*Columnas*/
 			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'publicada');
 			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'publicada');
-			$crud->unset_fields('id_parent', 'publicada', 'id_initiative');
+			$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'html_listado');
+			$crud->field_type('titulo_listado', 'invisible');
 			
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
@@ -365,7 +366,8 @@ class Admin extends CI_Controller {
 			/*Columnas*/
 			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
 			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
-			$crud->unset_fields('id_parent', 'publicada', 'id_initiative');
+			$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'html_listado');
+			$crud->field_type('titulo_listado', 'invisible');
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
