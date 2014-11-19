@@ -510,7 +510,7 @@ class Admin extends CI_Controller {
 				/*insert post into WP*/
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
-				$content['post_type']     = "iniciativa";
+				$content['post_type']     = "Iniciativas";
 				$content['categories']    = explode("|", $string_topics);
 				$content['mt_keywords']   = explode("|", $string_topics);
 				$content['custom_fields'] = array(
