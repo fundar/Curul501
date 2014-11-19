@@ -507,15 +507,17 @@ class Admin extends CI_Controller {
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
+				/*
 				$client->query('metaWeblog.getPostTypes', '', $config["user"], $config["pass"], '', true);
 				$response = $client->getResponse();
 					
 				die(var_dump($response));
+				*/
 				
 				/*insert post into WP*/
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
-				$content['post_type']   = "Iniciativa";
+				$content['post_type2']    = "Iniciativa";
 				$content['categories']    = explode("|", $string_topics);
 				$content['mt_keywords']   = explode("|", $string_topics);
 				$content['custom_fields'] = array(
