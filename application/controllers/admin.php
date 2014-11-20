@@ -213,7 +213,7 @@ class Admin extends CI_Controller {
 			/*Tabla y título*/
 			$crud->set_theme('datatables');
 			$crud->set_table('representatives_scrapper');
-			$crud->set_subject('Diputados_Scrapper');
+			$crud->set_subject('Representantes');
 			$crud->set_primary_key('id_representative');
 			
 			/*Set requiered fields, columns and fields*/
