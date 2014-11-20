@@ -517,7 +517,6 @@ class Admin extends CI_Controller {
 				/*insert post into WP*/
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
-				//$content['post_type']     = "iniciativa";
 				$content['categories']    = explode("|", $string_topics);
 				$content['mt_keywords']   = explode("|", $string_topics);
 				$content['custom_fields'] = array(
@@ -534,7 +533,8 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_presentada',	  	   'value' => $string_presentada),
 					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug),
 					array('key' => 'wp_status',		  	   'value' => $string_status),
-					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug)
+					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug),
+					array('key' => 'wp_post_type', 	   	   'value' => "iniciativa")
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
