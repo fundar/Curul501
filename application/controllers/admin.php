@@ -211,7 +211,7 @@ class Admin extends CI_Controller {
 			$state = $crud->getState();
 			
 			/*Tabla y título*/
-			//$crud->set_theme('datatables');
+			$crud->set_theme('datatables');
 			$crud->set_table('representatives_scrapper');
 			$crud->set_subject('Diputados_Scrapper');
 			$crud->set_primary_key('id_representative');
