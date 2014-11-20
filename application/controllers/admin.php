@@ -222,6 +222,9 @@ class Admin extends CI_Controller {
 			
 			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status');
 			
+			/*custom action - publish*/
+			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublishRepresentative'));
+			
 			/*Relaciones*/
 			$crud->set_primary_key('id_representative_type', 'representative_type');
 			$crud->display_as('id_representative_type', 'Tipo de Representante');
@@ -558,9 +561,27 @@ class Admin extends CI_Controller {
 		$this->load->view('publish_wp.php', $response);
 	}
 	
-	/*obtiene la url para publicar en wp*/
+	/*obtiene la url para publicar iniciativas en wp*/
 	function getUrlPublish($primary_key, $row) {
 		return site_url('admin/publish') . '/' . $row->id_initiative;
+	}
+	
+	/*Metodo para publicar representantes en WP*/
+	public function publishRepresentative($id_representative = false) {
+		if($id_representative and is_numeric($id_representative)) {
+			/*get representative*/
+			$this->load->model('curul501_model');
+			$initiative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
+		} else {
+			$response["error"] = 'Error al insertar el registro';
+		}
+		
+		$this->load->view('publish_representative_wp.php', $response);
+	}
+	
+	/*obtiene la url para publicar representantes en wp*/
+	function getUrlPublishRepresentative($primary_key, $row) {
+		return site_url('admin/publishRepresentative') . '/' . $row->id_representative;
 	}
 	
 	/*Crud para los estatus de las iniciativas del Scrapping*/
