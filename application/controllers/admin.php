@@ -571,7 +571,8 @@ class Admin extends CI_Controller {
 		if($id_representative and is_numeric($id_representative)) {
 			/*get representative*/
 			$this->load->model('curul501_model');
-			$initiative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
+			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
+			
 		} else {
 			$response["error"] = 'Error al insertar el registro';
 		}
