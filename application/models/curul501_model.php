@@ -40,6 +40,20 @@ class curul501_Model extends CI_Model  {
 		$this->db->update('votaciones_representantes_scrapper', $update);
 	}
 	
+	/*obtiene toda la información de un representante*/
+	public function getRepresentative($id_representative = 0, $andWhere = "") {
+		if($andWhere != "") {
+			$query = $this->db->query("select * from representatives_scrapper where id_representative=" . $id_representative . " and " . $andWhere);
+		} else {
+			$query = $this->db->query("select * from representatives_scrapper where id_representative=" . $id_representative);
+		}
+		
+		$data = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data[0];
+		return false;
+	}
+	
 	/*obtiene toda la información de una iniciativa*/
 	public function getInitiative($id_initiative = 0, $andWhere = "") {
 		if($andWhere != "") {

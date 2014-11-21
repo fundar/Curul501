@@ -572,7 +572,6 @@ class Admin extends CI_Controller {
 			/*get representative*/
 			$this->load->model('curul501_model');
 			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
-			
 		} else {
 			$response["error"] = 'Error al insertar el registro';
 		}
