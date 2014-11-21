@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 			$crud->required_fields('name');
 			$crud->columns('full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			
-			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean');
+			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada');
 			
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublishRepresentative'));
