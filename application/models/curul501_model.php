@@ -113,6 +113,15 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*obtiene las comisiones de una iniciativa*/
+	public function getCommissionsByRepresentative($id_representative = 0) {
+		$query = $this->db->query("select * from commissions where id_commission in (select id_commission from commissions2representatives where id_representative=" . $id_representative . ")");
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
 	/*obtiene los estatus de una iniciativa*/
 	public function getStatusInitiative($id_initiative = 0, $order = "asc") {
 		$query = $this->db->query("select * from estatus_iniciativas_scrapper where id_initiative=" . $id_initiative ." order by id_estatus " . $order);
@@ -129,6 +138,15 @@ class curul501_Model extends CI_Model  {
 		//update initiative
 		$this->db->where('id_initiative', $id_initiative);
 		$this->db->update('iniciativas_scrapper', $update);
+	}
+	
+	/*poner en true publicada un representante*/
+	public function setPublishRepresentative($id_representative = 0) {
+		$update = array('publicada' => "t");
+
+		//update representative
+		$this->db->where('id_representative', $id_representative);
+		$this->db->update('representatives_scrapper', $update);
 	}
 	
 	/*fix dates*/

@@ -76,8 +76,8 @@
 	<div id="body">		
 		<?php if(isset($success)) { ?>
 			<p>
-				Se ha publicado el representante <strong><?php echo $titulo;?></strong> correctamente con el ID: <strong><?php echo $ID;?></strong><br/>
-				<a href="http://curul501.org/?p=<?php echo $ID;?>" target="_blank" title="<?php echo $titulo;?>">Ver post en Curul501.org</a>
+				Se ha publicado el representante <strong><?php echo $full_name;?></strong> correctamente con el ID: <strong><?php echo $ID;?></strong><br/>
+				<a href="http://curul501.org/?p=<?php echo $ID;?>" target="_blank" title="<?php echo $full_name;?>">Ver post en Curul501.org</a>
 			</p>
 		<?php } ?>
 		

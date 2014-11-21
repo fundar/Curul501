@@ -513,7 +513,6 @@ class Admin extends CI_Controller {
 				/*insert post into WP*/
 				$content['title']         = $initiative["titulo"];
 				$content['description']   = $initiative["resumen"];
-				$content['post_excerpt']  = "tezst";
 				$content['categories']    = explode("|", $string_topics);
 				$content['mt_keywords']   = explode("|", $string_topics);
 				$content['custom_fields'] = array(
@@ -530,8 +529,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_presentada',	  	   'value' => $string_presentada),
 					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug),
 					array('key' => 'wp_status',		  	   'value' => $string_status),
-					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug),
-					array('key' => 'wp_post_type', 	   	   'value' => "iniciativa")
+					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug)
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
@@ -573,11 +571,74 @@ class Admin extends CI_Controller {
 			$this->load->model('curul501_model');
 			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
 			
-			die(var_dump($representative));
-			
-			$response["success"] = true;
-			$response["ID"]      = $ID;
-			$response["titulo"]  = $initiative["titulo"];
+			if($representative) {
+				/*commissions*/
+				$commissions = $this->curul501_model->getCommissionsByRepresentative($id_representative);
+				
+				$string_commissions 	 = "";
+				$string_commissions_slug = "";
+				if($commissions and is_array($commissions)) {
+					foreach($commissions as $commission) {
+						$string_commissions 	 .= $commission["name"] . "|";
+						$string_commissions_slug .= $commission["slug"] . "|";
+					}
+				}
+				$string_commissions 	 = rtrim($string_commissions, "|");
+				$string_commissions_slug = rtrim($string_commissions_slug, "|");
+				
+				/*include configs  & create instance*/
+				require("xmlrpc/config/config.php");
+				require("xmlrpc/IXR_Library.php");
+				$client = new IXR_Client($config["url"]);
+				
+				/*insert post into WP*/
+				$content['title']         = $representative["full_name"];
+				$content['description']   = "";
+				$content['custom_fields'] = array(
+					array('key' => 'wp_id_representative', 'value' => $id_representative),
+					array('key' => 'wp_id_political_party','value' => $representative["id_political_party"]),
+					array('key' => 'wp_slug', 		       'value' => $representative["slug"]),
+					array('key' => 'wp_email',    'value' => $representative["email"]),
+					array('key' => 'wp_phone',  'value' => $representative["phone"]),
+					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
+					array('key' => 'wp_birth_state', 'value' => $representative["birth_state"]),
+					array('key' => 'wp_birth_city', 'value' => $representative["birth_city"]),
+					array('key' => 'wp_election_type', 'value' => $representative["election_type"]),
+					array('key' => 'wp_zone_state', 'value' => $representative["zone_state"]),
+					array('key' => 'wp_district', 'value' => $representative["district"]),
+					array('key' => 'wp_circumscription', 'value' => $representative["circumscription"]),
+					array('key' => 'wp_fecha_protesta', 'value' => $representative["fecha_protesta"]),
+					array('key' => 'wp_ubication', 'value' => $representative["ubication"]),
+					array('key' => 'wp_substitute', 'value' => $representative["substitute"]),
+					array('key' => 'wp_ultimo_grado_estudios', 'value' => $representative["ultimo_grado_estudios"]),
+					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
+					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
+					array('key' => 'wp_commissions',	   'value' => $string_commissions),
+					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
+				);
+				
+				die(var_dump($content));
+				
+				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
+					$response["error"] = 'Error mientras se creaba el post ' . $client->getErrorCode() . " : " . $client->getErrorMessage();
+				} else {
+					/*get ID*/
+					$ID = $client->getResponse();
+					
+					if($ID) {
+						/*update publicada*/
+						//$this->curul501_model->setPublishRepresentative($id_representative);
+						
+						$response["success"]   = true;
+						$response["ID"]        = $ID;
+						$response["full_name"] = $representative["full_name"];
+					} else {
+						$response["error"] = 'Error al insertar el registro';
+					}
+				}
+			} else {
+				$response["error"] = 'No se encuentra el registro o ya esta publicado';
+			}
 		} else {
 			$response["error"] = 'Error al insertar el registro';
 		}
