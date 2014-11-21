@@ -27,8 +27,6 @@ CREATE TABLE iniciativas_scrapper (
   periodo varchar(255) DEFAULT NULL,
   ano varchar(255) DEFAULT NULL,
   revisada boolean DEFAULT false,
-  district_clean integer DEFAULT NULL,   
-  publicada boolean DEFAULT false,
   publicada boolean DEFAULT false,
 
   created_at timestamp NOT NULL DEFAULT now(),
@@ -126,6 +124,7 @@ CREATE TABLE representatives_scrapper (
   suplentede varchar(255) DEFAULT NULL,
   status boolean DEFAULT true,
   publicada boolean DEFAULT false,
+  district_clean integer DEFAULT NULL,   
   type character varying(255) DEFAULT 'Propietario'::character varying
 );
 create index on representatives_scrapper(id_representative);
