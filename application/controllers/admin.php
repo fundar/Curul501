@@ -612,8 +612,6 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_ubication', 'value' => $representative["ubication"]),
 					array('key' => 'wp_substitute', 'value' => $representative["substitute"]),
 					array('key' => 'wp_ultimo_grado_estudios', 'value' => $representative["ultimo_grado_estudios"]),
-					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
-					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
 					array('key' => 'wp_commissions',	   'value' => $string_commissions),
 					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
 				);
