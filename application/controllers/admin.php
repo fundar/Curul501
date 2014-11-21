@@ -572,6 +572,12 @@ class Admin extends CI_Controller {
 			/*get representative*/
 			$this->load->model('curul501_model');
 			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
+			
+			die(var_dump($representative));
+			
+			$response["success"] = true;
+			$response["ID"]      = $ID;
+			$response["titulo"]  = $initiative["titulo"];
 		} else {
 			$response["error"] = 'Error al insertar el registro';
 		}
