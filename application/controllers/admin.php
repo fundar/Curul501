@@ -595,25 +595,25 @@ class Admin extends CI_Controller {
 				$content['title']         = $representative["full_name"];
 				$content['description']   = "";
 				$content['custom_fields'] = array(
-					array('key' => 'wp_id_representative', 'value' => $id_representative),
-					array('key' => 'wp_id_political_party','value' => $representative["id_political_party"]),
-					array('key' => 'wp_slug', 		       'value' => $representative["slug"]),
-					array('key' => 'wp_email',    'value' => $representative["email"]),
-					array('key' => 'wp_phone',  'value' => $representative["phone"]),
-					array('key' => 'wp_birthday', 'value' => $representative["birthday"]),
-					array('key' => 'wp_birth_state', 'value' => $representative["birth_state"]),
-					array('key' => 'wp_birth_city', 'value' => $representative["birth_city"]),
-					array('key' => 'wp_election_type', 'value' => $representative["election_type"]),
-					array('key' => 'wp_zone_state', 'value' => $representative["zone_state"]),
-					array('key' => 'wp_district', 'value' => $representative["district"]),
-					array('key' => 'wp_district_clean', 'value' => $representative["district_clean"]),
-					array('key' => 'wp_circumscription', 'value' => $representative["circumscription"]),
-					array('key' => 'wp_fecha_protesta', 'value' => $representative["fecha_protesta"]),
-					array('key' => 'wp_ubication', 'value' => $representative["ubication"]),
-					array('key' => 'wp_substitute', 'value' => $representative["substitute"]),
-					array('key' => 'wp_ultimo_grado_estudios', 'value' => $representative["ultimo_grado_estudios"]),
-					array('key' => 'wp_commissions',	   'value' => $string_commissions),
-					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
+					array('key' => 'wp_id_representative',  'value' => $id_representative),
+					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
+					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
+					array('key' => 'wp_email',    		    'value' => $representative["email"]),
+					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
+					array('key' => 'wp_birthday', 			'value' => $representative["birthday"]),
+					array('key' => 'wp_birth_state', 		'value' => $representative["birth_state"]),
+					array('key' => 'wp_birth_city', 		'value' => $representative["birth_city"]),
+					array('key' => 'wp_election_type', 		'value' => $representative["election_type"]),
+					array('key' => 'wp_zone_state', 		'value' => $representative["zone_state"]),
+					array('key' => 'wp_district', 			'value' => $representative["district"]),
+					array('key' => 'wp_district_clean', 	'value' => $representative["district_clean"]),
+					array('key' => 'wp_circumscription', 	'value' => $representative["circumscription"]),
+					array('key' => 'wp_fecha_protesta', 	'value' => $representative["fecha_protesta"]),
+					array('key' => 'wp_ubication', 			'value' => $representative["ubication"]),
+					array('key' => 'wp_substitute', 		'value' => $representative["substitute"]),
+					array('key' => 'wp_ultimo_grado_estudios',	'value' => $representative["ultimo_grado_estudios"]),
+					array('key' => 'wp_commissions',	   		'value' => $string_commissions),
+					array('key' => 'wp_commissions_slug',  		'value' => $string_commissions_slug)
 				);
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
