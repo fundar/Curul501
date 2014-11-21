@@ -606,6 +606,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_election_type', 'value' => $representative["election_type"]),
 					array('key' => 'wp_zone_state', 'value' => $representative["zone_state"]),
 					array('key' => 'wp_district', 'value' => $representative["district"]),
+					array('key' => 'wp_district_clean', 'value' => $representative["district_clean"]),
 					array('key' => 'wp_circumscription', 'value' => $representative["circumscription"]),
 					array('key' => 'wp_fecha_protesta', 'value' => $representative["fecha_protesta"]),
 					array('key' => 'wp_ubication', 'value' => $representative["ubication"]),
@@ -616,8 +617,6 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_commissions',	   'value' => $string_commissions),
 					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug)
 				);
-				
-				die(var_dump($content));
 				
 				if(!$client->query('metaWeblog.newPost', '', $config["user"], $config["pass"], $content, true))  {
 					$response["error"] = 'Error mientras se creaba el post ' . $client->getErrorCode() . " : " . $client->getErrorMessage();
