@@ -125,6 +125,8 @@ CREATE TABLE representatives_scrapper (
   status boolean DEFAULT true,
   publicada boolean DEFAULT false,
   district_clean integer DEFAULT NULL,   
+  trayectoria text DEFAULT NULL,
+  clave_estado integer DEFAULT NULL,
   type character varying(255) DEFAULT 'Propietario'::character varying
 );
 create index on representatives_scrapper(id_representative);
