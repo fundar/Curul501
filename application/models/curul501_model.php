@@ -232,7 +232,7 @@ class curul501_Model extends CI_Model  {
 		$query .= " left join representatives_scrapper on votaciones_partidos_scrapper.id_representative=representatives_scrapper.id_representative";
 		$query .= " where id_initiative=". $id_initiative;
 		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_representantes_scrapper where id_initiative=" . $id_initiative;
-		$query .= "order by id_contador_voto desc limit 1);"
+		$query .= "order by id_contador_voto desc limit 1);";
 		
 		die(var_dump($query));
 			
