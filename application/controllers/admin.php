@@ -604,6 +604,7 @@ class Admin extends CI_Controller {
 				$content['custom_fields'] = array(
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
 					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
+					array('key' => 'wp_id_representative_type', 'value' => $representative["id_representative_type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
@@ -619,6 +620,8 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_fecha_protesta', 	'value' => $representative["fecha_protesta"]),
 					array('key' => 'wp_ubication', 			'value' => $representative["ubication"]),
 					array('key' => 'wp_substitute', 		'value' => $representative["substitute"]),
+					array('key' => 'wp_suplentede', 		'value' => $representative["suplentede"]),
+					array('key' => 'clave_estado', 			'value' => $representative["clave_estado"]),
 					array('key' => 'wp_ultimo_grado_estudios',	'value' => $representative["ultimo_grado_estudios"]),
 					array('key' => 'wp_commissions',	   		'value' => $string_commissions),
 					array('key' => 'wp_commissions_slug',  		'value' => $string_commissions_slug)
