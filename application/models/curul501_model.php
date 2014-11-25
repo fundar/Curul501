@@ -213,7 +213,7 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
-	/*get votes of political parties from initiative*/
+	/*get votes of political parties by initiative*/
 	public function getVotesPoliticalParties($id_initiative) {
 		$query  = "select * from votaciones_partidos_scrapper where id_initiative=". $id_initiative;
 		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
@@ -226,6 +226,27 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*get votes of representatives by initiative*/
+	public function getVotesRepresentatives($id_initiative = false) {
+		$query  = "select *.votaciones_partidos_scrapper, representatives_scrapper.full_name, representatives_scrapper.slug from votaciones_partidos_scrapper";
+		$query .= " left join representatives_scrapper on votaciones_partidos_scrapper.id_representative=representatives_scrapper.id_representative";
+		$query .= " where id_initiative=". $id_initiative;
+		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
+		$query .= "order by id_contador_voto desc limit 1);";
+		
+		die(var_dump($query));
+		
+		$query = $this->db->query($query);
+		$data  = $query->result_array();
+
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
+	$query  = "select * from votaciones_representantes_scrapper where id_initiative=". $id_initiative;
+			$query .= "and id_contador_voto=(select id_contador_voto from votaciones_representantes_scrapper where id_initiative=" . $id_initiative;
+			$query .= "order by id_contador_voto desc limit 1);"
+			
 	/*obtiene el mes - numerico*/
 	public function getMes($mes) {
 		switch($mes) {
