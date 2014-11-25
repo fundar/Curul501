@@ -605,6 +605,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
 					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
 					array('key' => 'wp_id_representative_type', 'value' => $representative["id_representative_type"]),
+					array('key' => 'wp_type',				'value' => $representative["type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
