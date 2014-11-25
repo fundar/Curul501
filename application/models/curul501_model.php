@@ -242,10 +242,6 @@ class curul501_Model extends CI_Model  {
 		if(is_array($data) and isset($data[0])) return $data;
 		return false;
 	}
-	
-	$query  = "select * from votaciones_representantes_scrapper where id_initiative=". $id_initiative;
-			$query .= "and id_contador_voto=(select id_contador_voto from votaciones_representantes_scrapper where id_initiative=" . $id_initiative;
-			$query .= "order by id_contador_voto desc limit 1);"
 			
 	/*obtiene el mes - numerico*/
 	public function getMes($mes) {
