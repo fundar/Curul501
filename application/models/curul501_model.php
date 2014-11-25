@@ -213,6 +213,21 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
+	/*get votes of political parties from initiative*/
+	public function getVotesPoliticalParties($id_initiative) {
+		$query  = "select * from votaciones_partidos_scrapper where id_initiative=". $id_initiative;
+		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
+		$query .= "order by id_contador_voto desc limit 1);"
+		
+		$query = $this->db->query($query);
+		$data  = $query->result_array();
+		
+		die(var_dump($data));
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
 	/*obtiene el mes - numerico*/
 	public function getMes($mes) {
 		switch($mes) {

@@ -468,6 +468,7 @@ class Admin extends CI_Controller {
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
 				$status		 = $this->curul501_model->getStatusInitiative($id_initiative);
+				$votes		 = $this->curul501_model->getVotesPoliticalParties($id_initiative);
 				
 				/*topic*/
 				$string_topics		= "";
@@ -601,6 +602,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
 					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
+					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
 					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
 					array('key' => 'wp_birthday', 			'value' => $representative["birthday"]),
