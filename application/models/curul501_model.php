@@ -217,7 +217,7 @@ class curul501_Model extends CI_Model  {
 	public function getVotesPoliticalParties($id_initiative) {
 		$query  = "select * from votaciones_partidos_scrapper where id_initiative=". $id_initiative;
 		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
-		$query .= "order by id_contador_voto desc limit 1);"
+		$query .= "order by id_contador_voto desc limit 1);";
 		
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
