@@ -221,9 +221,7 @@ class curul501_Model extends CI_Model  {
 		
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
-		
-		die(var_dump($data));
-		
+
 		if(is_array($data) and isset($data[0])) return $data;
 		return false;
 	}

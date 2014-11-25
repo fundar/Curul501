@@ -468,7 +468,8 @@ class Admin extends CI_Controller {
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
 				$status		 = $this->curul501_model->getStatusInitiative($id_initiative);
-				$votes		 = $this->curul501_model->getVotesPoliticalParties($id_initiative);
+				$votes		 = json_encode($this->curul501_model->getVotesPoliticalParties($id_initiative), JSON_NUMERIC_CHECK);
+				die(var_dump($votes));
 				
 				/*topic*/
 				$string_topics		= "";
