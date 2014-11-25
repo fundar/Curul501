@@ -234,8 +234,6 @@ class curul501_Model extends CI_Model  {
 		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
 		$query .= "order by id_contador_voto desc limit 1);";
 		
-		die(var_dump($query));
-		
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
 

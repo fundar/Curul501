@@ -471,6 +471,8 @@ class Admin extends CI_Controller {
 				$votes		 = json_encode($this->curul501_model->getVotesPoliticalParties($id_initiative), JSON_NUMERIC_CHECK);
 				$votesRepresentantes = json_encode($this->curul501_model->getVotesRepresentatives($id_initiative), JSON_NUMERIC_CHECK);
 				
+				die(var_dump($votesRepresentantes));
+				
 				/*topic*/
 				$string_topics		= "";
 				$string_topics_slug = "";
