@@ -228,12 +228,14 @@ class curul501_Model extends CI_Model  {
 	
 	/*get votes of representatives by initiative*/
 	public function getVotesRepresentatives($id_initiative = false) {
-		$query  = "select *.votaciones_partidos_scrapper, representatives_scrapper.full_name, representatives_scrapper.slug from votaciones_partidos_scrapper";
+		$query  = "select *.votaciones_representantes_scrapper, representatives_scrapper.full_name, representatives_scrapper.slug from votaciones_representantes_scrapper";
 		$query .= " left join representatives_scrapper on votaciones_partidos_scrapper.id_representative=representatives_scrapper.id_representative";
 		$query .= " where id_initiative=". $id_initiative;
-		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_partidos_scrapper where id_initiative=" . $id_initiative;
-		$query .= "order by id_contador_voto desc limit 1);";
+		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_representantes_scrapper where id_initiative=" . $id_initiative;
+		$query .= "order by id_contador_voto desc limit 1);"
 		
+		die(var_dump($query));
+			
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
 
