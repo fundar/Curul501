@@ -617,7 +617,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_zone_state', 		'value' => $representative["zone_state"]),
 					array('key' => 'wp_district', 			'value' => $representative["district"]),
 					array('key' => 'wp_district_clean', 	'value' => $representative["district_clean"]),
-					array('key' => 'wp_circumscription', 	'value' => $representative["circumscription"]),
+					array('key' => 'wp_circumscription', 	'value' => trim($representative["circumscription"])),
 					array('key' => 'wp_fecha_protesta', 	'value' => $representative["fecha_protesta"]),
 					array('key' => 'wp_ubication', 			'value' => $representative["ubication"]),
 					array('key' => 'wp_substitute', 		'value' => $representative["substitute"]),
