@@ -600,6 +600,7 @@ class Admin extends CI_Controller {
 				require("xmlrpc/IXR_Library.php");
 				$client = new IXR_Client($config["url"]);
 				
+				/*File upload*/
 				$fs   = filesize ('assets/uploads/files/' . $representative["avatar_id"]);
 				$file = fopen ('assets/uploads/files/' . $representative["avatar_id"], 'rb');
 				$data = fread ($file, $fs);
@@ -612,18 +613,12 @@ class Admin extends CI_Controller {
 				);
 				
 				if(!$client->query('metaWeblog.newMediaObject', '', $config["user"], $config["pass"], $content, true))  {
-					$dataFile['id'] = "";
-					die("error");
+					$dataFile['id']  = "";
+					$dataFile['url'] = "";
 				} else {
 					$dataFile = $client->getResponse();
-					
-					echo $dataFile['id'].'<br/>';
-					echo $dataFile['file'].'<br/>';
-					echo $dataFile['url'].'<br/>';
-					echo $dataFile['type'];
-					
-					//$customfields=array('key'=>'_thumbnail_id', 'value'=>'53')
 				}
+				/*End File upload*/
 				
 				/*commissions*/
 				$commissions = $this->curul501_model->getCommissionsByRepresentative($id_representative);
@@ -649,6 +644,8 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_type',				'value' => $representative["type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
+					array('key' => '_thumbnail_id',			'value' => $dataFile["id"]),
+					array('key' => 'avatar_url',			'value' => $dataFile["url"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
 					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
 					array('key' => 'wp_twitter',  			'value' => $representative["twitter"]),
