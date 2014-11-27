@@ -636,7 +636,7 @@ class Admin extends CI_Controller {
 				
 				/*insert post into WP*/
 				$content['title']          = $representative["full_name"];
-				$content['post_thumbnail'] = $dataFile["id"];
+				$content['post_thumbnail'] = $dataFile["url"];
 				$content['description']    = "";
 				$content['custom_fields'] = array(
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
@@ -645,6 +645,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_type',				'value' => $representative["type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
+					array('key' => '_thumbnail_id',			'value' => $dataFile["id"]),
 					array('key' => 'avatar_url',			'value' => $dataFile["url"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
 					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
