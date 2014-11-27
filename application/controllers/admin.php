@@ -595,6 +595,36 @@ class Admin extends CI_Controller {
 			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
 			
 			if($representative) {
+				/*include configs  & create instance*/
+				require("xmlrpc/config/config.php");
+				require("xmlrpc/IXR_Library.php");
+				$client = new IXR_Client($config["url"]);
+				
+				$fs   = filesize ('assets/uploads/files/' . $representative["avatar_id"]);
+				$file = fopen ('assets/uploads/files/' . $representative["avatar_id"], 'rb');
+				$data = fread ($file, $fs);
+				fclose ($file);
+				
+				$content = array(
+					'name' = $representative["avatar_id"],
+					'type' = 'image/jpeg',
+					'bits' = new IXR_Base64($data)
+				);
+				
+				if(!$client->query('metaWeblog.newMediaObject', '', $config["user"], $config["pass"], $content, true))  {
+					$dataFile['id'] = "";
+					die("error");
+				} else {
+					$dataFile = $client->getResponse();
+					
+					echo $dataFile['id'].'<br/>';
+					echo $dataFile['file'].'<br/>';
+					echo $dataFile['url'].'<br/>';
+					echo $dataFile['type'];
+					
+					//$customfields=array('key'=>'_thumbnail_id', 'value'=>'53')
+				}
+				
 				/*commissions*/
 				$commissions = $this->curul501_model->getCommissionsByRepresentative($id_representative);
 				
@@ -608,11 +638,6 @@ class Admin extends CI_Controller {
 				}
 				$string_commissions 	 = rtrim($string_commissions, "|");
 				$string_commissions_slug = rtrim($string_commissions_slug, "|");
-				
-				/*include configs  & create instance*/
-				require("xmlrpc/config/config.php");
-				require("xmlrpc/IXR_Library.php");
-				$client = new IXR_Client($config["url"]);
 				
 				/*insert post into WP*/
 				$content['title']         = $representative["full_name"];
