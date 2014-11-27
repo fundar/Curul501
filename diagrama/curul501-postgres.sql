@@ -104,6 +104,9 @@ CREATE TABLE representatives_scrapper (
   slug2 varchar(255) DEFAULT NULL,
   email varchar(255) DEFAULT NULL,
   phone varchar(255) DEFAULT NULL,
+  twitter varchar(255) DEFAULT NULL,
+  facebook varchar(255) DEFAULT NULL,
+  website varchar(255) DEFAULT NULL,
   avatar_id varchar(255) DEFAULT NULL,
   birthday varchar(255) DEFAULT NULL,
   created_at timestamp NOT NULL DEFAULT now(),
@@ -125,7 +128,7 @@ CREATE TABLE representatives_scrapper (
   status boolean DEFAULT true,
   publicada boolean DEFAULT false,
   district_clean integer DEFAULT NULL,   
-  trayectoria text DEFAULT NULL,
+  trayectoria text[][] DEFAULT NULL,
   clave_estado integer DEFAULT NULL,
   type character varying(255) DEFAULT 'Propietario'::character varying
 );

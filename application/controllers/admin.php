@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 			$crud->required_fields('name');
 			$crud->columns('full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			
-			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada');
+			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada', 'trayectoria');
 			
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublishRepresentative'));
@@ -626,6 +626,9 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
 					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
+					array('key' => 'wp_twitter',  			'value' => $representative["twitter"]),
+					array('key' => 'wp_facebook',  			'value' => $representative["facebook"]),
+					array('key' => 'wp_website',  			'value' => $representative["website"]),
 					array('key' => 'wp_birthday', 			'value' => $representative["birthday"]),
 					array('key' => 'wp_birth_state', 		'value' => $representative["birth_state"]),
 					array('key' => 'wp_birth_city', 		'value' => $representative["birth_city"]),
