@@ -18,8 +18,6 @@ function setMap(circuns) {
 		var array = [6, 13, 15, 16];
 	}
 	
-	var polygonsGroup = new L.LayerGroup();
-	
 	L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 		maxZoom: 12,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
