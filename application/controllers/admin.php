@@ -606,9 +606,9 @@ class Admin extends CI_Controller {
 				fclose ($file);
 				
 				$content = array(
-					'name' = $representative["avatar_id"],
-					'type' = 'image/jpeg',
-					'bits' = new IXR_Base64($data)
+					'name' => $representative["avatar_id"],
+					'type' => 'image/jpeg',
+					'bits' => new IXR_Base64($data)
 				);
 				
 				if(!$client->query('metaWeblog.newMediaObject', '', $config["user"], $config["pass"], $content, true))  {
