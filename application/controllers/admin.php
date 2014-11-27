@@ -447,22 +447,34 @@ class Admin extends CI_Controller {
 					}
 				}
 				
+				$string_presentada_dependencias	  	 = "";
+				$string_presentada_dependencias_slug = "";
+				
 				if($presentada["dependencies"] and is_array($presentada["dependencies"])) {
 					foreach($presentada["dependencies"] as $value) {
-						$string_presentada 		.= $value["name"] . "|";
-						$string_presentada_slug .= $value["slug"] . "|";
+						$string_presentada_dependencias 	 .= $value["name"] . "|";
+						$string_presentada_dependencias_slug .= $value["slug"] . "|";
 					}
 				}
 				
+				$string_presentada_partidos	  = "";
+				$string_presentada_partidos_slug = "";
+				
 				if($presentada["politicalparties"] and is_array($presentada["politicalparties"])) {
 					foreach($presentada["politicalparties"] as $value) {
-						$string_presentada 		.= $value["name"] . "|";
-						$string_presentada_slug .= $value["slug"] . "|";
+						$string_presentada_partidos 		.= $value["name"] . "|";
+						$string_presentada_partidos_slug .= $value["slug"] . "|";
 					}
 				}
 				
 				$string_presentada 		= rtrim($string_presentada, "|");
 				$string_presentada_slug = rtrim($string_presentada_slug, "|");
+				
+				$string_presentada_dependencias 	 = rtrim($string_presentada_dependencias, "|");
+				$string_presentada_dependencias_slug = rtrim($string_presentada_dependencias_slug, "|");
+				
+				$string_presentada_partidos 	 = rtrim($string_presentada_partidos, "|");
+				$string_presentada_partidos_slug = rtrim($string_presentada_partidos_slug, "|");
 				
 				/*get topics, status & commissions*/
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
@@ -533,6 +545,10 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_commissions_slug',  'value' => $string_commissions_slug),
 					array('key' => 'wp_presentada',	  	   'value' => $string_presentada),
 					array('key' => 'wp_presentada_slug',   'value' => $string_presentada_slug),
+					array('key' => 'wp_presentada_dependencias',	  'value' => $string_presentada_dependencias),
+					array('key' => 'wp_presentada_dependencias_slug', 'value' => $string_presentada_dependencias_slug),
+					array('key' => 'wp_presentada_partidos',	  	  'value' => $string_presentada_partidos),
+					array('key' => 'wp_presentada_partidos_slug',     'value' => $string_presentada_partidos_slug),
 					array('key' => 'wp_votes',					'value' => $votes),
 					array('key' => 'wp_votos_representantes',	'value' => $votesRepresentatives),
 					array('key' => 'wp_status',		  	   'value' => $string_status),
