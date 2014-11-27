@@ -617,7 +617,6 @@ class Admin extends CI_Controller {
 					$dataFile['url'] = "";
 				} else {
 					$dataFile = $client->getResponse();
-					echo $dataFile["id"];
 				}
 				/*End File upload*/
 				
