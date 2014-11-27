@@ -636,8 +636,9 @@ class Admin extends CI_Controller {
 				$string_commissions_slug = rtrim($string_commissions_slug, "|");
 				
 				/*insert post into WP*/
-				$content['title']         = $representative["full_name"];
-				$content['description']   = "";
+				$content['title']           = $representative["full_name"];
+				$content['post_thumbnail1'] = $dataFile["id"];
+				$content['description']     = "";
 				$content['custom_fields'] = array(
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
 					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
