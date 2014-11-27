@@ -645,7 +645,6 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_type',				'value' => $representative["type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),
 					array('key' => 'wp_full_name',			'value' => $representative["full_name"]),
-					array('key' => '_thumbnail_id',			'value' => $dataFile["id"]),
 					array('key' => 'avatar_url',			'value' => $dataFile["url"]),
 					array('key' => 'wp_email',    		    'value' => $representative["email"]),
 					array('key' => 'wp_phone',  			'value' => $representative["phone"]),
