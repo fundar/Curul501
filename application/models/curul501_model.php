@@ -228,12 +228,22 @@ class curul501_Model extends CI_Model  {
 	
 	/*get votes of representatives by initiative*/
 	public function getVotesRepresentatives($id_initiative = false) {
-		$query  = "select votaciones_representantes_scrapper.*, representatives_scrapper.full_name, representatives_scrapper.slug from votaciones_representantes_scrapper";
+		$query  = "select votaciones_representantes_scrapper.*, representatives_scrapper.full_name, representatives_scrapper.slug, representatives_scrapper.zone_state from votaciones_representantes_scrapper";
 		$query .= " left join representatives_scrapper on votaciones_representantes_scrapper.id_representative=representatives_scrapper.id_representative";
 		$query .= " where id_initiative=". $id_initiative;
 		$query .= "and id_contador_voto=(select id_contador_voto from votaciones_representantes_scrapper where id_initiative=" . $id_initiative;
 		$query .= "order by id_contador_voto desc limit 1);";
 			
+		$query = $this->db->query($query);
+		$data  = $query->result_array();
+
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
+	/*Get resume from representative*/
+	public function getResumeByRepresentative($id_representative = false) {
+		$query = "select array_to_string(unnest_multidim(trayectoria), ',') as trayectoria from representatives_scrapper where id_representative=". $id_representative;
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
 

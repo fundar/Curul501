@@ -618,7 +618,7 @@ class Admin extends CI_Controller {
 				} else {
 					$dataFile = $client->getResponse();
 				}
-				/*End File upload*/
+				
 				
 				/*commissions*/
 				$commissions = $this->curul501_model->getCommissionsByRepresentative($id_representative);
@@ -633,6 +633,9 @@ class Admin extends CI_Controller {
 				}
 				$string_commissions 	 = rtrim($string_commissions, "|");
 				$string_commissions_slug = rtrim($string_commissions_slug, "|");
+				
+				/*Resume*/
+				$resume = json_encode($this->curul501_model->getResumeByRepresentative($id_representative), JSON_NUMERIC_CHECK);
 				
 				/*insert post into WP*/
 				$content['title']          = $representative["full_name"];
@@ -663,6 +666,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_ubication', 			'value' => $representative["ubication"]),
 					array('key' => 'wp_substitute', 		'value' => $representative["substitute"]),
 					array('key' => 'wp_suplentede', 		'value' => $representative["suplentede"]),
+					array('key' => 'wp_resume', 			'value' => $resume),
 					array('key' => 'wp_clave_estado', 			'value' => $representative["clave_estado"]),
 					array('key' => 'wp_ultimo_grado_estudios',	'value' => $representative["ultimo_grado_estudios"]),
 					array('key' => 'wp_commissions',	   		'value' => $string_commissions),
