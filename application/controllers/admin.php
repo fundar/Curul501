@@ -482,8 +482,6 @@ class Admin extends CI_Controller {
 				$status		 = $this->curul501_model->getStatusInitiative($id_initiative);
 				$votos		 = json_encode($this->curul501_model->getVotesPoliticalParties($id_initiative), JSON_NUMERIC_CHECK);
 				
-				die(var_dump($votos));
-				
 				if($votos == "false") {
 					$votos				  = "";
 					$votesRepresentatives = "";
