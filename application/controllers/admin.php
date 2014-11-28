@@ -480,7 +480,7 @@ class Admin extends CI_Controller {
 				$topics 	 = $this->curul501_model->getTopicsByInitiative($id_initiative);
 				$commissions = $this->curul501_model->getCommissionsByInitiative($id_initiative);
 				$status		 = $this->curul501_model->getStatusInitiative($id_initiative);
-				$votes		 = json_encode($this->curul501_model->getVotesPoliticalParties($id_initiative), JSON_NUMERIC_CHECK);
+				$votos		 = json_encode($this->curul501_model->getVotesPoliticalParties($id_initiative), JSON_NUMERIC_CHECK);
 				$votesRepresentatives = json_encode($this->curul501_model->getVotesRepresentatives($id_initiative), JSON_NUMERIC_CHECK);
 				
 				/*topic*/
@@ -549,7 +549,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_presentada_dependencias_slug', 'value' => $string_presentada_dependencias_slug),
 					array('key' => 'wp_presentada_partidos',	  	  'value' => $string_presentada_partidos),
 					array('key' => 'wp_presentada_partidos_slug',     'value' => $string_presentada_partidos_slug),
-					array('key' => 'wp_votes',					'value' => $votes),
+					array('key' => 'wp_votos',					'value' => $votos),
 					array('key' => 'wp_votos_representantes',	'value' => $votesRepresentatives),
 					array('key' => 'wp_status',		  	   'value' => $string_status),
 					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug)
