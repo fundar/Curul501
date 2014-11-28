@@ -243,7 +243,7 @@ class curul501_Model extends CI_Model  {
 	
 	/*Get resume from representative*/
 	public function getResumeByRepresentative($id_representative = false) {
-		$query = "select array_to_string(unnest_multidim(trayectoria), ',') as trayectoria from representatives_scrapper where id_representative=". $id_representative;
+		$query = "select array_to_string(unnest_multidim(trayectoria), '_____') as trayectoria from representatives_scrapper where id_representative=". $id_representative;
 		$query = $this->db->query($query);
 		$data  = $query->result_array();
 
