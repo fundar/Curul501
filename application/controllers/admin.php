@@ -601,6 +601,8 @@ class Admin extends CI_Controller {
 			$representative = $this->curul501_model->getRepresentative($id_representative, "publicada=false");
 			
 			if($representative) {
+				$politicalParty = $this->curul501_model->getPoliticalParty($representative["id_political_party"]);
+				
 				/*include configs  & create instance*/
 				require("xmlrpc/config/config.php");
 				require("xmlrpc/IXR_Library.php");
@@ -625,7 +627,6 @@ class Admin extends CI_Controller {
 					$dataFile = $client->getResponse();
 				}
 				
-				
 				/*commissions*/
 				$commissions = $this->curul501_model->getCommissionsByRepresentative($id_representative);
 				
@@ -649,6 +650,9 @@ class Admin extends CI_Controller {
 				$content['custom_fields'] = array(
 					array('key' => 'wp_id_representative',  'value' => $id_representative),
 					array('key' => 'wp_id_political_party', 'value' => $representative["id_political_party"]),
+					array('key' => 'wp_political_party_name', 'value' => $politicalParty["name"]),
+					array('key' => 'wp_political_party_slug', 'value' => $politicalParty["slug"]),
+					array('key' => 'wp_political_party_short_name', 'value' => $politicalParty["short_name"]),
 					array('key' => 'wp_id_representative_type', 'value' => $representative["id_representative_type"]),
 					array('key' => 'wp_type',				'value' => $representative["type"]),
 					array('key' => 'wp_slug', 		        'value' => $representative["slug"]),

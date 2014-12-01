@@ -68,6 +68,15 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*obtiene información del partido politico*/
+	public function getPoliticalParty($id_political_party) {
+		$query = $this->db->query("select * from political_parties where id_political_party=" . $id_political_party);
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data[0];
+		return false;
+	}
+	
 	/*Obtiene los representantes que la presentaron*/
 	public function byRepresentatives($id_initiative = 0) {
 		$query = $this->db->query("select * from representatives_scrapper where id_representative in (select id_representative from initiative2representatives where id_initiative=" . $id_initiative . ")");
