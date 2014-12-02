@@ -1015,10 +1015,12 @@ class Admin extends CI_Controller {
 	}
 	
 	/*metodo para obtener las comissiones*/
+	/*
 	public function getCommissions() {
 		$this->load->model('curul501_model');
 		$results = $this->curul501_model->getCommissions();
 		
-		echo json_encode($results);
+		die(var_dump($results));
 	}
+	*/
 }
