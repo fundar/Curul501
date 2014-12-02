@@ -1019,6 +1019,6 @@ class Admin extends CI_Controller {
 		$this->load->model('curul501_model');
 		$results = $this->curul501_model->getCommissions();
 		
-		die(var_dump($results));
+		echo json_encode($results);
 	}
 }
