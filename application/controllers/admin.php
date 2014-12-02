@@ -57,6 +57,8 @@ class Admin extends CI_Controller {
 		$crud->set_subject('Comisiones');
 		$crud->set_primary_key('id_commission');
 		
+		$crud->unset_delete();
+		
 		/*Set requiered fields, columns and fields*/
 		$crud->required_fields('name');
 		$crud->columns('id_commission', 'name', 'created_at');
