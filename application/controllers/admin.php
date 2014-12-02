@@ -1013,4 +1013,12 @@ class Admin extends CI_Controller {
 		$this->load->model('curul501_model');
 		$result = $this->curul501_model->fixSlugStatus();
 	}
+	
+	/*metodo para obtener las comissiones*/
+	public function getCommissions() {
+		$this->load->model('curul501_model');
+		$results = $this->curul501_model->getCommissions();
+		
+		die(var_dump($results));
+	}
 }

@@ -68,6 +68,16 @@ class curul501_Model extends CI_Model  {
 		return false;
 	}
 	
+	/*obtiene todas las comisiones*/
+	public function getCommissions() {
+		$query = $this->db->query("select id_commission, name, slug from commissions");
+		$data  = $query->result_array();
+		
+		if(is_array($data) and isset($data[0])) return $data;
+		return false;
+	}
+	
+	
 	/*obtiene información del partido politico*/
 	public function getPoliticalParty($id_political_party) {
 		$query = $this->db->query("select * from political_parties where id_political_party=" . $id_political_party);
