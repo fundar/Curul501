@@ -23,11 +23,9 @@ function setMap() {
 		
 		layer.on('click', function(e) {
 			map.removeLayer(sMarker);
-			
 			sMarker = L.marker([e.latlng.lat, e.latlng.lng], { CVE_ENT : feature.properties.CVE_ENT, NOMBRE : feature.properties.NOMBRE }).addTo(map);
-			sMarker.bindPopup("<div class='map-info-representante'>" + feature.properties.NOMBRE + "</div>").openPopup();
-			
 			getPip(e.latlng.lat, e.latlng.lng);
+			map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map._zoom);
 		});
 	}
 	
@@ -46,21 +44,50 @@ function getPip(lat, lng) {
 		.success(function (distritosGeoJson) {
 			var distritosLayer = L.geoJson(distritosGeoJson);
 			var resultDisrtPip = leafletPip.pointInLayer([lng, lat], distritosLayer);
+			var district = resultDisrtPip[0].feature.properties.DISTRITO;
+			var state = parseInt(resultPip[0].feature.properties.CVE_ENT);
 			
 			if(resultDisrtPip.length) {
 				if(primera.indexOf(parseInt(resultPip[0].feature.properties.CVE_ENT)) != -1) {
-					console.log("Circunscripción: Primera");
+					var circum = "Primera";
 				} else if(segunda.indexOf(parseInt(resultPip[0].feature.properties.CVE_ENT)) != -1) {
-					console.log("Circunscripción: Segunda");
+					var circum = "Segunda";
 				} else if(tercera.indexOf(parseInt(resultPip[0].feature.properties.CVE_ENT)) != -1) {
-					console.log("Circunscripción: Tercera");
+					var circum = "Tercera";
 				} else if(cuarta.indexOf(parseInt(resultPip[0].feature.properties.CVE_ENT)) != -1) {
-					console.log("Circunscripción: Cuarta");
+					var circum = "Cuarta";
 				} else if(quinta.indexOf(parseInt(resultPip[0].feature.properties.CVE_ENT)) != -1) {
-					console.log("Circunscripción: Quinta");
+					var circum = "Quinta";
+				} else {
+					var circum = "";
 				}
 				
-				jQuery(".map-info-representante").html("Estado :" +  sMarker.options.NOMBRE +", Distrito: " + resultDisrtPip[0].feature.properties.DISTRITO);
+				var results = jQuery(representatives).filter(function (i, value) {
+					return (value.clave_estado == state && value.circum == circum) || (value.clave_estado == state && value.district == district);
+				});
+				
+				var html = "";
+				
+				jQuery.each(results, function( index, value ) {
+					html += "<div class='representante-mapa'>";
+					html += "<img style='width:50px; height:50px;' src='" + value.avatar_url + "' alt='" + value.name + "'/><br/>";
+					html += "<a href='" + value.permalink + "' title='" + value.name + "'>" + value.name + "</a><br/>";
+					html += "Tipo de elección: " + value.election_type + "<br/>";
+					
+					if(value.circum == "") {
+						html += "Distrito: " + value.district + "<br/>";
+					} else {
+						html += "Circunscripción: " + value.circum + "<br/>";
+					}
+					
+					html += "Tipo de elección: " + value.election_type + "<br/>";
+					html += "Estado: " + value.zone_state + "<br/>";
+					html += "Partido politico: " + value.politicalParty.name + "<br/>";
+					html += "<img src='http://curul501.org/wp-content/themes/curul501/images/" + value.politicalParty.url_logo + "' alt='" + value.politicalParty.name + "'/><br/>";
+					html += "</div>";
+				});
+				
+				jQuery(".map-info-representante").html(html);
 			} else {
 				console.log("Asegurate de estar en territorio mexicano");
 			}
