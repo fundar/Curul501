@@ -241,6 +241,19 @@ class curul501_Model extends CI_Model  {
 		}
 	}
 	
+	/*fix slug status*/
+	public function fixSlugRepresentatives() {
+		$query = $this->db->query("select * from representatives_scrapper");
+		$data  = $query->result_array();
+		
+		foreach($data as $value) {
+			$update["slug"] = slug($value["full_name"]);
+			
+			$this->db->where('id_representative', $value["id_representative"]);
+			$this->db->update('representatives_scrapper', $update);
+		}
+	}
+	
 	/*get votes of political parties by initiative*/
 	public function getVotesPoliticalParties($id_initiative) {
 		$query  = "select * from votaciones_partidos_scrapper where id_initiative=". $id_initiative;
