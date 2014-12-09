@@ -353,7 +353,7 @@ class Admin extends CI_Controller {
 			$crud->callback_column('titulo_listado', array($this, 'getFullValue'));
 			
 			/*required fields*/
-			$crud->required_fields('titulo', 'resumen');
+			$crud->required_fields('titulo', 'resumen', 'initiatives2topics');
 			
 			$crud->callback_column('commissions2initiatives', array($this, 'cleanText'));
 			$crud->callback_column('initiatives2topics', array($this, 'cleanText'));
@@ -430,7 +430,7 @@ class Admin extends CI_Controller {
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
 		
 			/*required fields*/
-			$crud->required_fields('titulo', 'resumen');
+			$crud->required_fields('titulo', 'resumen', 'initiatives2topics');
 			
 			/*callback titulo*/
 			$crud->callback_before_update(array($this, 'getSlugTitle'));
