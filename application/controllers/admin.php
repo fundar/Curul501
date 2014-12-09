@@ -444,7 +444,7 @@ class Admin extends CI_Controller {
 	}
 	
 	function enlace_gaceta($value, $primary_key) {
-		return '<a href="' . $value . '" title="Enlace gaceta">' . $value . '</a>';
+		return '<a href="' . $value . '" title="Enlace gaceta" target="_blank">' . $value . '</a>';
 	}
 
 	/*Metodo para publicar una iniciativa en WP*/
