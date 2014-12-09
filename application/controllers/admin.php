@@ -296,8 +296,14 @@ class Admin extends CI_Controller {
 			
 			/*Columnas*/
 			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'publicada');
-			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'publicada');
-			$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'titulo_listado2', 'html_listado2');
+			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies', 'fecha_votacion_tm', 'numero_iniciativa', 'enlace_dictamen_listado', 'enlace_publicado_listado', 'html_listado', 'contenido_html_iniciativa', 'enviada', 'turnada', 'presentada', 'periodo', 'ano', 'revisada', 'publicada');
+			
+			$crud->field_type('html_listado', 'readonly');
+			$crud->field_type('enviada', 'readonly');
+			$crud->field_type('turnada', 'readonly');
+			$crud->field_type('presentada', 'readonly');
+			$crud->field_type('periodo', 'readonly');
+			$crud->field_type('ano', 'readonly');
 			
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
