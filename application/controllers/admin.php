@@ -369,8 +369,9 @@ class Admin extends CI_Controller {
 			
 			/*Columnas*/
 			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
-			//$crud->columns('id_initiative', 'id_legislature', 'titulo_listado', 'fecha_listado_tm', 'fecha_votacion_tm', 'periodo', 'presentada', 'commissions2initiatives', 'initiatives2topics', 'revisada');
-			$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'titulo_listado2', 'html_listado2');
+			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies');
+			
+			//$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'titulo_listado2', 'html_listado2', 'created_at', 'updated_at', 'fecha_listado_header', 'fecha_listado_header_tm');
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
