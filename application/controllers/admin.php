@@ -308,6 +308,9 @@ class Admin extends CI_Controller {
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
 			
+			/*link*/
+			$crud->callback_edit_field('enlace_gaceta',array($this,'enlace_gaceta'));
+			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
 			$crud->display_as('numero_iniciativa', 'Numero iniciativa Gaceta');
@@ -437,6 +440,10 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	function enlace_gaceta($value, $primary_key) {
+		return '<a href="' . $value . '" title="Enlace gaceta">' . $value . '</a>';
+	}
+
 	/*Metodo para publicar una iniciativa en WP*/
 	public function publish($id_initiative = false) {
 		if($id_initiative and is_numeric($id_initiative)) {
