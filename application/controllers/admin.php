@@ -308,7 +308,7 @@ class Admin extends CI_Controller {
 			/*custom action - publish*/
 			$crud->add_action('Publicar', '', '','ui-icon-plus',array($this, 'getUrlPublish'));
 			
-			/*link*/
+			/*Enlace gaceta*/
 			$crud->callback_edit_field('enlace_gaceta',array($this,'enlace_gaceta'));
 			
 			/*Relaciones y displays*/
@@ -386,6 +386,9 @@ class Admin extends CI_Controller {
 			$crud->field_type('presentada', 'readonly');
 			$crud->field_type('periodo', 'readonly');
 			$crud->field_type('ano', 'readonly');
+			
+			/*Enlace gaceta*/
+			$crud->callback_edit_field('enlace_gaceta',array($this,'enlace_gaceta'));
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
