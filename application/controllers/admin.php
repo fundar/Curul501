@@ -372,7 +372,6 @@ class Admin extends CI_Controller {
 			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies', 'fecha_votacion_tm', 'numero_iniciativa', 'enlace_dictamen_listado', 'enlace_publicado_listado', 'html_listado', 'contenido_html_iniciativa', 'enviada', 'turnada', 'presentada', 'periodo', 'ano', 'revisada');
 			
 			$crud->field_type('html_listado', 'readonly');
-			$crud->field_type('contenido_html_iniciativa', 'readonly');
 			$crud->field_type('enviada', 'readonly');
 			$crud->field_type('turnada', 'readonly');
 			$crud->field_type('presentada', 'readonly');
