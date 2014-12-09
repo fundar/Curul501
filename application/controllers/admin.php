@@ -566,7 +566,7 @@ class Admin extends CI_Controller {
 				$content['custom_fields'] = array(
 					array('key' => 'wp_id_initiative',	   'value' => $id_initiative),
 					array('key' => 'wp_titulo', 		   'value' => $initiative["titulo"]),
-					array('key' => 'wp_slug', 		       'value' => $initiative["slug"]),
+					array('key' => 'wp_backend_slug', 	   'value' => $initiative["slug"]),
 					array('key' => 'wp_titulo_listado',    'value' => $initiative["titulo_listado"]),
 					array('key' => 'wp_fecha_listado_tm',  'value' => $initiative["fecha_listado_tm"]),
 					array('key' => 'wp_fecha_votacion_tm', 'value' => $initiative["fecha_votacion_tm"]),
