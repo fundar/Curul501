@@ -256,7 +256,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('birth_city', 'Ciudad de Nacimiento');
 			$crud->display_as('zone_state', 'Entidad Representada');
 			
-			$crud->display_as('district', 'Distrito o Circunscripcion');
+			$crud->display_as('district', 'Distrito');
 			$crud->display_as('circumscription', 'Circunscripcion');
 			
 			$crud->display_as('fecha_protesta', 'Fecha de Protesta');
