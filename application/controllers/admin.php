@@ -369,9 +369,15 @@ class Admin extends CI_Controller {
 			
 			/*Columnas*/
 			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
-			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies');
+			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies', 'fecha_votacion_tm', 'numero_iniciativa', 'enlace_dictamen_listado', 'enlace_publicado_listado', 'html_listado', 'contenido_html_iniciativa', 'enviada', 'turnada', 'presentada', 'periodo', 'ano', 'revisada');
 			
-			//$crud->unset_fields('id_parent', 'publicada', 'id_initiative', 'titulo_listado2', 'html_listado2', 'created_at', 'updated_at', 'fecha_listado_header', 'fecha_listado_header_tm');
+			$crud->field_type('html_listado', 'readonly');
+			$crud->field_type('contenido_html_iniciativa', 'readonly');
+			$crud->field_type('enviada', 'readonly');
+			$crud->field_type('turnada', 'readonly');
+			$crud->field_type('presentada', 'readonly');
+			$crud->field_type('periodo', 'readonly');
+			$crud->field_type('ano', 'readonly');
 			
 			/*Relaciones y displays*/
 			$crud->display_as('id_initiative', '#Iniciativa');
@@ -404,7 +410,7 @@ class Admin extends CI_Controller {
 			$crud->display_as('initiatives2topics', 'Temas');
 			
 			/*Slug*/
-			$crud->field_type('slug', 'invisible');		
+			$crud->field_type('slug', 'invisible');
 			
 			/*Callbacks para obtener urls y slug*/
 			$crud->field_type('revisada', 'dropdown', array("t" => 'Si', "f" => 'No'));
