@@ -223,6 +223,8 @@ class Admin extends CI_Controller {
 			$crud->columns('id_representative', 'full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada', 'trayectoria', 'created_at', 'updated_at', 'commisions');
 			
+			$crud->display_as('id_representative', '#Representante');
+			
 			/*Relacion Comisiones - representantes*/
 			$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'commissions', 'id_representative', 'id_commission', 'name');
 			$crud->display_as('commissions2representatives', 'Comisiones');
