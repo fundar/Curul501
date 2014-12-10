@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
-			$crud->columns('full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
+			$crud->columns('id_representative', 'full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada', 'trayectoria', 'created_at', 'updated_at', 'commisions');
 			
 			/*Relacion Comisiones - representantes*/
@@ -298,7 +298,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'publicada');
+			$crud->columns('id_initiative', 'titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives', 'publicada');
 			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies', 'fecha_votacion_tm', 'numero_iniciativa', 'enlace_dictamen_listado', 'enlace_publicado_listado', 'html_listado', 'contenido_html_iniciativa', 'enviada', 'turnada', 'presentada', 'periodo', 'ano', 'revisada', 'publicada');
 			
 			$crud->field_type('html_listado', 'readonly');
@@ -380,7 +380,7 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_initiative');
 			
 			/*Columnas*/
-			$crud->columns('titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
+			$crud->columns('id_initiative', 'titulo_listado', 'titulo', 'presentada', 'fecha_listado_tm', 'commissions2initiatives');
 			$crud->fields('id_legislature', 'titulo_listado', 'fecha_listado_tm', 'enlace_gaceta', 'titulo', 'resumen', 'initiatives2topics', 'initiative2representatives', 'commissions2initiatives', 'initiative2political_party', 'initiative2dependencies', 'fecha_votacion_tm', 'numero_iniciativa', 'enlace_dictamen_listado', 'enlace_publicado_listado', 'html_listado', 'contenido_html_iniciativa', 'enviada', 'turnada', 'presentada', 'periodo', 'ano', 'revisada');
 			
 			$crud->field_type('html_listado', 'readonly');
