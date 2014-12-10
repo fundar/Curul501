@@ -958,7 +958,7 @@ class Admin extends CI_Controller {
 						return $user;
 					} else {
 						if($redirect) {
-							header('Location: ' . site_url('admin/initiatives'));
+							header('Location: ' . site_url('admin/'));
 						}
 						
 						return false;
@@ -985,7 +985,7 @@ class Admin extends CI_Controller {
 	/*login de usuarios*/
 	public function login() {
 		if($this->isUser(false)) {
-			header('Location: ' . site_url('admin/initiatives'));
+			header('Location: ' . site_url('admin/'));
 		} else {
 			$vars["error"] = false;
 			
