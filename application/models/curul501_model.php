@@ -168,6 +168,12 @@ class curul501_Model extends CI_Model  {
 		$this->db->update('iniciativas_scrapper', $update);
 	}
 	
+	/*guarda el id del post insertado en wordpress con el id de la iniciativa publicada*/
+	public function setInitiative2Post($id_initiative = 0, $id_post = 0) {
+		$query = $this->db->query("insert into initiative2post (id_initiative, id_post) values (".$id_initiative.",".$id_post.")");
+		return true;
+	}
+	
 	/*poner en true publicada un representante*/
 	public function setPublishRepresentative($id_representative = 0) {
 		$update = array('publicada' => "t");
@@ -175,6 +181,12 @@ class curul501_Model extends CI_Model  {
 		//update representative
 		$this->db->where('id_representative', $id_representative);
 		$this->db->update('representatives_scrapper', $update);
+	}
+	
+	/*guarda el id del post insertado en wordpress con el id del representante publicado*/
+	public function setRepresentative2Post($id_representative = 0, $id_post = 0) {
+		$query = $this->db->query("insert into representative2post (id_representative, id_post) values (".$id_representative.",".$id_post.")");
+		return true;
 	}
 	
 	/*fix dates*/

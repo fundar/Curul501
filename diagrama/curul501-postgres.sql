@@ -191,6 +191,13 @@ CREATE TABLE commissions2representatives (
 create index on commissions2representatives(id_commission);
 create index on commissions2representatives(id_representative);
 
+CREATE TABLE representative2post (
+  id_representative integer,
+  id_post integer
+);
+create index on representative2post(id_representative);
+create index on representative2post(id_post);
+
 --iniciativas
 CREATE TABLE status_initiatives (
   id_status serial,
@@ -233,6 +240,13 @@ CREATE TABLE initiative2dependencies (
 );
 create index on initiative2dependencies(id_initiative);
 create index on initiative2dependencies(id_dependency);
+
+CREATE TABLE initiative2post (
+  id_initiative integer,
+  id_post integer
+);
+create index on initiative2post(id_initiative);
+create index on initiative2post(id_post);
 
 --Dependencias
 CREATE TABLE dependencies (

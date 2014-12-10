@@ -601,9 +601,14 @@ class Admin extends CI_Controller {
 						/*update publicada*/
 						//$this->curul501_model->setPublish($id_initiative);
 						
+						/*set Initiative 2 Post*/
+						$this->curul501_model->setInitiative2Post($id_initiative, $ID);
+						
 						$response["success"] = true;
 						$response["ID"]      = $ID;
 						$response["titulo"]  = $initiative["titulo"];
+						
+						
 					} else {
 						$response["error"] = 'Error al insertar el registro';
 					}
@@ -722,6 +727,9 @@ class Admin extends CI_Controller {
 					if($ID) {
 						/*update publicada*/
 						//$this->curul501_model->setPublishRepresentative($id_representative);
+						
+						/*set Representative 2 Post*/
+						$this->curul501_model->setRepresentative2Post($id_representative, $ID);
 						
 						$response["success"]   = true;
 						$response["ID"]        = $ID;
