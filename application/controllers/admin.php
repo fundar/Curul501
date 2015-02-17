@@ -728,7 +728,7 @@ class Admin extends CI_Controller {
 					
 					if($ID) {
 						/*update publicada*/
-						//$this->curul501_model->setPublishRepresentative($id_representative);
+						$this->curul501_model->setPublishRepresentative($id_representative);
 						
 						/*set Representative 2 Post*/
 						//$this->curul501_model->setRepresentative2Post($id_representative, $ID);
