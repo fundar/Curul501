@@ -60,9 +60,9 @@ class Admin extends CI_Controller {
 		$crud->unset_delete();
 		
 		/*Set requiered fields, columns and fields*/
-		$crud->required_fields('full_name');
-		$crud->columns('id_commission', 'full_name', 'created_at');
-		$crud->fields('full_name', 'slug', 'commissions2representatives', 'created_at', 'status');
+		$crud->required_fields('name');
+		$crud->columns('id_commission', 'name', 'created_at');
+		$crud->fields('name', 'slug', 'commissions2representatives', 'created_at', 'status');
 		
 		/*Relacion Integrantes - comisiones*/
 		$crud->set_relation_n_n('commissions2representatives', 'commissions2representatives', 'representatives_scrapper', 'id_commission', 'id_representative', 'full_name');
