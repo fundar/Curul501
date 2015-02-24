@@ -589,6 +589,7 @@ class Admin extends CI_Controller {
 					array('key' => 'wp_votos_representantes',		'value' => $votesRepresentatives),
 					array('key' => 'wp_last_status',		  	   'value' => $lastStatus["tipo"]),
 					array('key' => 'wp_last_status_slug',		   'value' => $lastStatus["slug"]),
+					array('key' => 'wp_tipo_camara',		   'value' => 1,
 					array('key' => 'wp_status',		  	   'value' => $string_status),
 					array('key' => 'wp_status_slug', 	   'value' => $string_status_slug)
 				);
