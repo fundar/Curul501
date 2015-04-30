@@ -5,5 +5,5 @@
 */cache/!index.html
 application/config/config.php
 application/config/database.php
-assets/uploads/files/*
+#assets/uploads/files/*
 xmlrpc/config/config.php
