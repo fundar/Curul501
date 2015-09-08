@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 			
 			/*Set requiered fields, columns and fields*/
 			$crud->required_fields('name');
-			$crud->columns('id_representative', 'full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
+			$crud->columns('id_representative','id_legislature', 'full_name', 'id_political_party', 'zone_state', 'district', 'circumscription', 'twitter', 'email', 'phone', 'ubication');
 			$crud->unset_fields('id_representative', 'full_name2', 'slug2', 'status', 'district_clean', 'publicada', 'trayectoria', 'created_at', 'updated_at', 'commisions');
 			
 			$crud->display_as('id_representative', '#Representante');
@@ -240,6 +240,11 @@ class Admin extends CI_Controller {
 			$crud->set_primary_key('id_political_party', 'political_parties');
 			$crud->display_as('id_political_party', 'Grupo parlamentario');
 			$crud->set_relation('id_political_party', 'political_parties', 'name');
+			
+			$crud->set_primary_key('id_legislature', 'legislatures');
+			$crud->display_as('id_legislature', 'Legislatura');
+			$crud->set_relation('id_legislature', 'legislatures', 'name');
+			
 			
 			$crud->set_primary_key('id_legislature', 'legislatures');
 			$crud->display_as('id_legislature', 'Legislatura');
