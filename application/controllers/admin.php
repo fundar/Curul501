@@ -607,10 +607,10 @@ class Admin extends CI_Controller {
 					
 					if($ID) {
 						/*update publicada*/
-						//$this->curul501_model->setPublish($id_initiative);
+						$this->curul501_model->setPublish($id_initiative);
 						
 						/*set Initiative 2 Post*/
-						$this->curul501_model->setInitiative2Post($id_initiative, $ID);
+						//$this->curul501_model->setInitiative2Post($id_initiative, $ID);
 						
 						$response["success"] = true;
 						$response["ID"]      = $ID;
@@ -734,10 +734,10 @@ class Admin extends CI_Controller {
 					
 					if($ID) {
 						/*update publicada*/
-						//$this->curul501_model->setPublishRepresentative($id_representative);
+						$this->curul501_model->setPublishRepresentative($id_representative);
 						
 						/*set Representative 2 Post*/
-					$this->curul501_model->setRepresentative2Post($id_representative, $ID);
+						//$this->curul501_model->setRepresentative2Post($id_representative, $ID);
 						
 						$response["success"]   = true;
 						$response["ID"]        = $ID;
