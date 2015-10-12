@@ -733,7 +733,7 @@ class Admin extends CI_Controller {
 						$this->curul501_model->setPublishRepresentative($id_representative);
 						
 						/*set Representative 2 Post*/
-						//$this->curul501_model->setRepresentative2Post($id_representative, $ID);
+						$this->curul501_model->setRepresentative2Post($id_representative, $ID);
 						
 						$response["success"]   = true;
 						$response["ID"]        = $ID;
