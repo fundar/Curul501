@@ -246,10 +246,6 @@ class Admin extends CI_Controller {
 			$crud->set_relation('id_legislature', 'legislatures', 'name');
 			
 			
-			$crud->set_primary_key('id_legislature', 'legislatures');
-			$crud->display_as('id_legislature', 'Legislatura');
-			$crud->set_relation('id_legislature', 'legislatures', 'name');
-			
 			/*Nombres de campos*/
 			$crud->display_as('name', 'Nombres');
 			$crud->display_as('last_name', 'Apellidos');
